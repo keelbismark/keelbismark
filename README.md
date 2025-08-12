@@ -64,4 +64,4 @@
 
 ---
 
-_Last updated: **PLACEHOLDER**_
+_Last updated: 12.08.2025_
