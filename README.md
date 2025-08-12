@@ -21,7 +21,7 @@
 
 <h3 align="center">🛠 Tech Stack</h3>
 <p align="center">
-  <b>Languages:</b> Java · JavaScript · Python · C++ · Bash<br/>
+  <b>Languages:</b> Java · JavaScript · TypeScript · Python · C++ · Bash<br/>
   <b>Frameworks & Tools:</b> Spring Boot · Node.js · Flask · Electron · Gradle · Docker<br/>
   <b>Databases:</b> SQLite · MySQL · PostgreSQL<br/>
   <b>Other:</b> Git · GitHub Actions · Nginx · WebSocket
