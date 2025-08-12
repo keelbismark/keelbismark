@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="240" viewBox="0 0 1280 240" role="img" aria-label="KeelBismark banner">
+  <defs>
+    <!-- neon glow filter -->
+    <filter id="neon" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"></feGaussianBlur>
+      <feMerge>
+        <feMergeNode in="blur"></feMergeNode>
+        <feMergeNode in="SourceGraphic"></feMergeNode>
+      </feMerge>
+    </filter>
+
+    <!-- soft vignette -->
+    <radialGradient id="vignette" cx="80%" cy="40%" r="1">
+      <stop offset="0%" stop-color="#000" stop-opacity="0"></stop>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.35"></stop>
+    </radialGradient>
+
+    <!-- subtle animated halo (SMIL) - may be sanitized by GitHub; still useful as local/fallback -->
+    <radialGradient id="halo" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#FF2D95" stop-opacity="0.35">
+        <animate attributeName="stop-opacity" values="0.35;0.09;0.35" dur="4s" repeatCount="indefinite"></animate>
+      </stop>
+      <stop offset="100%" stop-color="#FF2D95" stop-opacity="0"></stop>
+    </radialGradient>
+  </defs>
+
+  <!-- transparent background (no rect) -->
+
+  <!-- accent floating circles -->
+  <g filter="url(#neon)">
+    <circle cx="1180" cy="120" r="60" fill="url(#halo)" opacity="0.18"></circle>
+    <circle cx="1100" cy="60" r="26" fill="#FF2D95" opacity="0.12"></circle>
+  </g>
+
+  <!-- main texts -->
+  <text x="72" y="96" font-family="Inter, Roboto, sans-serif" font-size="52" fill="#FFFFFF" font-weight="700">KeelBismark</text>
+  <text x="72" y="148" font-family="Inter, Roboto, sans-serif" font-size="18" fill="#FFB1D6">Full-stack dev · Python / JS / C++ · Freelancer</text>
+
+  <!-- neon outline for small badge -->
+  <g transform="translate(1020,28)">
+    <rect x="0" y="0" rx="12" ry="12" width="220" height="84" fill="none" stroke="#FF2D95" stroke-opacity="0.55" stroke-width="1.6"></rect>
+    <text x="18" y="42" font-family="Inter, Roboto, sans-serif" font-size="14" fill="#FF2D95">Open for freelance</text>
+  </g>
+
+  <!-- vignette overlay to make edges darker on light backgrounds -->
+  <rect width="100%" height="100%" fill="url(#vignette)" style="mix-blend-mode:multiply" opacity="0.25"></rect>
+</svg>
