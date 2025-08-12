@@ -58,7 +58,6 @@
 ## Links
 <p align="center">
   <a href="https://example.com"><img src="https://img.shields.io/badge/Website-coming_soon-FF2D95?style=flat-square&logo=google-chrome" alt="website" /></a>&nbsp;
-  <a href="./resume.pdf"><img src="https://img.shields.io/badge/Resume-Download-FF2D95?style=flat-square&logo=adobe&logoColor=white" alt="resume" /></a>&nbsp;
   <a href="#"><img src="https://img.shields.io/badge/Contact-justkeel.6707-FF2D95?style=flat-square&logo=discord" alt="contact" /></a>
 </p>
 
