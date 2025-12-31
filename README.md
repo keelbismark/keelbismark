@@ -73,12 +73,6 @@
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=keelbismark&show_icons=true&theme=dark&bg_color=050505&title_color=ff3e00&text_color=e5e5e5&icon_color=ff3e00&border_color=1f1f1f&count_private=true&include_all_commits=true" alt="GitHub Stats" width="49%" />
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=keelbismark&theme=dark&background=050505&ring=ff3e00&fire=ff3e00&currStreakLabel=ff3e00&sideLabels=e5e5e5&sideNums=e5e5e5&dates=525252&currStreakNum=e5e5e5&border=1f1f1f" alt="Streak" width="49%" />
-
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=keelbismark&layout=compact&theme=dark&bg_color=050505&title_color=ff3e00&text_color=e5e5e5&border_color=1f1f1f&langs_count=8" alt="Languages" width="49%" />
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=keelbismark&theme=radical&utcOffset=3" alt="Productive Time" width="49%" />
-
 ![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=keelbismark&theme=react-dark&bg_color=050505&color=ff3e00&line=ff3e00&point=e5e5e5&area=true&hide_border=true)
 
 </div>
