@@ -1,164 +1,95 @@
-<svg width="600" height="350" xmlns="http://www.w3.org/2000/svg">
+<svg width="600" height="380" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <style>
-      @keyframes typeSystem {
-        0%, 3% { width: 0; }
-        15% { width: 100%; }
+      @keyframes typeCmd {
+        0%, 5% { width: 0; }
+        20% { width: 100%; }
         100% { width: 100%; }
       }
-      @keyframes showInfo {
-        0%, 15% { opacity: 0; }
-        16% { opacity: 1; }
-        100% { opacity: 1; }
+      @keyframes fadeIn {
+        0%, 18% { opacity: 0; transform: translateY(10px); }
+        25%, 100% { opacity: 1; transform: translateY(0); }
       }
-      @keyframes cpuLoad {
-        0%, 16% { width: 0; }
-        30% { width: 87%; }
-        100% { width: 87%; }
-      }
-      @keyframes ramLoad {
-        0%, 17% { width: 0; }
-        31% { width: 72%; }
-        100% { width: 72%; }
-      }
-      @keyframes gpuLoad {
-        0%, 18% { width: 0; }
-        32% { width: 94%; }
-        100% { width: 94%; }
-      }
-      @keyframes blink {
-        0%, 49% { opacity: 1; }
-        50%, 100% { opacity: 0; }
-      }
-      @keyframes pulse {
-        0%, 100% { r: 3; opacity: 0.8; }
-        50% { r: 4; opacity: 1; }
-      }
-      @keyframes dataFlow {
-        0% { transform: translateX(0); opacity: 0; }
-        50% { opacity: 1; }
-        100% { transform: translateX(100px); opacity: 0; }
-      }
+      @keyframes barLoadCPU { 0%, 25% { width: 0; } 50% { width: 87%; } 100% { width: 87%; } }
+      @keyframes barLoadRAM { 0%, 25% { width: 0; } 55% { width: 72%; } 100% { width: 72%; } }
+      @keyframes barLoadGPU { 0%, 25% { width: 0; } 60% { width: 94%; } 100% { width: 94%; } }
+      @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
       
-      .bg { fill: #050505; }
-      .border { fill: none; stroke: #1f1f1f; stroke-width: 1; }
-      .header-bg { fill: #0a0a0a; }
+      .bg { fill: #0b0e14; }
+      .border { fill: none; stroke: #2d333b; stroke-width: 1; }
+      .header { fill: #1c2128; }
       
-      .text-prompt { fill: #10b981; font-family: monospace; font-size: 13px; font-weight: bold; }
-      .text-cmd { fill: #e5e5e5; font-family: monospace; font-size: 13px; }
-      .text-label { fill: #525252; font-family: monospace; font-size: 11px; }
-      .text-value { fill: #e5e5e5; font-family: monospace; font-size: 11px; }
-      .text-highlight { fill: #ff3e00; font-family: monospace; font-size: 11px; font-weight: bold; }
-      .text-success { fill: #10b981; font-family: monospace; font-size: 11px; }
+      .t-prompt { fill: #4ade80; font-family: 'Cascadia Code', monospace; font-size: 13px; font-weight: bold; }
+      .t-cmd { fill: #adbac7; font-family: 'Cascadia Code', monospace; font-size: 13px; }
+      .t-label { fill: #768390; font-family: monospace; font-size: 11px; }
+      .t-val { fill: #adbac7; font-family: monospace; font-size: 11px; }
+      .t-warn { fill: #f47067; font-family: monospace; font-size: 11px; font-weight: bold; }
       
-      .bar-track { fill: #0a0a0a; stroke: #1f1f1f; stroke-width: 1; }
-      .bar-cpu { fill: #ff3e00; }
-      .bar-ram { fill: #60a5fa; }
-      .bar-gpu { fill: #10b981; }
+      .track { fill: #22272e; rx: 2; }
+      .bar-c { fill: #f47067; } /* CPU */
+      .bar-r { fill: #539bf5; } /* RAM */
+      .bar-g { fill: #34d399; } /* GPU */
       
-      .cursor { fill: #ff3e00; animation: blink 0.8s step-end infinite; }
-      .status-dot { animation: pulse 2s ease-in-out infinite; }
-      .data-packet { fill: #ff3e00; opacity: 0; animation: dataFlow 2s ease-in-out infinite; }
+      .cursor { fill: #4ade80; animation: blink 1s step-end infinite; }
+      .content-anim { animation: fadeIn 10s infinite; }
     </style>
   </defs>
   
-  <!-- Background -->
-  <rect class="bg" width="600" height="350" rx="6"/>
-  <rect class="border" x="0.5" y="0.5" width="599" height="349" rx="6"/>
+  <rect class="bg" width="600" height="380" rx="10"/>
+  <rect class="border" x="0.5" y="0.5" width="599" height="379" rx="10"/>
   
-  <!-- Header -->
-  <rect class="header-bg" width="600" height="25" rx="6 6 0 0"/>
-  <circle fill="#ff5f56" cx="15" cy="12.5" r="5"/>
-  <circle fill="#ffbd2e" cx="35" cy="12.5" r="5"/>
-  <circle fill="#27c93f" cx="55" cy="12.5" r="5"/>
-  <text class="text-label" x="300" y="16" text-anchor="middle">htop — System Monitor</text>
+  <rect class="header" width="600" height="32" rx="10 10 0 0"/>
+  <circle fill="#ff5f56" cx="18" cy="16" r="5"/>
+  <circle fill="#ffbd2e" cx="36" cy="16" r="5"/>
+  <circle fill="#27c93f" cx="54" cy="16" r="5"/>
+  <text class="t-label" x="300" y="20" text-anchor="middle">keel@bismark: ~/system_stats</text>
   
-  <!-- Terminal content -->
-  <g transform="translate(15, 45)">
-    
-    <!-- Command -->
-    <text class="text-prompt" x="0" y="0">root@keelbismark</text>
-    <text class="text-prompt" x="140" y="0">$</text>
+  <g transform="translate(25, 65)">
+    <text class="t-prompt" x="0" y="0">➜</text>
+    <text class="t-prompt" x="20" y="0">~</text>
     <g>
-      <defs>
-        <clipPath id="sysClip">
-          <rect style="animation: typeSystem 10s steps(30) infinite;" x="155" y="-12" width="0" height="18"/>
-        </clipPath>
-      </defs>
-      <text class="text-cmd" x="155" y="0" clip-path="url(#sysClip)">neofetch --hardware</text>
+      <defs><clipPath id="cp"><rect style="animation: typeCmd 10s steps(25) infinite;" x="40" y="-12" width="0" height="20"/></clipPath></defs>
+      <text class="t-cmd" x="40" y="0" clip-path="url(#cp)">neofetch --hardware --precise</text>
     </g>
-    <rect class="cursor" x="305" y="-11" width="7" height="13"/>
+    <rect class="cursor" x="245" y="-11" width="8" height="15"/>
     
-    <!-- System info output -->
-    <g style="animation: showInfo 10s infinite; opacity: 0;">
+    <g class="content-anim">
+      <line stroke="#2d333b" x1="0" y1="25" x2="550" y2="25"/>
       
-      <!-- Header -->
-      <line stroke="#1f1f1f" x1="0" y1="20" x2="570" y2="20"/>
-      <text class="text-highlight" x="0" y="40">SYSTEM SPECIFICATIONS</text>
-      <circle class="status-dot" fill="#10b981" cx="185" cy="37"/>
-      <text class="text-success" x="195" y="40">ONLINE</text>
+      <text class="t-label" x="0" y="55">PROCESSOR</text>
+      <text class="t-val" x="100" y="55">Intel Core i9-14900KF (24-Cores, 6.0GHz)</text>
+      <rect class="track" x="100" y="65" width="250" height="10"/>
+      <rect class="bar-c" x="100" y="65" width="0" height="10" rx="2" style="animation: barLoadCPU 10s ease-out infinite;"/>
+      <text class="t-warn" x="360" y="74">87% LOAD</text>
       
-      <!-- CPU Info -->
-      <text class="text-label" x="0" y="70">CPU:</text>
-      <text class="text-value" x="80" y="70">Intel Core i9-14900KF</text>
-      <text class="text-label" x="320" y="70">Cores:</text>
-      <text class="text-value" x="370" y="70">24 (8P + 16E)</text>
+      <text class="t-label" x="0" y="105">MEMORY</text>
+      <text class="t-val" x="100" y="105">80GB DDR4 RAM @ 3200MHz</text>
+      <rect class="track" x="100" y="115" width="250" height="10"/>
+      <rect class="bar-r" x="100" y="115" width="0" height="10" rx="2" style="animation: barLoadRAM 10s ease-out infinite;"/>
+      <text class="t-val" x="360" y="124">58GB / 80GB (72%)</text>
       
-      <text class="text-label" x="0" y="88">Usage:</text>
-      <rect class="bar-track" x="80" y="78" width="200" height="12" rx="2"/>
-      <rect class="bar-cpu" x="80" y="78" width="0" height="12" rx="2" style="animation: cpuLoad 10s ease-out infinite;"/>
-      <text class="text-highlight" x="290" y="88">87%</text>
+      <text class="t-label" x="0" y="155">GRAPHICS</text>
+      <text class="t-val" x="100" y="155">NVIDIA RTX 4070 Ti SUPER OC (16GB)</text>
+      <rect class="track" x="100" y="165" width="250" height="10"/>
+      <rect class="bar-g" x="100" y="165" width="0" height="10" rx="2" style="animation: barLoadGPU 10s ease-out infinite;"/>
+      <text class="t-warn" x="360" y="174">94% VRAM UTIL</text>
       
-      <!-- Data flow animation -->
-      <circle class="data-packet" cx="80" cy="84" r="2" style="animation-delay: 0s;"/>
-      <circle class="data-packet" cx="80" cy="84" r="2" style="animation-delay: 0.5s;"/>
-      <circle class="data-packet" cx="80" cy="84" r="2" style="animation-delay: 1s;"/>
-      
-      <!-- RAM Info -->
-      <text class="text-label" x="0" y="120">RAM:</text>
-      <text class="text-value" x="80" y="120">80GB DDR4 @ 3200MHz</text>
-      
-      <text class="text-label" x="0" y="138">Usage:</text>
-      <rect class="bar-track" x="80" y="128" width="200" height="12" rx="2"/>
-      <rect class="bar-ram" x="80" y="128" width="0" height="12" rx="2" style="animation: ramLoad 10s ease-out infinite;"/>
-      <text class="text-highlight" x="290" y="138">72%</text>
-      <text class="text-label" x="330" y="138">58GB / 80GB</text>
-      
-      <!-- GPU Info -->
-      <text class="text-label" x="0" y="170">GPU:</text>
-      <text class="text-value" x="80" y="170">NVIDIA RTX 4070 Ti SUPER OC</text>
-      
-      <text class="text-label" x="0" y="188">VRAM:</text>
-      <rect class="bar-track" x="80" y="178" width="200" height="12" rx="2"/>
-      <rect class="bar-gpu" x="80" y="178" width="0" height="12" rx="2" style="animation: gpuLoad 10s ease-out infinite;"/>
-      <text class="text-highlight" x="290" y="188">94%</text>
-      <text class="text-label" x="330" y="188">15GB / 16GB</text>
-      
-      <!-- OS Info -->
-      <line stroke="#1f1f1f" x1="0" y1="210" x2="570" y2="210"/>
-      
-      <g transform="translate(0, 230)">
-        <text class="text-label" x="0" y="0">OS:</text>
-        <text class="text-value" x="80" y="0">Windows 11 Pro</text>
-        <text class="text-label" x="260" y="0">Kernel:</text>
-        <text class="text-value" x="320" y="0">NT 10.0.22621</text>
+      <g transform="translate(0, 210)">
+        <text class="t-label" x="0" y="0">OS</text>
+        <text class="t-val" x="100" y="0">Windows 11 Pro (23H2)</text>
+        
+        <text class="t-label" x="0" y="25">UPTIME</text>
+        <text class="t-val" x="100" y="25">127 days, 13 hours (Server Mode)</text>
+        
+        <text class="t-label" x="300" y="0">SHELL</text>
+        <text class="t-val" x="370" y="0">PowerShell 7.4</text>
+        
+        <text class="t-label" x="300" y="25">STATUS</text>
+        <text style="fill: #4ade80;" class="t-val" x="370" y="25">● High Performance</text>
       </g>
       
-      <g transform="translate(0, 250)">
-        <text class="text-label" x="0" y="0">Shell:</text>
-        <text class="text-value" x="80" y="0">PowerShell 7.3</text>
-        <text class="text-label" x="260" y="0">Terminal:</text>
-        <text class="text-value" x="320" y="0">Windows Terminal</text>
-      </g>
-      
-      <g transform="translate(0, 270)">
-        <text class="text-label" x="0" y="0">Uptime:</text>
-        <text class="text-value" x="80" y="0">127d 13h 37m</text>
-        <text class="text-label" x="260" y="0">Packages:</text>
-        <text class="text-value" x="320" y="0">1,247</text>
-      </g>
-      
+      <line stroke="#2d333b" x1="0" y1="265" x2="550" y2="265"/>
+      <text class="t-label" x="0" y="290" style="font-style: italic;">[KeelBismark]: Heavy task detected. Cooling fans at 80%...</text>
     </g>
-    
   </g>
 </svg>
