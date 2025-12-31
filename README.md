@@ -85,12 +85,6 @@
 
 ![Activity Log](./assets/activity-log.svg)
 
-<br/>
-
-[![Trophies](https://github-profile-trophy.vercel.app/?username=keelbismark&theme=darkhub&no-frame=true&no-bg=true&margin-w=4&column=7&title_color=ff3e00&text_color=e5e5e5&icon_color=ff3e00)](https://github.com/keelbismark)
-
-</div>
-
 ---
 
 ## 📫 Contact
