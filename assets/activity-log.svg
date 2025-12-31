@@ -1,0 +1,169 @@
+<svg width="700" height="250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @keyframes scrollLog {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-180px); }
+      }
+      @keyframes fadeIn1 {
+        0%, 10% { opacity: 0; }
+        15% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+      @keyframes fadeIn2 {
+        0%, 20% { opacity: 0; }
+        25% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+      @keyframes fadeIn3 {
+        0%, 30% { opacity: 0; }
+        35% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+      @keyframes fadeIn4 {
+        0%, 40% { opacity: 0; }
+        45% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+      @keyframes fadeIn5 {
+        0%, 50% { opacity: 0; }
+        55% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+      @keyframes fadeIn6 {
+        0%, 60% { opacity: 0; }
+        65% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+      @keyframes fadeIn7 {
+        0%, 70% { opacity: 0; }
+        75% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+      @keyframes blink {
+        0%, 49% { opacity: 1; }
+        50%, 100% { opacity: 0; }
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      .bg { fill: #050505; }
+      .border { fill: none; stroke: #1f1f1f; stroke-width: 1; }
+      .header-bg { fill: #0a0a0a; }
+      
+      .text-timestamp { fill: #525252; font-family: monospace; font-size: 10px; }
+      .text-info { fill: #60a5fa; font-family: monospace; font-size: 11px; }
+      .text-success { fill: #10b981; font-family: monospace; font-size: 11px; }
+      .text-warning { fill: #fbbf24; font-family: monospace; font-size: 11px; }
+      .text-error { fill: #ef4444; font-family: monospace; font-size: 11px; }
+      .text-highlight { fill: #ff3e00; font-family: monospace; font-size: 11px; }
+      .text-muted { fill: #a3a3a3; font-family: monospace; font-size: 11px; }
+      .text-header { fill: #525252; font-family: monospace; font-size: 10px; }
+      
+      .cursor { fill: #ff3e00; animation: blink 0.8s step-end infinite; }
+      .spinner { stroke: #ff3e00; stroke-width: 2; fill: none; animation: spin 1s linear infinite; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect class="bg" width="700" height="250" rx="6"/>
+  <rect class="border" x="0.5" y="0.5" width="699" height="249" rx="6"/>
+  
+  <!-- Header -->
+  <rect class="header-bg" width="700" height="25" rx="6 6 0 0"/>
+  <circle fill="#ff5f56" cx="15" cy="12.5" r="5"/>
+  <circle fill="#ffbd2e" cx="35" cy="12.5" r="5"/>
+  <circle fill="#27c93f" cx="55" cy="12.5" r="5"/>
+  <text class="text-header" x="350" y="16" text-anchor="middle">tail -f /var/log/activity.log</text>
+  
+  <!-- Timestamp in header -->
+  <text class="text-header" x="680" y="16" text-anchor="end">12:34:56</text>
+  
+  <!-- Content area with clipping -->
+  <defs>
+    <clipPath id="logClip">
+      <rect x="0" y="25" width="700" height="225"/>
+    </clipPath>
+  </defs>
+  
+  <g clip-path="url(#logClip)">
+    <g transform="translate(15, 45)">
+      
+      <!-- Log entries -->
+      <g style="animation: fadeIn1 12s infinite; opacity: 0;">
+        <text class="text-timestamp" x="0" y="0">[2025-12-31 15:42:33]</text>
+        <text class="text-success" x="150" y="0">[SUCCESS]</text>
+        <text class="text-muted" x="230" y="0">Pushed to remote repository</text>
+        <text class="text-highlight" x="450" y="0">main</text>
+      </g>
+      
+      <g style="animation: fadeIn2 12s infinite; opacity: 0;" transform="translate(0, 25)">
+        <text class="text-timestamp" x="0" y="0">[2025-12-31 14:18:45]</text>
+        <text class="text-info" x="150" y="0">[COMMIT]</text>
+        <text class="text-muted" x="230" y="0">Update portfolio website</text>
+      </g>
+      
+      <g style="animation: fadeIn3 12s infinite; opacity: 0;" transform="translate(0, 50)">
+        <text class="text-timestamp" x="0" y="0">[2025-12-31 12:30:22]</text>
+        <text class="text-success" x="150" y="0">[MERGE]</text>
+        <text class="text-muted" x="230" y="0">feature/terminal-animation</text>
+        <text class="text-info" x="450" y="0">→ main</text>
+      </g>
+      
+      <g style="animation: fadeIn4 12s infinite; opacity: 0;" transform="translate(0, 75)">
+        <text class="text-timestamp" x="0" y="0">[2025-12-31 10:55:11]</text>
+        <text class="text-warning" x="150" y="0">[BUILD]</text>
+        <text class="text-muted" x="230" y="0">Compiling project...</text>
+        <circle class="spinner" cx="400" cy="-3" r="5"/>
+      </g>
+      
+      <g style="animation: fadeIn5 12s infinite; opacity: 0;" transform="translate(0, 100)">
+        <text class="text-timestamp" x="0" y="0">[2025-12-30 20:12:08]</text>
+        <text class="text-success" x="150" y="0">[RELEASE]</text>
+        <text class="text-muted" x="230" y="0">AuthNotMeTG</text>
+        <text class="text-highlight" x="390" y="0">v2.1</text>
+      </g>
+      
+      <g style="animation: fadeIn6 12s infinite; opacity: 0;" transform="translate(0, 125)">
+        <text class="text-timestamp" x="0" y="0">[2025-12-30 18:45:33]</text>
+        <text class="text-info" x="150" y="0">[TEST]</text>
+        <text class="text-muted" x="230" y="0">All tests passed</text>
+        <text class="text-success" x="400" y="0">✓ 127/127</text>
+      </g>
+      
+      <g style="animation: fadeIn7 12s infinite; opacity: 0;" transform="translate(0, 150)">
+        <text class="text-timestamp" x="0" y="0">[2025-12-30 16:20:15]</text>
+        <text class="text-info" x="150" y="0">[DEPLOY]</text>
+        <text class="text-muted" x="230" y="0">Concert Player deployed to production</text>
+      </g>
+      
+      <!-- Additional older logs (faded) -->
+      <g opacity="0.5" transform="translate(0, 175)">
+        <text class="text-timestamp" x="0" y="0">[2025-12-30 14:30:00]</text>
+        <text class="text-info" x="150" y="0">[REFACTOR]</text>
+        <text class="text-muted" x="230" y="0">Code optimization complete</text>
+      </g>
+      
+      <g opacity="0.3" transform="translate(0, 200)">
+        <text class="text-timestamp" x="0" y="0">[2025-12-30 12:15:42]</text>
+        <text class="text-success" x="150" y="0">[PUSH]</text>
+        <text class="text-muted" x="230" y="0">Updated README.md</text>
+      </g>
+      
+    </g>
+  </g>
+  
+  <!-- Status bar at bottom -->
+  <rect fill="#0a0a0a" x="0" y="225" width="700" height="25"/>
+  <line stroke="#1f1f1f" x1="0" y1="225" x2="700" y2="225"/>
+  
+  <text class="text-info" x="15" y="241" font-size="10">
+    <tspan fill="#10b981">●</tspan> Monitoring repository activity...
+  </text>
+  
+  <text class="text-muted" x="685" y="241" text-anchor="end" font-size="10">
+    Press 'q' to quit
+  </text>
+</svg>

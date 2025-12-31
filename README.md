@@ -1,23 +1,17 @@
 <div align="center">
 
-![Terminal Banner](./assets/banner.svg)
+![Terminal Banner](./assets/terminal-banner.svg)
 
 [![Discord](https://img.shields.io/badge/Discord-justkeel.6707-FF3E00?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-coming_soon-FF3E00?style=for-the-badge&logo=linkedin&logoColor=white)](#)
 [![Status](https://img.shields.io/badge/status-open%20for%20freelance-FF3E00?style=for-the-badge&logo=statuspage&logoColor=white)]()
-[![Location](https://img.shields.io/badge/Location-Moscow,_RU-FF3E00?style=for-the-badge&logo=google-maps&logoColor=white)]()
+[![Location](https://img.shields.io/badge/Moscow,_RU-UTC+3-FF3E00?style=for-the-badge&logo=google-maps&logoColor=white)]()
 
 </div>
 
 ---
 
 ## `root@sys:~/$ whoami`
-
-<div align="center">
-
-![Typing Effect](./assets/typing.svg)
-
-</div>
 
 ```bash
 > cat profile.txt
@@ -27,16 +21,17 @@ ROLE: Full-stack Developer
 FOCUS: Python · JavaScript · C++ · Open Source
 STATUS: Available for freelance projects
 CONTACT: Discord @ justkeel.6707
-LOCATION: Moscow, Russia
+LOCATION: Moscow, Russia (UTC+3)
 ```
 
 <div align="center">
 
 ```
 ╭──────────────────────────────────────────────────────────╮
-│  💬 DM on Discord: justkeel.6707                        │
+│  💬 Primary Contact: justkeel.6707 (Discord)            │
 │  🌐 Portfolio: coming soon                              │
-│  📧 LinkedIn: coming soon                               │
+│  💼 LinkedIn: coming soon                               │
+│  📧 Email: contact@keelbismark.space                    │
 ╰──────────────────────────────────────────────────────────╯
 ```
 
@@ -44,23 +39,33 @@ LOCATION: Moscow, Russia
 
 ---
 
-## `root@sys:~/skills$ cat tech_stack.json`
+## `root@sys:~/skills$ ./analyze_stack.sh`
 
 <div align="center">
 
-![Skills Widget](./assets/skills.svg)
+![Skills Analysis](./assets/terminal-skills.svg)
 
 </div>
 
-### 🛠️ **LANGUAGES**
+### 🛠️ **TECH_STACK.json**
 
 <div align="center">
 
 ```javascript
-const languages = {
-  "core": ["Java", "JavaScript", "TypeScript", "Python", "C++", "Bash"],
-  "experience": "2+ years professional development",
-  "focus": "Full-stack & System Programming"
+{
+  "languages": {
+    "primary": ["Java", "JavaScript", "TypeScript", "Python", "C++"],
+    "scripting": ["Bash", "PowerShell"],
+    "markup": ["HTML", "CSS", "Markdown"]
+  },
+  "frameworks": {
+    "backend": ["Spring Boot", "Node.js", "Flask"],
+    "desktop": ["Electron"],
+    "build": ["Gradle", "Maven", "npm"]
+  },
+  "tools": ["Git", "Docker", "Nginx", "WebSocket"],
+  "databases": ["SQLite", "MySQL", "PostgreSQL"],
+  "experience": "2+ years professional development"
 }
 ```
 
@@ -70,23 +75,6 @@ const languages = {
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
 ![C++](https://img.shields.io/badge/C++-00599C?style=flat-square&logo=cplusplus&logoColor=white)
 ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnu-bash&logoColor=white)
-
-</div>
-
-### ⚙️ **FRAMEWORKS & TOOLS**
-
-<div align="center">
-
-```json
-{
-  "backend": ["Spring Boot", "Node.js", "Flask"],
-  "desktop": ["Electron"],
-  "build": ["Gradle", "Docker"],
-  "vcs": ["Git", "GitHub Actions"],
-  "server": ["Nginx", "WebSocket"],
-  "databases": ["SQLite", "MySQL", "PostgreSQL"]
-}
-```
 
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=spring-boot&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white)
@@ -104,9 +92,15 @@ const languages = {
 
 ---
 
-## `root@sys:~/hardware$ cat system_specs.txt`
+## `root@sys:~/hardware$ neofetch --hardware`
 
-### 💻 **WORKSTATION_CONFIGURATION**
+<div align="center">
+
+![System Monitor](./assets/system-monitor.svg)
+
+</div>
+
+### 💻 **WORKSTATION_SPECS**
 
 <table align="center">
 <tr>
@@ -114,10 +108,11 @@ const languages = {
 
 ```yaml
 CPU:
-  Model: "Intel Core i9-14900KF"
+  Model: Intel Core i9-14900KF
   Cores: 24 (8P + 16E)
-  Base: "3.2 GHz"
-  Boost: "6.0 GHz"
+  Base Clock: 3.2 GHz
+  Boost Clock: 6.0 GHz
+  TDP: 125W
 ```
 
 </td>
@@ -125,9 +120,10 @@ CPU:
 
 ```yaml
 GPU:
-  Model: "RTX 4070 Ti SUPER OC"
-  VRAM: "16GB GDDR6X"
-  CUDA: 8448
+  Model: NVIDIA RTX 4070 Ti SUPER OC
+  VRAM: 16GB GDDR6X
+  CUDA Cores: 8448
+  Memory Speed: 21 Gbps
 ```
 
 </td>
@@ -136,19 +132,20 @@ GPU:
 <td width="50%">
 
 ```yaml
-RAM:
-  Capacity: "80GB DDR4"
-  Speed: "3200 MHz"
+Memory:
+  RAM: 80GB DDR4
+  Speed: 3200 MHz
+  Type: Dual Channel
 ```
 
 </td>
 <td width="50%">
 
 ```yaml
-OS:
-  - "Windows 11 Pro"
-  - "Arch Linux"
-  - "macOS (available)"
+Operating Systems:
+  - Windows 11 Pro (Primary)
+  - Arch Linux (Dev)
+  - macOS (Testing available)
 ```
 
 </td>
@@ -169,7 +166,7 @@ OS:
 
 ---
 
-## `root@sys:~/stats$ ./display_metrics.sh`
+## `root@sys:~/stats$ ./github_metrics.sh`
 
 <div align="center">
 
@@ -194,27 +191,51 @@ OS:
 ```bash
 > du -sh repositories/*
 
-total   50+
-public  15+
-private 35+
+total     50+
+public    15+
+private   35+
+active    12
 
-> git status
+> git log --oneline | head -5
 
-On branch main
-Your branch is up to date with 'origin/main'.
-
-nothing to commit, working tree clean
+a8f3d21  Update portfolio website with new features
+7c2e945  Refactor core authentication module  
+4b1a890  Add automation scripts for deployment
+2d5f123  Performance optimization in WebSocket layer
+9e8c234  Initial commit
 ```
 
 [![View All Repositories](https://img.shields.io/badge/VIEW_ALL_REPOS-FF3E00?style=for-the-badge&logo=github&logoColor=white)](https://github.com/keelbismark?tab=repositories)
 [![Stars](https://img.shields.io/github/stars/keelbismark?style=for-the-badge&logo=github&color=FF3E00)](https://github.com/keelbismark)
 [![Followers](https://img.shields.io/github/followers/keelbismark?style=for-the-badge&logo=github&color=FF3E00)](https://github.com/keelbismark?tab=followers)
 
-### 🔥 **PINNED_REPOSITORIES**
+</div>
 
-<a href="https://github.com/keelbismark">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=keelbismark&repo=portfolio&theme=dark&bg_color=050505&title_color=ff3e00&text_color=e5e5e5&icon_color=ff3e00&border_color=1f1f1f" width="49%"/>
-</a>
+---
+
+## `root@sys:~/activity$ tail -f activity.log`
+
+<div align="center">
+
+![Activity Log](./assets/activity-log.svg)
+
+</div>
+
+### 🎯 **CONTRIBUTION_ACTIVITY**
+
+<!--START_SECTION:activity-->
+```log
+[INFO] Monitoring repository activity in real-time...
+[SUCCESS] Last commit: 2 hours ago
+[INFO] Most active day: Monday
+[SUCCESS] Current streak: 15 days
+[INFO] Total contributions this year: 1,247
+```
+<!--END_SECTION:activity-->
+
+<div align="center">
+
+[![Trophies](https://github-profile-trophy.vercel.app/?username=keelbismark&theme=darkhub&no-frame=true&no-bg=true&margin-w=4&column=7&title_color=ff3e00&text_color=e5e5e5&icon_color=ff3e00)](https://github.com/keelbismark)
 
 </div>
 
@@ -224,52 +245,39 @@ nothing to commit, working tree clean
 
 <div align="center">
 
-### 📡 **CONNECT_WITH_ME**
+### 📡 **COMMUNICATION_CHANNELS**
 
 ```json
 {
   "status": "ACCEPTING_CONNECTIONS",
   "availability": "OPEN_FOR_FREELANCE",
   "response_time": "<24_hours",
-  "timezone": "UTC+3 (Moscow)",
+  "timezone": "UTC+3 (Moscow, Russia)",
   
-  "primary_contact": {
+  "primary": {
     "discord": "justkeel.6707",
-    "github": "https://github.com/keelbismark"
+    "github": "https://github.com/keelbismark",
+    "email": "contact@keelbismark.space"
   },
   
-  "coming_soon": {
+  "upcoming": {
     "portfolio": "personal_website",
-    "linkedin": "professional_profile"
-  }
+    "linkedin": "professional_profile",
+    "blog": "tech_articles"
+  },
+  
+  "interests": [
+    "Full-stack development",
+    "System programming",
+    "Open source contributions",
+    "Freelance projects"
+  ]
 }
 ```
 
 [![Discord](https://img.shields.io/badge/CONNECT_ON_DISCORD-FF3E00?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com)
 [![GitHub](https://img.shields.io/badge/BROWSE_CODE-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/keelbismark)
-[![Email](https://img.shields.io/badge/SEND_MESSAGE-FF3E00?style=for-the-badge&logo=gmail&logoColor=white)](mailto:contact@keelbismark.space)
-
-</div>
-
----
-
-## `root@sys:~/activity$ tail -f recent.log`
-
-<div align="center">
-
-### 🎯 **RECENT_ACTIVITY**
-
-<!--START_SECTION:activity-->
-```log
-[LIVE] Monitoring repository activity...
-[INFO] Total commits this week: Calculating...
-[INFO] Most used language: Java
-[INFO] Current streak: Active
-[SYSTEM] All systems operational
-```
-<!--END_SECTION:activity-->
-
-[![Trophies](https://github-profile-trophy.vercel.app/?username=keelbismark&theme=darkhub&no-frame=true&no-bg=true&margin-w=4&column=7&title_color=ff3e00&text_color=e5e5e5&icon_color=ff3e00)](https://github.com/keelbismark)
+[![Email](https://img.shields.io/badge/SEND_EMAIL-FF3E00?style=for-the-badge&logo=gmail&logoColor=white)](mailto:contact@keelbismark.space)
 
 </div>
 
@@ -278,19 +286,20 @@ nothing to commit, working tree clean
 <div align="center">
 
 ```
-╭───────────────────────────────────────────────────────────────────────╮
-│                                                                       │
-│  > EOF                                                                │
-│                                                                       │
-│  LAST_UPDATED: 12.08.2025                                            │
-│  SYSTEM_STATUS: OPTIMAL                                              │
-│  UPTIME: 24/7/365                                                    │
-│                                                                       │
-│  "Engineering logic. Building stability."                            │
-│                                                                       │
-│  root@keelbismark:~$ █                                               │
-│                                                                       │
-╰───────────────────────────────────────────────────────────────────────╯
+╭────────────────────────────────────────────────────────────────────────╮
+│                                                                        │
+│  > system.exit(0)                                                      │
+│                                                                        │
+│  LAST_UPDATED: 12.08.2025                                             │
+│  SYSTEM_STATUS: ● OPTIMAL                                             │
+│  UPTIME: 24/7/365                                                     │
+│  MONITORING: ACTIVE                                                   │
+│                                                                        │
+│  "Engineering logic. Building stability."                             │
+│                                                                        │
+│  root@keelbismark:~$ █                                                │
+│                                                                        │
+╰────────────────────────────────────────────────────────────────────────╯
 ```
 
 ![Visitors](https://komarev.com/ghpvc/?username=keelbismark&color=ff3e00&style=flat-square&label=VISITORS)
