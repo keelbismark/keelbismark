@@ -1,0 +1,135 @@
+<svg width="800" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @keyframes blink {
+        0%, 49% { opacity: 1; }
+        50%, 100% { opacity: 0; }
+      }
+      @keyframes typing {
+        from { width: 0; }
+        to { width: 100%; }
+      }
+      @keyframes glow {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 1; }
+      }
+      @keyframes scan {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(100%); }
+      }
+      
+      .terminal-bg {
+        fill: #050505;
+      }
+      .terminal-border {
+        fill: none;
+        stroke: #1f1f1f;
+        stroke-width: 2;
+      }
+      .terminal-accent {
+        fill: none;
+        stroke: #ff3e00;
+        stroke-width: 2;
+      }
+      .text-primary {
+        fill: #ff3e00;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .text-white {
+        fill: #e5e5e5;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+      }
+      .text-muted {
+        fill: #525252;
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+      }
+      .cursor {
+        fill: #ff3e00;
+        animation: blink 1s step-end infinite;
+      }
+      .glow-circle {
+        fill: #10b981;
+        animation: glow 2s ease-in-out infinite;
+      }
+      .scan-line {
+        fill: #ff3e00;
+        opacity: 0.1;
+        animation: scan 3s linear infinite;
+      }
+      .typing-text {
+        animation: typing 2s steps(40) 1s forwards;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect class="terminal-bg" width="800" height="200" rx="8"/>
+  
+  <!-- Border -->
+  <rect class="terminal-border" x="1" y="1" width="798" height="198" rx="8"/>
+  
+  <!-- Corner accents -->
+  <line class="terminal-accent" x1="10" y1="10" x2="30" y2="10"/>
+  <line class="terminal-accent" x1="10" y1="10" x2="10" y2="30"/>
+  
+  <line class="terminal-accent" x1="770" y1="10" x2="790" y2="10"/>
+  <line class="terminal-accent" x1="790" y1="10" x2="790" y2="30"/>
+  
+  <line class="terminal-accent" x1="10" y1="190" x2="30" y2="190"/>
+  <line class="terminal-accent" x1="10" y1="170" x2="10" y2="190"/>
+  
+  <line class="terminal-accent" x1="770" y1="190" x2="790" y2="190"/>
+  <line class="terminal-accent" x1="790" y1="170" x2="790" y2="190"/>
+  
+  <!-- Scan line effect -->
+  <rect class="scan-line" x="0" y="0" width="800" height="4"/>
+  
+  <!-- Terminal header -->
+  <text class="text-muted" x="20" y="35">┌─[root@keelbismark:~]</text>
+  <text class="text-muted" x="20" y="50">└──╼</text>
+  
+  <!-- Status indicator -->
+  <circle class="glow-circle" cx="750" cy="30" r="4"/>
+  <text class="text-primary" x="710" y="35" font-size="10">ONLINE</text>
+  
+  <!-- Main content line 1 -->
+  <text class="text-primary" x="70" y="50">$</text>
+  <text class="text-white" x="90" y="50">whoami</text>
+  
+  <!-- Response 1 -->
+  <text class="text-white" x="70" y="75">KeelBismark</text>
+  
+  <!-- Main content line 2 -->
+  <text class="text-primary" x="70" y="100">$</text>
+  <text class="text-white" x="90" y="100">cat role.txt</text>
+  
+  <!-- Response 2 with typing effect -->
+  <g>
+    <clipPath id="typing-clip">
+      <rect class="typing-text" x="70" y="110" width="0" height="20"/>
+    </clipPath>
+    <text class="text-primary" x="70" y="125" clip-path="url(#typing-clip)">
+      FULL STACK DEVELOPER // PYTHON · JS · C++
+    </text>
+  </g>
+  
+  <!-- Cursor -->
+  <rect class="cursor" x="460" y="113" width="8" height="14"/>
+  
+  <!-- Main content line 3 -->
+  <text class="text-primary" x="70" y="150">$</text>
+  <text class="text-white" x="90" y="150">echo $STATUS</text>
+  
+  <!-- Response 3 -->
+  <text class="text-primary" x="70" y="175">OPEN_FOR_FREELANCE</text>
+  <text class="text-muted" x="240" y="175">✓</text>
+  
+  <!-- Footer info -->
+  <text class="text-muted" x="600" y="185" font-size="10">Moscow, RU</text>
+</svg>

@@ -1,0 +1,95 @@
+<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @keyframes fillBar1 {
+        0% { width: 0; }
+        100% { width: 180px; }
+      }
+      @keyframes fillBar2 {
+        0% { width: 0; }
+        100% { width: 170px; }
+      }
+      @keyframes fillBar3 {
+        0% { width: 0; }
+        100% { width: 160px; }
+      }
+      @keyframes fillBar4 {
+        0% { width: 0; }
+        100% { width: 150px; }
+      }
+      @keyframes countUp {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+      @keyframes glow {
+        0%, 100% { opacity: 0.5; filter: blur(4px); }
+        50% { opacity: 0.8; filter: blur(6px); }
+      }
+      
+      .bg { fill: #050505; }
+      .border { fill: none; stroke: #1f1f1f; stroke-width: 1; }
+      .text-primary { fill: #ff3e00; font-family: monospace; font-size: 12px; font-weight: bold; }
+      .text-white { fill: #e5e5e5; font-family: monospace; font-size: 11px; }
+      .text-muted { fill: #525252; font-family: monospace; font-size: 10px; }
+      
+      .bar-bg { fill: #0a0a0a; stroke: #1f1f1f; stroke-width: 1; }
+      .bar-fill { fill: url(#barGradient); }
+      
+      .bar1 { animation: fillBar1 1.5s ease-out forwards; }
+      .bar2 { animation: fillBar2 1.5s ease-out 0.2s forwards; }
+      .bar3 { animation: fillBar3 1.5s ease-out 0.4s forwards; }
+      .bar4 { animation: fillBar4 1.5s ease-out 0.6s forwards; }
+      
+      .glow { animation: glow 2s ease-in-out infinite; }
+      .number { animation: countUp 0.8s ease-out forwards; }
+    </style>
+    
+    <linearGradient id="barGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff3e00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff5e00;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="glow-filter">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect class="bg" width="400" height="200" rx="4"/>
+  <rect class="border" x="0.5" y="0.5" width="399" height="199" rx="4"/>
+  
+  <!-- Title -->
+  <text class="text-primary" x="20" y="25" font-size="14">⚡ SKILL_METRICS</text>
+  <line stroke="#1f1f1f" stroke-width="1" x1="20" y1="30" x2="380" y2="30"/>
+  
+  <!-- Skill 1: Java -->
+  <text class="text-white" x="20" y="60">Java / Spring Boot</text>
+  <text class="text-primary number" x="360" y="60" text-anchor="end">90%</text>
+  <rect class="bar-bg" x="20" y="65" width="200" height="8" rx="2"/>
+  <rect class="bar-fill bar1" x="20" y="65" width="0" height="8" rx="2" filter="url(#glow-filter)"/>
+  
+  <!-- Skill 2: JavaScript -->
+  <text class="text-white" x="20" y="95">JavaScript / Node.js</text>
+  <text class="text-primary number" x="360" y="95" text-anchor="end">85%</text>
+  <rect class="bar-bg" x="20" y="100" width="200" height="8" rx="2"/>
+  <rect class="bar-fill bar2" x="20" y="100" width="0" height="8" rx="2" filter="url(#glow-filter)"/>
+  
+  <!-- Skill 3: Python -->
+  <text class="text-white" x="20" y="130">Python / Flask</text>
+  <text class="text-primary number" x="360" y="130" text-anchor="end">80%</text>
+  <rect class="bar-bg" x="20" y="135" width="200" height="8" rx="2"/>
+  <rect class="bar-fill bar3" x="20" y="135" width="0" height="8" rx="2" filter="url(#glow-filter)"/>
+  
+  <!-- Skill 4: C++ -->
+  <text class="text-white" x="20" y="165">C++ / System Programming</text>
+  <text class="text-primary number" x="360" y="165" text-anchor="end">75%</text>
+  <rect class="bar-bg" x="20" y="170" width="200" height="8" rx="2"/>
+  <rect class="bar-fill bar4" x="20" y="170" width="0" height="8" rx="2" filter="url(#glow-filter)"/>
+  
+  <!-- Glow effect -->
+  <circle class="text-primary glow" cx="230" cy="105" r="2" opacity="0.5"/>
+</svg>
