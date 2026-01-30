@@ -30,21 +30,6 @@
         45% { opacity: 1; }
         100% { opacity: 1; }
       }
-      @keyframes fadeIn5 {
-        0%, 50% { opacity: 0; }
-        55% { opacity: 1; }
-        100% { opacity: 1; }
-      }
-      @keyframes fadeIn6 {
-        0%, 60% { opacity: 0; }
-        65% { opacity: 1; }
-        100% { opacity: 1; }
-      }
-      @keyframes fadeIn7 {
-        0%, 70% { opacity: 0; }
-        75% { opacity: 1; }
-        100% { opacity: 1; }
-      }
       
       .bg { fill: #050505; }
       .border { fill: none; stroke: #1f1f1f; stroke-width: 1; }
@@ -76,7 +61,7 @@
   <text class="text-header" x="350" y="16" text-anchor="middle">tail -f /var/log/activity.log</text>
   
   <!-- Current time -->
-  <text class="text-header" x="680" y="16" text-anchor="end">15:40:46</text>
+  <text class="text-header" x="680" y="16" text-anchor="end">16:46:47</text>
   
   <!-- Content area -->
   <g transform="translate(15, 45)">
@@ -109,27 +94,6 @@
       <text class="text-highlight" x="450" y="0">keelbismark/keelbismark</text>
     </g>
 
-    <g style="animation: fadeIn5 12s infinite; opacity: 0;" transform="translate(0, 100)">
-      <text class="text-timestamp" x="0" y="0">[2025-12-31 08:40:20]</text>
-      <text class="text-success" x="150" y="0">[SUCCESS]</text>
-      <text class="text-muted" x="230" y="0">Pushed to keelbismark</text>
-      <text class="text-highlight" x="450" y="0">keelbismark/keelbismark</text>
-    </g>
-
-    <g style="animation: fadeIn6 12s infinite; opacity: 0;" transform="translate(0, 125)">
-      <text class="text-timestamp" x="0" y="0">[2025-12-31 08:39:02]</text>
-      <text class="text-success" x="150" y="0">[SUCCESS]</text>
-      <text class="text-muted" x="230" y="0">Pushed to keelbismark</text>
-      <text class="text-highlight" x="450" y="0">keelbismark/keelbismark</text>
-    </g>
-
-    <g style="animation: fadeIn7 12s infinite; opacity: 0;" transform="translate(0, 150)">
-      <text class="text-timestamp" x="0" y="0">[2025-12-31 08:37:27]</text>
-      <text class="text-success" x="150" y="0">[SUCCESS]</text>
-      <text class="text-muted" x="230" y="0">Pushed to keelbismark</text>
-      <text class="text-highlight" x="450" y="0">keelbismark/keelbismark</text>
-    </g>
-
   </g>
   
   <!-- Status bar at bottom -->
@@ -141,6 +105,6 @@
   </text>
   
   <text class="text-muted" x="685" y="241" text-anchor="end" font-size="10">
-    Updated: 2026-01-30 15:40 UTC
+    Updated: 2026-01-30 16:46 UTC
   </text>
 </svg>
