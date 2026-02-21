@@ -15,6 +15,31 @@
         15% { opacity: 1; }
         100% { opacity: 1; }
       }
+      @keyframes fadeIn2 {
+        0%, 20% { opacity: 0; }
+        25% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+      @keyframes fadeIn3 {
+        0%, 30% { opacity: 0; }
+        35% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+      @keyframes fadeIn4 {
+        0%, 40% { opacity: 0; }
+        45% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+      @keyframes fadeIn5 {
+        0%, 50% { opacity: 0; }
+        55% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+      @keyframes fadeIn6 {
+        0%, 60% { opacity: 0; }
+        65% { opacity: 1; }
+        100% { opacity: 1; }
+      }
       
       .bg { fill: #050505; }
       .border { fill: none; stroke: #1f1f1f; stroke-width: 1; }
@@ -46,12 +71,47 @@
   <text class="text-header" x="350" y="16" text-anchor="middle">tail -f /var/log/activity.log</text>
   
   <!-- Current time -->
-  <text class="text-header" x="680" y="16" text-anchor="end">17:29:34</text>
+  <text class="text-header" x="680" y="16" text-anchor="end">18:42:36</text>
   
   <!-- Content area -->
   <g transform="translate(15, 45)">
 
     <g style="animation: fadeIn1 12s infinite; opacity: 0;" transform="translate(0, 0)">
+      <text class="text-timestamp" x="0" y="0">[2026-02-21 18:36:45]</text>
+      <text class="text-success" x="150" y="0">[SUCCESS]</text>
+      <text class="text-muted" x="230" y="0">Pushed to ShooPhantom</text>
+      <text class="text-highlight" x="450" y="0">keelbismark/ShooPhantom</text>
+    </g>
+
+    <g style="animation: fadeIn2 12s infinite; opacity: 0;" transform="translate(0, 25)">
+      <text class="text-timestamp" x="0" y="0">[2026-02-21 18:27:37]</text>
+      <text class="text-success" x="150" y="0">[SUCCESS]</text>
+      <text class="text-muted" x="230" y="0">Pushed to ShooPhantom</text>
+      <text class="text-highlight" x="450" y="0">keelbismark/ShooPhantom</text>
+    </g>
+
+    <g style="animation: fadeIn3 12s infinite; opacity: 0;" transform="translate(0, 50)">
+      <text class="text-timestamp" x="0" y="0">[2026-02-21 18:25:54]</text>
+      <text class="text-success" x="150" y="0">[SUCCESS]</text>
+      <text class="text-muted" x="230" y="0">Pushed to ShooPhantom</text>
+      <text class="text-highlight" x="450" y="0">keelbismark/ShooPhantom</text>
+    </g>
+
+    <g style="animation: fadeIn4 12s infinite; opacity: 0;" transform="translate(0, 75)">
+      <text class="text-timestamp" x="0" y="0">[2026-02-21 18:23:24]</text>
+      <text class="text-success" x="150" y="0">[SUCCESS]</text>
+      <text class="text-muted" x="230" y="0">Pushed to ShooPhantom</text>
+      <text class="text-highlight" x="450" y="0">keelbismark/ShooPhantom</text>
+    </g>
+
+    <g style="animation: fadeIn5 12s infinite; opacity: 0;" transform="translate(0, 100)">
+      <text class="text-timestamp" x="0" y="0">[2026-02-21 18:20:54]</text>
+      <text class="text-info" x="150" y="0">[CREATE]</text>
+      <text class="text-muted" x="230" y="0">Created branch in ShooPhantom</text>
+      <text class="text-highlight" x="450" y="0">keelbismark/ShooPhantom</text>
+    </g>
+
+    <g style="animation: fadeIn6 12s infinite; opacity: 0;" transform="translate(0, 125)">
       <text class="text-timestamp" x="0" y="0">[2026-01-22 18:06:46]</text>
       <text class="text-info" x="150" y="0">[STAR]</text>
       <text class="text-muted" x="230" y="0">Starred py-clash-bot</text>
@@ -69,6 +129,6 @@
   </text>
   
   <text class="text-muted" x="685" y="241" text-anchor="end" font-size="10">
-    Updated: 2026-02-21 17:29 UTC
+    Updated: 2026-02-21 18:42 UTC
   </text>
 </svg>
