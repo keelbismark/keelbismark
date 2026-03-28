@@ -40,11 +40,6 @@
         65% { opacity: 1; }
         100% { opacity: 1; }
       }
-      @keyframes fadeIn7 {
-        0%, 70% { opacity: 0; }
-        75% { opacity: 1; }
-        100% { opacity: 1; }
-      }
       
       .bg { fill: #050505; }
       .border { fill: none; stroke: #1f1f1f; stroke-width: 1; }
@@ -76,7 +71,7 @@
   <text class="text-header" x="350" y="16" text-anchor="middle">tail -f /var/log/activity.log</text>
   
   <!-- Current time -->
-  <text class="text-header" x="680" y="16" text-anchor="end">17:34:56</text>
+  <text class="text-header" x="680" y="16" text-anchor="end">18:50:27</text>
   
   <!-- Content area -->
   <g transform="translate(15, 45)">
@@ -123,13 +118,6 @@
       <text class="text-highlight" x="450" y="0">Flowseal/zapret-discord-youtube</text>
     </g>
 
-    <g style="animation: fadeIn7 12s infinite; opacity: 0;" transform="translate(0, 150)">
-      <text class="text-timestamp" x="0" y="0">[2026-02-26 11:42:28]</text>
-      <text class="text-info" x="150" y="0">[MERGE]</text>
-      <text class="text-muted" x="230" y="0">Pull request in narrativa</text>
-      <text class="text-highlight" x="450" y="0">DelightZone/narrativa</text>
-    </g>
-
   </g>
   
   <!-- Status bar at bottom -->
@@ -141,6 +129,6 @@
   </text>
   
   <text class="text-muted" x="685" y="241" text-anchor="end" font-size="10">
-    Updated: 2026-03-28 17:34 UTC
+    Updated: 2026-03-28 18:50 UTC
   </text>
 </svg>
