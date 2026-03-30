@@ -35,11 +35,6 @@
         55% { opacity: 1; }
         100% { opacity: 1; }
       }
-      @keyframes fadeIn6 {
-        0%, 60% { opacity: 0; }
-        65% { opacity: 1; }
-        100% { opacity: 1; }
-      }
       
       .bg { fill: #050505; }
       .border { fill: none; stroke: #1f1f1f; stroke-width: 1; }
@@ -71,7 +66,7 @@
   <text class="text-header" x="350" y="16" text-anchor="middle">tail -f /var/log/activity.log</text>
   
   <!-- Current time -->
-  <text class="text-header" x="680" y="16" text-anchor="end">23:38:24</text>
+  <text class="text-header" x="680" y="16" text-anchor="end">02:56:49</text>
   
   <!-- Content area -->
   <g transform="translate(15, 45)">
@@ -111,13 +106,6 @@
       <text class="text-highlight" x="450" y="0">Mr-Catcraft/MyMusicVault</text>
     </g>
 
-    <g style="animation: fadeIn6 12s infinite; opacity: 0;" transform="translate(0, 125)">
-      <text class="text-timestamp" x="0" y="0">[2026-02-27 18:56:50]</text>
-      <text class="text-info" x="150" y="0">[MERGE]</text>
-      <text class="text-muted" x="230" y="0">Pull request in zapret-discord-youtube</text>
-      <text class="text-highlight" x="450" y="0">Flowseal/zapret-discord-youtube</text>
-    </g>
-
   </g>
   
   <!-- Status bar at bottom -->
@@ -129,6 +117,6 @@
   </text>
   
   <text class="text-muted" x="685" y="241" text-anchor="end" font-size="10">
-    Updated: 2026-03-29 23:38 UTC
+    Updated: 2026-03-30 02:56 UTC
   </text>
 </svg>
