@@ -51,7 +51,7 @@
   <text class="text-header" x="350" y="16" text-anchor="middle">tail -f /var/log/activity.log</text>
   
   <!-- Current time -->
-  <text class="text-header" x="680" y="16" text-anchor="end">15:16:11</text>
+  <text class="text-header" x="680" y="16" text-anchor="end">17:11:11</text>
   
   <!-- Content area -->
   <g transform="translate(15, 45)">
@@ -81,6 +81,6 @@
   </text>
   
   <text class="text-muted" x="685" y="241" text-anchor="end" font-size="10">
-    Updated: 2026-04-08 15:16 UTC
+    Updated: 2026-04-08 17:11 UTC
   </text>
 </svg>
