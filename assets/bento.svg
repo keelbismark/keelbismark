@@ -9,12 +9,10 @@
   .text { fill: #d4c8d1; }
   .muted { fill: #93838f; }
   .green { fill: #3fb950; }
-  .italic { font-style: italic; }
   .card-bg { fill: url(#cardGrad); stroke: #ffffff; stroke-opacity: 0.08; }
   .chip { fill: #ffffff; fill-opacity: 0.04; stroke: #ffffff; stroke-opacity: 0.10; }
   .rise { opacity: 0; animation: rise .7s cubic-bezier(.2,.7,.3,1) forwards; }
-  .d1 { animation-delay: .05s; } .d2 { animation-delay: .15s; } .d3 { animation-delay: .25s; }
-  .d4 { animation-delay: .35s; } .d5 { animation-delay: .45s; }
+  .d1 { animation-delay: .05s; } .d2 { animation-delay: .15s; } .d3 { animation-delay: .25s; } .d4 { animation-delay: .35s; }
   .fade { opacity: 0; animation: fade .4s ease-out forwards; }
   .f1 { animation-delay: 1.4s; } .f2 { animation-delay: 2.9s; } .f3 { animation-delay: 3.2s; }
   .t1 { width: 0; animation: t1 .6s steps(8) .8s forwards; }
@@ -50,8 +48,8 @@
   <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000000" flood-opacity="0.35"/>
 </filter>
 <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
-<clipPath id="tc1"><rect class="t1" x="714" y="65" width="0" height="18"/></clipPath>
-<clipPath id="tc2"><rect class="t2" x="714" y="117" width="0" height="18"/></clipPath>
+<clipPath id="tc1"><rect class="t1" x="616" y="65" width="0" height="18"/></clipPath>
+<clipPath id="tc2"><rect class="t2" x="616" y="117" width="0" height="18"/></clipPath>
 </defs>
 
 <!-- panel -->
@@ -65,9 +63,7 @@
 <g class="rise d1">
   <rect class="card-bg" x="20" y="20" width="540" height="210" rx="20" filter="url(#shadow)"/>
   <circle cx="76" cy="96" r="30" fill="#0c0910" stroke="#ff2e88" stroke-width="1.5"/>
-  <text class="mono" x="76" y="106" font-size="24" font-weight="700" text-anchor="middle">
-    <tspan fill="#93838f" opacity="0.6">B</tspan>
-  </text>
+  <text class="mono" x="76" y="106" font-size="24" font-weight="700" text-anchor="middle" fill="#93838f" opacity="0.6">B</text>
   <text class="mono accent" x="76" y="106" font-size="24" font-weight="700" text-anchor="middle">K</text>
   <text class="sans" x="128" y="88" font-size="34" font-weight="700" fill="url(#nameGrad)">KeelBismarck</text>
   <path d="M128 100 q14 4 28 1 t28 0 t28 -1" fill="none" stroke="#ff2e88" stroke-width="2.5" stroke-linecap="round" filter="url(#glowP)"/>
@@ -91,10 +87,10 @@
   <circle fill="#27c93f" cx="634" cy="46" r="4"/>
   <g class="mono" font-size="11">
     <text class="accent" x="598" y="78">❯</text>
-    <text class="white" x="714" y="78" clip-path="url(#tc1)">whoami</text>
+    <text class="white" x="616" y="78" clip-path="url(#tc1)">whoami</text>
     <text class="sans white fade f1" x="616" y="102" font-size="12" font-weight="700">KeelBismarck</text>
     <text class="accent fade f1" x="598" y="132">❯</text>
-    <text class="white" x="714" y="132" clip-path="url(#tc2)">cat status.txt</text>
+    <text class="white" x="616" y="132" clip-path="url(#tc2)">cat status.txt</text>
     <text class="text fade f2" x="616" y="156">focused · available</text>
     <g class="fade f3">
       <text class="accent" x="598" y="186">❯</text>
@@ -103,9 +99,9 @@
   </g>
 </g>
 
-<!-- ═══ STACK ═══ -->
+<!-- ═══ STACK ══ -->
 <g class="rise d3">
-  <rect class="card-bg" x="20" y="244" width="420" height="230" rx="20" filter="url(#shadow)"/>
+  <rect class="card-bg" x="20" y="244" width="540" height="230" rx="20" filter="url(#shadow)"/>
   <text class="label" x="44" y="278"><tspan class="accent">//</tspan> stack</text>
   <g class="sans" font-size="11">
     <rect class="chip" x="44" y="296" width="62" height="24" rx="12"/><text class="text" x="56" y="312">Python</text>
@@ -130,31 +126,23 @@
   </g>
 </g>
 
-<!-- ═══ NOW (dashed) ═══ -->
-<g class="rise d4">
-  <rect class="card-bg" x="460" y="244" width="200" height="230" rx="20" stroke-dasharray="5 4" filter="url(#shadow)"/>
-  <text class="label" x="484" y="278"><tspan class="accent">//</tspan> now</text>
-  <g class="sans" font-size="12">
-    <rect class="accent" x="484" y="298" width="6" height="6" rx="1.5"/><text class="text" x="498" y="306">shipping: this profile</text>
-    <rect class="accent" x="484" y="332" width="6" height="6" rx="1.5"/><text class="text" x="498" y="340">reading: docs &amp; RFCs</text>
-    <rect class="accent" x="484" y="366" width="6" height="6" rx="1.5"/><text class="text" x="498" y="374">listening: synthwave</text>
-    <rect class="accent" x="484" y="400" width="6" height="6" rx="1.5"/><text class="text" x="498" y="408">shipping: stable code</text>
-  </g>
-</g>
-
 <!-- ═══ CONTACT ═══ -->
-<g class="rise d5">
-  <rect class="card-bg" x="680" y="244" width="200" height="230" rx="20" filter="url(#shadow)"/>
-  <text class="label" x="704" y="278"><tspan class="accent">//</tspan> contact</text>
-  <g class="sans">
-    <text class="muted" x="704" y="302" font-size="9">discord</text>
-    <text class="text" x="704" y="318" font-size="11">justkeel.6707</text>
-    <text class="muted" x="704" y="346" font-size="9">email</text>
-    <text class="text" x="704" y="362" font-size="10">contact@keelbismark.space</text>
-    <text class="muted" x="704" y="390" font-size="9">github</text>
-    <text class="text" x="704" y="406" font-size="11">github.com/keelbismark</text>
+<g class="rise d4">
+  <rect class="card-bg" x="580" y="244" width="300" height="230" rx="20" filter="url(#shadow)"/>
+  <text class="label" x="604" y="278"><tspan class="accent">//</tspan> contact</text>
+  <g class="mono" font-size="8">
+    <circle cx="614" cy="302" r="10" fill="#ffffff" fill-opacity="0.06"/><text class="accent" x="614" y="305" text-anchor="middle">TG</text>
+    <circle cx="614" cy="338" r="10" fill="#ffffff" fill-opacity="0.06"/><text class="accent" x="614" y="341" text-anchor="middle">D</text>
+    <circle cx="614" cy="374" r="10" fill="#ffffff" fill-opacity="0.06"/><text class="accent" x="614" y="377" text-anchor="middle">@</text>
+    <circle cx="614" cy="410" r="10" fill="#ffffff" fill-opacity="0.06"/><text class="accent" x="614" y="413" text-anchor="middle">GH</text>
   </g>
-  <circle class="green pulse" cx="708" cy="440" r="3"/>
-  <text class="sans muted" x="718" y="444" font-size="10">reply &lt; 24h</text>
+  <g class="sans">
+    <text class="text" x="634" y="306" font-size="11">@bismark_dev</text><text class="muted" x="856" y="306" text-anchor="end" font-size="9">telegram</text>
+    <text class="text" x="634" y="342" font-size="11">justkeel.6707</text><text class="muted" x="856" y="342" text-anchor="end" font-size="9">discord</text>
+    <text class="text" x="634" y="378" font-size="10">contact@keelbismark.space</text><text class="muted" x="856" y="378" text-anchor="end" font-size="9">email</text>
+    <text class="text" x="634" y="414" font-size="11">github.com/keelbismark</text><text class="muted" x="856" y="414" text-anchor="end" font-size="9">github</text>
+  </g>
+  <circle class="green pulse" cx="608" cy="444" r="3"/>
+  <text class="sans muted" x="618" y="448" font-size="10">reply &lt; 24h</text>
 </g>
 </svg>
