@@ -16,15 +16,15 @@
   .d1 { animation-delay: .05s; } .d2 { animation-delay: .15s; } .d3 { animation-delay: .25s; }
   .d4 { animation-delay: .35s; } .d5 { animation-delay: .45s; }
   .fade { opacity: 0; animation: fade .4s ease-out forwards; }
-  .f1 { animation-delay: 1.4s; } .f2 { animation-delay: 2.7s; } .f3 { animation-delay: 3s; }
-  .t1 { width: 0; animation: t1 .6s steps(10) .8s forwards; }
-  .t2 { width: 0; animation: t2 .8s steps(16) 1.9s forwards; }
+  .f1 { animation-delay: 1.4s; } .f2 { animation-delay: 2.9s; } .f3 { animation-delay: 3.2s; }
+  .t1 { width: 0; animation: t1 .6s steps(8) .8s forwards; }
+  .t2 { width: 0; animation: t2 .8s steps(14) 1.9s forwards; }
   .pulse { animation: pulse 2s ease-in-out infinite; }
   .blink { animation: blink 1s step-end infinite; }
   @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes fade { to { opacity: 1; } }
-  @keyframes t1 { to { width: 44px; } }
-  @keyframes t2 { to { width: 84px; } }
+  @keyframes t1 { to { width: 48px; } }
+  @keyframes t2 { to { width: 86px; } }
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
   @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
 </style>
@@ -50,8 +50,8 @@
   <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000000" flood-opacity="0.35"/>
 </filter>
 <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
-<clipPath id="tc1"><rect class="t1" x="706" y="65" width="0" height="18"/></clipPath>
-<clipPath id="tc2"><rect class="t2" x="706" y="117" width="0" height="18"/></clipPath>
+<clipPath id="tc1"><rect class="t1" x="714" y="65" width="0" height="18"/></clipPath>
+<clipPath id="tc2"><rect class="t2" x="714" y="117" width="0" height="18"/></clipPath>
 </defs>
 
 <!-- panel -->
@@ -63,43 +63,42 @@
 
 <!-- ═══ IDENTITY ═══ -->
 <g class="rise d1">
-  <rect class="card-bg" x="20" y="20" width="640" height="210" rx="20" filter="url(#shadow)"/>
+  <rect class="card-bg" x="20" y="20" width="540" height="210" rx="20" filter="url(#shadow)"/>
   <circle cx="76" cy="96" r="30" fill="#0c0910" stroke="#ff2e88" stroke-width="1.5"/>
-  <g fill="none" stroke="#ff2e88" stroke-width="2" stroke-linecap="round">
-    <circle cx="76" cy="82" r="4"/>
-    <line x1="76" y1="86" x2="76" y2="112"/>
-    <line x1="66" y1="92" x2="86" y2="92"/>
-    <path d="M62 102 q14 16 28 0"/>
-  </g>
+  <text class="mono" x="76" y="106" font-size="24" font-weight="700" text-anchor="middle">
+    <tspan fill="#93838f" opacity="0.6">B</tspan>
+  </text>
+  <text class="mono accent" x="76" y="106" font-size="24" font-weight="700" text-anchor="middle">K</text>
   <text class="sans" x="128" y="88" font-size="34" font-weight="700" fill="url(#nameGrad)">KeelBismarck</text>
   <path d="M128 100 q14 4 28 1 t28 0 t28 -1" fill="none" stroke="#ff2e88" stroke-width="2.5" stroke-linecap="round" filter="url(#glowP)"/>
   <text class="sans muted" x="128" y="128" font-size="13">Full-stack Developer · Python / JavaScript / C++</text>
   <rect x="128" y="146" width="168" height="28" rx="14" fill="#3fb950" fill-opacity="0.10" stroke="#3fb950" stroke-opacity="0.35"/>
   <circle class="green pulse" cx="146" cy="160" r="4" filter="url(#glowG)"/>
   <text class="sans" x="158" y="165" font-size="12" fill="#7ee2a8">Open for freelance</text>
-  <text class="sans muted italic" x="128" y="198" font-size="11">moscow · utc+3 · usually online way past midnight</text>
-  <g transform="rotate(-6 600 43)">
-    <rect x="545" y="28" width="110" height="30" rx="15" fill="#0c0910" stroke="#ff2e88" stroke-dasharray="4 3"/>
-    <text class="mono accent" x="600" y="47" font-size="11" text-anchor="middle">hire me →</text>
+  <rect x="308" y="146" width="148" height="28" rx="14" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.10"/>
+  <text class="sans muted" x="324" y="165" font-size="12">Moscow · UTC+3</text>
+  <g transform="rotate(-6 502 43)">
+    <rect x="452" y="28" width="100" height="30" rx="15" fill="#0c0910" stroke="#ff2e88" stroke-dasharray="4 3"/>
+    <text class="mono accent" x="502" y="47" font-size="11" text-anchor="middle">hire me →</text>
   </g>
 </g>
 
 <!-- ═══ TERMINAL ═══ -->
 <g class="rise d2">
-  <rect class="card-bg" x="674" y="20" width="206" height="210" rx="20" filter="url(#shadow)"/>
-  <circle fill="#ff5f56" cx="692" cy="36" r="4"/>
-  <circle fill="#ffbd2e" cx="708" cy="36" r="4"/>
-  <circle fill="#27c93f" cx="724" cy="36" r="4"/>
+  <rect class="card-bg" x="580" y="20" width="300" height="210" rx="20" filter="url(#shadow)"/>
+  <circle fill="#ff5f56" cx="602" cy="46" r="4"/>
+  <circle fill="#ffbd2e" cx="618" cy="46" r="4"/>
+  <circle fill="#27c93f" cx="634" cy="46" r="4"/>
   <g class="mono" font-size="11">
-    <text class="accent" x="690" y="78">❯</text>
-    <text class="white" x="706" y="78" clip-path="url(#tc1)">whoami</text>
-    <text class="sans white fade f1" x="706" y="100" font-size="12" font-weight="700">KeelBismarck</text>
-    <text class="accent fade f1" x="690" y="130">❯</text>
-    <text class="white" x="706" y="130" clip-path="url(#tc2)">cat mood.txt</text>
-    <text class="text fade f2" x="706" y="152">coffee-driven dev ☕</text>
+    <text class="accent" x="598" y="78">❯</text>
+    <text class="white" x="714" y="78" clip-path="url(#tc1)">whoami</text>
+    <text class="sans white fade f1" x="616" y="102" font-size="12" font-weight="700">KeelBismarck</text>
+    <text class="accent fade f1" x="598" y="132">❯</text>
+    <text class="white" x="714" y="132" clip-path="url(#tc2)">cat status.txt</text>
+    <text class="text fade f2" x="616" y="156">focused · available</text>
     <g class="fade f3">
-      <text class="accent" x="690" y="182">❯</text>
-      <rect class="accent blink" x="706" y="172" width="7" height="13"/>
+      <text class="accent" x="598" y="186">❯</text>
+      <rect class="accent blink" x="616" y="175" width="7" height="14"/>
     </g>
   </g>
 </g>
@@ -129,34 +128,33 @@
     <rect class="chip" x="204" y="392" width="70" height="24" rx="12"/><text class="text" x="216" y="408">Windows</text>
     <rect class="chip" x="282" y="392" width="60" height="24" rx="12"/><text class="text" x="294" y="408">macOS</text>
   </g>
-  <text class="sans muted italic" x="44" y="446" font-size="11">// tools change — curiosity doesn't</text>
 </g>
 
 <!-- ═══ NOW (dashed) ═══ -->
 <g class="rise d4">
-  <rect class="card-bg" x="454" y="244" width="206" height="230" rx="20" stroke-dasharray="5 4" filter="url(#shadow)"/>
-  <text class="label" x="478" y="278"><tspan class="accent">//</tspan> now</text>
+  <rect class="card-bg" x="460" y="244" width="200" height="230" rx="20" stroke-dasharray="5 4" filter="url(#shadow)"/>
+  <text class="label" x="484" y="278"><tspan class="accent">//</tspan> now</text>
   <g class="sans" font-size="12">
-    <rect class="accent" x="478" y="298" width="6" height="6" rx="1.5"/><text class="text" x="492" y="306">shipping: this profile</text>
-    <rect class="accent" x="478" y="332" width="6" height="6" rx="1.5"/><text class="text" x="492" y="340">learning: ml tooling</text>
-    <rect class="accent" x="478" y="366" width="6" height="6" rx="1.5"/><text class="text" x="492" y="374">listening: synthwave</text>
-    <rect class="accent" x="478" y="400" width="6" height="6" rx="1.5"/><text class="text" x="492" y="408">coffee: cup #3 today</text>
+    <rect class="accent" x="484" y="298" width="6" height="6" rx="1.5"/><text class="text" x="498" y="306">shipping: this profile</text>
+    <rect class="accent" x="484" y="332" width="6" height="6" rx="1.5"/><text class="text" x="498" y="340">reading: docs &amp; RFCs</text>
+    <rect class="accent" x="484" y="366" width="6" height="6" rx="1.5"/><text class="text" x="498" y="374">listening: synthwave</text>
+    <rect class="accent" x="484" y="400" width="6" height="6" rx="1.5"/><text class="text" x="498" y="408">shipping: stable code</text>
   </g>
 </g>
 
 <!-- ═══ CONTACT ═══ -->
 <g class="rise d5">
-  <rect class="card-bg" x="674" y="244" width="206" height="230" rx="20" filter="url(#shadow)"/>
-  <text class="label" x="698" y="278"><tspan class="accent">//</tspan> contact</text>
+  <rect class="card-bg" x="680" y="244" width="200" height="230" rx="20" filter="url(#shadow)"/>
+  <text class="label" x="704" y="278"><tspan class="accent">//</tspan> contact</text>
   <g class="sans">
-    <text class="muted" x="698" y="302" font-size="9">discord</text>
-    <text class="text" x="698" y="318" font-size="11">justkeel.6707</text>
-    <text class="muted" x="698" y="346" font-size="9">email</text>
-    <text class="text" x="698" y="362" font-size="10">contact@keelbismark.space</text>
-    <text class="muted" x="698" y="390" font-size="9">github</text>
-    <text class="text" x="698" y="406" font-size="11">github.com/keelbismark</text>
+    <text class="muted" x="704" y="302" font-size="9">discord</text>
+    <text class="text" x="704" y="318" font-size="11">justkeel.6707</text>
+    <text class="muted" x="704" y="346" font-size="9">email</text>
+    <text class="text" x="704" y="362" font-size="10">contact@keelbismark.space</text>
+    <text class="muted" x="704" y="390" font-size="9">github</text>
+    <text class="text" x="704" y="406" font-size="11">github.com/keelbismark</text>
   </g>
-  <circle class="green pulse" cx="702" cy="440" r="3"/>
-  <text class="sans muted" x="712" y="444" font-size="10">reply &lt; 24h</text>
+  <circle class="green pulse" cx="708" cy="440" r="3"/>
+  <text class="sans muted" x="718" y="444" font-size="10">reply &lt; 24h</text>
 </g>
 </svg>
