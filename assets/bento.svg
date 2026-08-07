@@ -13,23 +13,43 @@
   .card-bg { fill: url(#cardGrad); }
   .edge { fill: none; stroke: url(#edgeGrad); }
   .chip { fill: #ffffff; fill-opacity: 0.04; stroke: #ffffff; stroke-opacity: 0.10; }
-  .core { fill: #ff2e88; fill-opacity: 0.08; stroke: #ff2e88; stroke-opacity: 0.35; }
+  .core { fill: #ff2e88; fill-opacity: 0.08; stroke: #ff2e88; stroke-opacity: 0.35; animation: coreGlow 3s ease-in-out 1.4s infinite; }
   .core-t { fill: #ffd7e8; }
   .icon { fill: none; stroke: #ff9ec7; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-  .rise { opacity: 0; animation: rise .7s cubic-bezier(.2,.7,.3,1) forwards; }
+  .icon * { stroke-dasharray: 1; stroke-dashoffset: 1; animation: drawI .8s ease-out forwards; }
+  .ig1 * { animation-delay: .6s; } .ig2 * { animation-delay: .75s; }
+  .ig3 * { animation-delay: .9s; } .ig4 * { animation-delay: 1.05s; }
+  .rise { opacity: 0; animation: rise .7s cubic-bezier(.22,.9,.3,1.05) forwards; }
   .d1 { animation-delay: .05s; } .d2 { animation-delay: .15s; } .d3 { animation-delay: .25s; } .d4 { animation-delay: .35s; }
+  .fadeup { opacity: 0; animation: fadeup .5s cubic-bezier(.22,.9,.3,1.05) forwards; }
+  .r1 { animation-delay: .5s; } .r2 { animation-delay: .62s; } .r3 { animation-delay: .74s; } .r4 { animation-delay: .86s; }
   .fade { opacity: 0; animation: fade .4s ease-out forwards; }
-  .f1 { animation-delay: 1.4s; } .f2 { animation-delay: 2.9s; } .f3 { animation-delay: 3.2s; }
-  .t1 { width: 0; animation: t1 .6s steps(8) .8s forwards; }
-  .t2 { width: 0; animation: t2 .8s steps(14) 1.9s forwards; }
+  .f1 { animation-delay: 1.7s; } .f2 { animation-delay: 3.2s; } .f3 { animation-delay: 3.5s; }
+  .t1 { width: 0; animation: t1 .7s steps(6) .9s forwards; }
+  .t2 { width: 0; animation: t2 .9s steps(14) 2.2s forwards; }
+  .cA { opacity: 0; animation: cA 2.5s linear forwards; }
+  .cB { opacity: 0; animation: cB 4s linear forwards; }
   .pulse { animation: pulse 2s ease-in-out infinite; }
   .blink { animation: blink 1s step-end infinite; }
-  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .draw1 { stroke-dasharray: 90; stroke-dashoffset: 90; animation: draw .7s ease-out 1s forwards; }
+  .draw2 { stroke-dasharray: 85; stroke-dashoffset: 85; animation: draw .7s ease-out 1.15s forwards; }
+  .ambient { animation: amb 8s ease-in-out infinite alternate; }
+  .sticker { transform-origin: 500px 44px; animation: pop .6s cubic-bezier(.3,1.4,.4,1) .7s both, floaty 5s ease-in-out 1.6s infinite alternate; }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeup { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes fade { to { opacity: 1; } }
   @keyframes t1 { to { width: 48px; } }
   @keyframes t2 { to { width: 86px; } }
+  @keyframes cA { 0% { opacity: 0; transform: translateX(0); } 36% { opacity: 1; transform: translateX(0); } 64% { opacity: 1; transform: translateX(48px); } 68%, 100% { opacity: 0; transform: translateX(48px); } }
+  @keyframes cB { 0% { opacity: 0; transform: translateX(0); } 55% { opacity: 1; transform: translateX(0); } 77.5% { opacity: 1; transform: translateX(86px); } 81%, 100% { opacity: 0; transform: translateX(86px); } }
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
   @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes drawI { to { stroke-dashoffset: 0; } }
+  @keyframes coreGlow { 0%,100% { stroke-opacity: .35; } 50% { stroke-opacity: .65; } }
+  @keyframes amb { from { opacity: .7; } to { opacity: 1; } }
+  @keyframes pop { 0% { opacity: 0; transform: rotate(-5deg) scale(.7); } 100% { opacity: 1; transform: rotate(-5deg) scale(1); } }
+  @keyframes floaty { from { transform: rotate(-5deg) translateY(0); } to { transform: rotate(-5deg) translateY(-3px); } }
 </style>
 <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
   <stop offset="0" stop-color="#16111b"/><stop offset="1" stop-color="#0d0a11"/>
@@ -58,9 +78,6 @@
 <filter id="glowP" x="-80%" y="-80%" width="260%" height="260%">
   <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#ff2e88" flood-opacity="0.45"/>
 </filter>
-<filter id="glowG" x="-80%" y="-80%" width="260%" height="260%">
-  <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#3fb950" flood-opacity="0.6"/>
-</filter>
 <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
   <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.5"/>
   <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="#000000" flood-opacity="0.35"/>
@@ -73,7 +90,7 @@
 <!-- panel -->
 <rect x="0" y="0" width="900" height="494" rx="24" fill="#08060b"/>
 <rect x="0" y="0" width="900" height="494" rx="24" fill="url(#grid)"/>
-<rect x="0" y="0" width="900" height="494" rx="24" fill="url(#glowTL)"/>
+<rect class="ambient" x="0" y="0" width="900" height="494" rx="24" fill="url(#glowTL)"/>
 <rect x="0" y="0" width="900" height="494" rx="24" fill="url(#glowBR)"/>
 <rect x="0" y="0" width="900" height="494" rx="24" filter="url(#noise)" opacity="0.02"/>
 <rect x="0.5" y="0.5" width="899" height="493" rx="24" fill="none" stroke="#ffffff" stroke-opacity="0.06"/>
@@ -82,19 +99,28 @@
 <g class="rise d1">
   <rect class="card-bg" x="20" y="20" width="540" height="210" rx="20" filter="url(#shadow)"/>
   <rect class="edge" x="20.5" y="20.5" width="539" height="209" rx="20"/>
+  <!-- logo: ring + prompt glyph + orbit -->
   <circle cx="76" cy="96" r="30" fill="#0d0a11" stroke="url(#ringGrad)" stroke-width="1.5"/>
-  <text class="mono white" x="69" y="103" font-size="19" font-weight="700" text-anchor="middle">K</text>
-  <text class="mono accent" x="85" y="103" font-size="19" font-weight="700" text-anchor="middle">B</text>
+  <text class="mono accent" x="70" y="103" font-size="18" font-weight="700" text-anchor="middle">❯</text>
+  <rect class="blink" x="79" y="98" width="9" height="2.5" rx="1" fill="#ff9ec7"/>
+  <g>
+    <circle cx="76" cy="66" r="2.5" fill="#ff9ec7"/>
+    <animateTransform attributeName="transform" type="rotate" from="0 76 96" to="360 76 96" dur="10s" repeatCount="indefinite"/>
+  </g>
   <text class="sans" x="128" y="88" font-size="34" font-weight="700" letter-spacing="-0.5" fill="url(#nameGrad)">KeelBismarck</text>
-  <path d="M128 100 q14 4 28 1 t28 0 t28 -1" fill="none" stroke="#ff2e88" stroke-width="2.5" stroke-linecap="round" filter="url(#glowP)"/>
-  <path d="M130 103 q14 3 26 1 t26 0 t24 -1" fill="none" stroke="#ff2e88" stroke-width="1.2" stroke-linecap="round" opacity="0.45"/>
+  <path class="draw1" d="M128 100 q14 4 28 1 t28 0 t28 -1" fill="none" stroke="#ff2e88" stroke-width="2.5" stroke-linecap="round" filter="url(#glowP)"/>
+  <path class="draw2" d="M130 103 q14 3 26 1 t26 0 t24 -1" fill="none" stroke="#ff2e88" stroke-width="1.2" stroke-linecap="round" opacity="0.45"/>
   <text class="sans muted" x="128" y="128" font-size="13">Full-stack Developer · Python / JavaScript / C++</text>
   <rect x="128" y="146" width="168" height="28" rx="14" fill="#3fb950" fill-opacity="0.10" stroke="#3fb950" stroke-opacity="0.35"/>
-  <circle class="green pulse" cx="146" cy="160" r="4" filter="url(#glowG)"/>
+  <circle class="green pulse" cx="146" cy="160" r="4"/>
+  <circle cx="146" cy="160" r="4" fill="none" stroke="#3fb950" stroke-width="1">
+    <animate attributeName="r" values="4;11" dur="1.8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;0" dur="1.8s" repeatCount="indefinite"/>
+  </circle>
   <text class="sans" x="158" y="165" font-size="12" fill="#7ee2a8">Open for freelance</text>
   <rect x="308" y="146" width="148" height="28" rx="14" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.10"/>
   <text class="sans muted" x="324" y="165" font-size="12">Moscow · UTC+3</text>
-  <g transform="rotate(-5 500 44)">
+  <g class="sticker">
     <rect x="448" y="29" width="104" height="30" rx="15" fill="#ff2e88" filter="url(#shadow)"/>
     <text class="mono" x="500" y="48" font-size="11" font-weight="700" text-anchor="middle" fill="#200510">hire me →</text>
   </g>
@@ -112,9 +138,11 @@
   <g class="mono" font-size="11">
     <text class="accent" x="598" y="78">❯</text>
     <text class="white" x="616" y="78" clip-path="url(#tc1)">whoami</text>
+    <rect class="cA accent" x="616" y="66" width="7" height="14"/>
     <text class="sans white fade f1" x="616" y="102" font-size="12" font-weight="700">KeelBismarck</text>
     <text class="accent fade f1" x="598" y="132">❯</text>
     <text class="white" x="616" y="132" clip-path="url(#tc2)">cat status.txt</text>
+    <rect class="cB accent" x="616" y="120" width="7" height="14"/>
     <text class="text fade f2" x="616" y="156">focused · available</text>
     <g class="fade f3">
       <text class="accent" x="598" y="186">❯</text>
@@ -128,22 +156,28 @@
   <rect class="card-bg" x="20" y="244" width="540" height="230" rx="20" filter="url(#shadow)"/>
   <rect class="edge" x="20.5" y="244.5" width="539" height="229" rx="20"/>
   <text class="label" x="44" y="278"><tspan class="accent">//</tspan> stack</text>
-  <g class="sans" font-size="11">
+  <g class="sans fadeup r1" font-size="11">
     <rect class="core" x="44" y="296" width="62" height="24" rx="12"/><text class="core-t" x="56" y="312">Python</text>
     <rect class="core" x="114" y="296" width="78" height="24" rx="12"/><text class="core-t" x="126" y="312">JavaScript</text>
     <rect class="core" x="200" y="296" width="48" height="24" rx="12"/><text class="core-t" x="212" y="312">C++</text>
     <rect class="chip" x="256" y="296" width="50" height="24" rx="12"/><text class="text" x="268" y="312">Java</text>
     <rect class="chip" x="314" y="296" width="50" height="24" rx="12"/><text class="text" x="326" y="312">Bash</text>
+  </g>
+  <g class="sans fadeup r2" font-size="11">
     <rect class="chip" x="44" y="328" width="76" height="24" rx="12"/><text class="text" x="56" y="344">TypeScript</text>
     <rect class="chip" x="128" y="328" width="62" height="24" rx="12"/><text class="text" x="140" y="344">Node.js</text>
     <rect class="chip" x="198" y="328" width="50" height="24" rx="12"/><text class="text" x="210" y="344">Flask</text>
     <rect class="chip" x="256" y="328" width="86" height="24" rx="12"/><text class="text" x="268" y="344">Spring Boot</text>
     <rect class="chip" x="350" y="328" width="58" height="24" rx="12"/><text class="text" x="362" y="344">Docker</text>
+  </g>
+  <g class="sans fadeup r3" font-size="11">
     <rect class="chip" x="44" y="360" width="82" height="24" rx="12"/><text class="text" x="56" y="376">PostgreSQL</text>
     <rect class="chip" x="134" y="360" width="58" height="24" rx="12"/><text class="text" x="146" y="376">MySQL</text>
     <rect class="chip" x="200" y="360" width="56" height="24" rx="12"/><text class="text" x="212" y="376">SQLite</text>
     <rect class="chip" x="264" y="360" width="40" height="24" rx="12"/><text class="text" x="276" y="376">Git</text>
     <rect class="chip" x="312" y="360" width="54" height="24" rx="12"/><text class="text" x="324" y="376">Nginx</text>
+  </g>
+  <g class="sans fadeup r4" font-size="11">
     <rect class="chip" x="44" y="392" width="66" height="24" rx="12"/><text class="text" x="56" y="408">Electron</text>
     <rect class="chip" x="118" y="392" width="78" height="24" rx="12"/><text class="text" x="130" y="408">Arch Linux</text>
     <rect class="chip" x="204" y="392" width="70" height="24" rx="12"/><text class="text" x="216" y="408">Windows</text>
@@ -151,27 +185,27 @@
   </g>
 </g>
 
-<!-- ═══ CONTACT ══ -->
+<!-- ═══ CONTACT ═══ -->
 <g class="rise d4">
   <rect class="card-bg" x="580" y="244" width="300" height="230" rx="20" filter="url(#shadow)"/>
   <rect class="edge" x="580.5" y="244.5" width="299" height="229" rx="20"/>
   <text class="label" x="604" y="278"><tspan class="accent">//</tspan> contact</text>
   <circle cx="614" cy="302" r="11" fill="#ffffff" fill-opacity="0.05"/>
-  <g class="icon" transform="translate(608,296)">
-    <path d="M11 1 L1 5.8 L4.8 7.2 L5.6 11 L7.6 8.6 L11 1 Z"/><path d="M11 1 L4.8 7.2"/>
+  <g class="icon ig1" transform="translate(608,296)">
+    <path pathLength="1" d="M11 1 L1 5.8 L4.8 7.2 L5.6 11 L7.6 8.6 L11 1 Z"/><path pathLength="1" d="M11 1 L4.8 7.2"/>
   </g>
   <circle cx="614" cy="338" r="11" fill="#ffffff" fill-opacity="0.05"/>
-  <g class="icon" transform="translate(608,332)">
-    <path d="M1.5 1.5 h9 a1 1 0 0 1 1 1 v5 a1 1 0 0 1 -1 1 H6 l-2.8 2.4 V8.5 H1.5 a1 1 0 0 1 -1 -1 v-5 a1 1 0 0 1 1 -1 z"/>
+  <g class="icon ig2" transform="translate(608,332)">
+    <path pathLength="1" d="M1.5 1.5 h9 a1 1 0 0 1 1 1 v5 a1 1 0 0 1 -1 1 H6 l-2.8 2.4 V8.5 H1.5 a1 1 0 0 1 -1 -1 v-5 a1 1 0 0 1 1 -1 z"/>
   </g>
   <circle cx="614" cy="374" r="11" fill="#ffffff" fill-opacity="0.05"/>
-  <g class="icon" transform="translate(608,368)">
-    <rect x="0.5" y="1.5" width="11" height="8.5" rx="1.5"/><path d="M1 2.5 L6 6.5 L11 2.5"/>
+  <g class="icon ig3" transform="translate(608,368)">
+    <rect pathLength="1" x="0.5" y="1.5" width="11" height="8.5" rx="1.5"/><path pathLength="1" d="M1 2.5 L6 6.5 L11 2.5"/>
   </g>
   <circle cx="614" cy="410" r="11" fill="#ffffff" fill-opacity="0.05"/>
-  <g class="icon" transform="translate(608,404)">
-    <circle cx="3" cy="2.5" r="1.7"/><circle cx="3" cy="9.5" r="1.7"/><circle cx="9.5" cy="4" r="1.7"/>
-    <path d="M3 4.2 v3.6 M9.5 5.7 c0 2.6 -4.5 1.6 -6.5 3.2"/>
+  <g class="icon ig4" transform="translate(608,404)">
+    <circle pathLength="1" cx="3" cy="2.5" r="1.7"/><circle pathLength="1" cx="3" cy="9.5" r="1.7"/><circle pathLength="1" cx="9.5" cy="4" r="1.7"/>
+    <path pathLength="1" d="M3 4.2 v3.6 M9.5 5.7 c0 2.6 -4.5 1.6 -6.5 3.2"/>
   </g>
   <g class="sans">
     <text class="text" x="634" y="306" font-size="11">@bismark_dev</text><text class="muted" x="856" y="306" text-anchor="end" font-size="9">telegram</text>
@@ -180,6 +214,10 @@
     <text class="text" x="634" y="414" font-size="11">github.com/keelbismark</text><text class="muted" x="856" y="414" text-anchor="end" font-size="9">github</text>
   </g>
   <circle class="green pulse" cx="608" cy="444" r="3"/>
+  <circle cx="608" cy="444" r="3" fill="none" stroke="#3fb950" stroke-width="1">
+    <animate attributeName="r" values="3;8" dur="1.8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;0" dur="1.8s" repeatCount="indefinite"/>
+  </circle>
   <text class="sans muted" x="618" y="448" font-size="10">reply &lt; 24h</text>
 </g>
 </svg>

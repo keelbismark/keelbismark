@@ -8,8 +8,12 @@
   .card-bg { fill: url(#cardGrad); }
   .edge { fill: none; stroke: url(#edgeGrad); }
   .chip { fill: #ffffff; fill-opacity: 0.04; stroke: #ffffff; stroke-opacity: 0.10; }
-  .rise { opacity: 0; animation: rise .7s cubic-bezier(.2,.7,.3,1) forwards; }
-  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .rise { opacity: 0; animation: rise .7s cubic-bezier(.22,.9,.3,1.05) forwards; }
+  .fadeup { opacity: 0; animation: fadeup .5s cubic-bezier(.22,.9,.3,1.05) forwards; }
+  .c1 { animation-delay: .2s; } .c2 { animation-delay: .3s; } .c3 { animation-delay: .4s; }
+  .c4 { animation-delay: .5s; } .c5 { animation-delay: .6s; } .c6 { animation-delay: .7s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeup { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
   <stop offset="0" stop-color="#16111b"/><stop offset="1" stop-color="#0d0a11"/>
@@ -27,12 +31,12 @@
   <rect class="edge" x="0.5" y="0.5" width="899" height="109" rx="20"/>
   <text class="label" x="32" y="42"><tspan class="accent">//</tspan> hardware</text>
   <g class="sans" font-size="11">
-    <rect class="chip" x="32" y="58" width="112" height="28" rx="14"/><text class="text" x="44" y="76">Intel i9-14900KF</text>
-    <rect class="chip" x="154" y="58" width="126" height="28" rx="14"/><text class="text" x="166" y="76">RTX 4070 Ti SUPER</text>
-    <rect class="chip" x="290" y="58" width="74" height="28" rx="14"/><text class="text" x="302" y="76">80 GB RAM</text>
-    <rect class="chip" x="374" y="58" width="82" height="28" rx="14"/><text class="text" x="386" y="76">Arch Linux</text>
-    <rect class="chip" x="466" y="58" width="88" height="28" rx="14"/><text class="text" x="478" y="76">Windows 11</text>
-    <rect class="chip" x="564" y="58" width="64" height="28" rx="14"/><text class="text" x="576" y="76">macOS</text>
+    <g class="fadeup c1"><rect class="chip" x="32" y="58" width="112" height="28" rx="14"/><text class="text" x="44" y="76">Intel i9-14900KF</text></g>
+    <g class="fadeup c2"><rect class="chip" x="154" y="58" width="126" height="28" rx="14"/><text class="text" x="166" y="76">RTX 4070 Ti SUPER</text></g>
+    <g class="fadeup c3"><rect class="chip" x="290" y="58" width="74" height="28" rx="14"/><text class="text" x="302" y="76">80 GB RAM</text></g>
+    <g class="fadeup c4"><rect class="chip" x="374" y="58" width="82" height="28" rx="14"/><text class="text" x="386" y="76">Arch Linux</text></g>
+    <g class="fadeup c5"><rect class="chip" x="466" y="58" width="88" height="28" rx="14"/><text class="text" x="478" y="76">Windows 11</text></g>
+    <g class="fadeup c6"><rect class="chip" x="564" y="58" width="64" height="28" rx="14"/><text class="text" x="576" y="76">macOS</text></g>
   </g>
 </g>
 </svg>
