@@ -4,10 +4,9 @@ update.py — self-updating GitHub profile generator.
 
 Тянет реальные данные из GitHub API и перегенерирует SVG-ассеты
 (stats / languages) в единой дизайн-системе профиля, затем обновляет
-AUTO-секцию README.md.
+AUTO-секцию README.md. Все карточки — «окна» с одинаковой шапкой.
 
-Heatmap не генерируется намеренно: нативный граф контрибуций
-и так всегда виден на странице профиля GitHub.
+Heatmap не генерируется: нативный граф контрибуций уже есть на профиле.
 
 Usage:
     python update.py                      # anonymous (60 req/h)
@@ -20,6 +19,7 @@ import os
 import re
 import sys
 from collections import defaultdict
+from datetime import date
 from pathlib import Path
 
 from github import Auth, Github
@@ -36,13 +36,13 @@ AUTO_END = "<!-- AUTO:END -->"
 SHARED_CSS = """
   .sans { font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
   .mono { font-family: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace; }
-  .label { font-family: 'JetBrains Mono', Consolas, monospace; font-size: 10px; fill: #6b5a68; letter-spacing: 2px; }
   .accent { fill: #ff2e88; }
   .white { fill: #f5f0f4; }
   .text { fill: #d4c8d1; }
   .muted { fill: #93838f; }
   .card-bg { fill: url(#cardGrad); }
   .edge { fill: none; stroke: url(#edgeGrad); }
+  .chip { fill: #ffffff; fill-opacity: 0.04; stroke: #ffffff; stroke-opacity: 0.10; }
   .rise { opacity: 0; animation: rise .7s cubic-bezier(.22,.9,.3,1.05) forwards; }
   .fadeup { opacity: 0; animation: fadeup .5s cubic-bezier(.22,.9,.3,1.05) forwards; }
   @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
@@ -51,8 +51,9 @@ SHARED_CSS = """
 """
 
 
-def svg_shell(width: int, height: int, title: str, body: str) -> str:
-    """Panel + card wrapper in the profile design system."""
+def svg_shell(width: int, height: int, title: str, label: str, body: str) -> str:
+    """Panel + window-card with the unified 30px header (dots + // label)."""
+    w = width - 40
     return f"""<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{title}">
 <title>{title}</title>
 <defs>
@@ -62,6 +63,9 @@ def svg_shell(width: int, height: int, title: str, body: str) -> str:
 </linearGradient>
 <linearGradient id="edgeGrad" x1="0" y1="0" x2="0" y2="1">
   <stop offset="0" stop-color="#ffffff" stop-opacity="0.14"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.04"/>
+</linearGradient>
+<linearGradient id="headGrad" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#1c1522"/><stop offset="1" stop-color="#141018"/>
 </linearGradient>
 <linearGradient id="barGrad" x1="0" y1="0" x2="1" y2="0">
   <stop offset="0" stop-color="#ff2e88"/><stop offset="1" stop-color="#ff7ab8"/>
@@ -82,8 +86,13 @@ def svg_shell(width: int, height: int, title: str, body: str) -> str:
 <rect x="0" y="0" width="{width}" height="{height}" rx="24" fill="url(#glowTL)"/>
 <rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="24" fill="none" stroke="#ffffff" stroke-opacity="0.06"/>
 <g class="rise">
-  <rect class="card-bg" x="20" y="20" width="{width - 40}" height="{height - 40}" rx="20" filter="url(#shadow)"/>
-  <rect class="edge" x="20.5" y="20.5" width="{width - 41}" height="{height - 41}" rx="20"/>
+  <rect class="card-bg" x="20" y="20" width="{w}" height="{height - 40}" rx="20" filter="url(#shadow)"/>
+  <rect class="edge" x="20.5" y="20.5" width="{w - 1}" height="{height - 41}" rx="20"/>
+  <path d="M20 40 a20 20 0 0 1 20 -20 h{w - 40} a20 20 0 0 1 20 20 v10 h-{w} z" fill="url(#headGrad)"/>
+  <circle fill="#ff5f56" cx="40" cy="35" r="4"/>
+  <circle fill="#ffbd2e" cx="56" cy="35" r="4"/>
+  <circle fill="#27c93f" cx="72" cy="35" r="4"/>
+  <text class="mono muted" x="{width // 2}" y="39" font-size="10" text-anchor="middle"><tspan class="accent">//</tspan> {label}</text>
 {body}
 </g>
 </svg>
@@ -125,20 +134,20 @@ def build_stats(d: dict) -> str:
         ("followers", str(d["followers"])),
         ("on github", f"since {d['since']}"),
     ]
-    parts = [f'  <text class="label" x="44" y="62"><tspan class="accent">//</tspan> stats</text>']
+    parts = []
     for i, (label, value) in enumerate(tiles):
         cx = 128 + i * 164
-        parts.append(f'  <text class="sans white" x="{cx}" y="98" font-size="22" font-weight="700" text-anchor="middle">{value}</text>')
-        parts.append(f'  <text class="sans muted" x="{cx}" y="118" font-size="9" text-anchor="middle">{label}</text>')
+        parts.append(f'  <text class="sans white" x="{cx}" y="92" font-size="22" font-weight="700" text-anchor="middle">{value}</text>')
+        parts.append(f'  <text class="sans muted" x="{cx}" y="112" font-size="9" text-anchor="middle">{label}</text>')
         if i:
-            parts.append(f'  <line x1="{cx - 82}" y1="66" x2="{cx - 82}" y2="118" stroke="#ffffff" stroke-opacity="0.06"/>')
-    return svg_shell(900, 150, "GitHub stats", "\n".join(parts))
+            parts.append(f'  <line x1="{cx - 82}" y1="64" x2="{cx - 82}" y2="112" stroke="#ffffff" stroke-opacity="0.06"/>')
+    return svg_shell(900, 150, "GitHub stats", "stats", "\n".join(parts))
 
 
 def build_languages(d: dict) -> str:
-    parts = [f'  <text class="label" x="44" y="62"><tspan class="accent">//</tspan> languages — real repo data</text>']
+    parts = []
     for i, (name, pct) in enumerate(d["languages"]):
-        y = 88 + i * 26
+        y = 78 + i * 26
         w = max(4, round(pct / 100 * 560))
         delay = 0.2 + i * 0.1
         parts.append(f'  <g class="fadeup" style="animation-delay:{delay:.1f}s">')
@@ -147,7 +156,7 @@ def build_languages(d: dict) -> str:
         parts.append(f'    <rect x="170" y="{y}" width="{w}" height="10" rx="5" fill="url(#barGrad)"/>')
         parts.append(f'    <text class="mono muted" x="856" y="{y + 9}" font-size="10" text-anchor="end">{pct}%</text>')
         parts.append("  </g>")
-    return svg_shell(900, 260, "Languages", "\n".join(parts))
+    return svg_shell(900, 260, "Languages", "languages — real repo data", "\n".join(parts))
 
 
 # ── readme ────────────────────────────────────────────────────────────
@@ -162,7 +171,7 @@ def update_readme() -> None:
             '<div align="center">',
             '  <img src="./assets/languages.svg" width="900" alt="Languages"/>',
             "</div>",
-            f"<!-- regenerated: {__import__('datetime').date.today().isoformat()} -->",
+            f"<!-- regenerated: {date.today().isoformat()} -->",
             AUTO_END,
         ]
     )
