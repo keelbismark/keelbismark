@@ -1,0 +1,126 @@
+<svg width="900" height="440" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<style>
+  .sans { font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace; }
+  .card-bg { fill: url(#cardGrad); stroke: #ffffff; stroke-opacity: 0.08; stroke-width: 1; }
+  .title { fill: #8b949e; font-size: 11px; letter-spacing: 2px; }
+  .muted { fill: #8b949e; }
+  .text { fill: #c9d1d9; }
+  .white { fill: #f0f6fc; }
+  .accent { fill: #ff3e00; }
+  .green { fill: #3fb950; }
+  .chip { fill: #ffffff; fill-opacity: 0.04; stroke: #ffffff; stroke-opacity: 0.10; }
+  .rise { opacity: 0; animation: rise .7s cubic-bezier(.2,.7,.3,1) forwards; }
+  .d1 { animation-delay: .05s; } .d2 { animation-delay: .15s; }
+  .d3 { animation-delay: .25s; } .d4 { animation-delay: .35s; }
+  .fade { opacity: 0; animation: fade .4s ease-out forwards; }
+  .f1 { animation-delay: 1.5s; } .f2 { animation-delay: 2.9s; } .f3 { animation-delay: 3.2s; }
+  .t1 { width: 0; animation: t1 .6s steps(10) .8s forwards; }
+  .t2 { width: 0; animation: t2 .8s steps(16) 2.0s forwards; }
+  .pulse { animation: pulse 2s ease-in-out infinite; }
+  .blink { animation: blink 1s step-end infinite; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fade { to { opacity: 1; } }
+  @keyframes t1 { to { width: 60px; } }
+  @keyframes t2 { to { width: 120px; } }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+  @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+</style>
+<linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#12151c"/>
+  <stop offset="1" stop-color="#0b0e13"/>
+</linearGradient>
+<filter id="glowO" x="-80%" y="-80%" width="260%" height="260%">
+  <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#ff3e00" flood-opacity="0.45"/>
+</filter>
+<filter id="glowG" x="-80%" y="-80%" width="260%" height="260%">
+  <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#3fb950" flood-opacity="0.6"/>
+</filter>
+<filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+  <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000000" flood-opacity="0.35"/>
+</filter>
+<clipPath id="tc1"><rect class="t1" x="48" y="278" width="0" height="20"/></clipPath>
+<clipPath id="tc2"><rect class="t2" x="48" y="336" width="0" height="20"/></clipPath>
+</defs>
+
+<!-- ═══ CARD A · IDENTITY ═══ -->
+<g class="rise d1">
+  <rect class="card-bg" x="0" y="0" width="560" height="200" rx="20" filter="url(#shadow)"/>
+  <text class="mono muted" x="32" y="48" font-size="12">github.com/keelbismark</text>
+  <text class="sans white" x="32" y="102" font-size="42" font-weight="700">KeelBismarck</text>
+  <rect class="accent" x="32" y="118" width="64" height="4" rx="2" filter="url(#glowO)"/>
+  <text class="sans muted" x="32" y="150" font-size="15">Full-stack Developer · Python / JavaScript / C++</text>
+  <rect x="32" y="164" width="168" height="28" rx="14" fill="#3fb950" fill-opacity="0.10" stroke="#3fb950" stroke-opacity="0.35"/>
+  <circle class="green pulse" cx="50" cy="178" r="4" filter="url(#glowG)"/>
+  <text class="sans" x="62" y="183" font-size="12" fill="#7ee2a8">Open for freelance</text>
+  <rect x="212" y="164" width="148" height="28" rx="14" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.10"/>
+  <text class="sans muted" x="228" y="183" font-size="12">Moscow · UTC+3</text>
+</g>
+
+<!-- ═══ CARD B · STACK ═══ -->
+<g class="rise d2">
+  <rect class="card-bg" x="574" y="0" width="326" height="200" rx="20" filter="url(#shadow)"/>
+  <text class="mono title" x="598" y="44">STACK</text>
+  <g class="sans" font-size="11">
+    <rect class="chip" x="598" y="62" width="62" height="24" rx="12"/><text class="text" x="610" y="78">Python</text>
+    <rect class="chip" x="668" y="62" width="78" height="24" rx="12"/><text class="text" x="680" y="78">JavaScript</text>
+    <rect class="chip" x="754" y="62" width="48" height="24" rx="12"/><text class="text" x="766" y="78">C++</text>
+    <rect class="chip" x="598" y="94" width="76" height="24" rx="12"/><text class="text" x="610" y="110">TypeScript</text>
+    <rect class="chip" x="682" y="94" width="50" height="24" rx="12"/><text class="text" x="694" y="110">Java</text>
+    <rect class="chip" x="740" y="94" width="62" height="24" rx="12"/><text class="text" x="752" y="110">Node.js</text>
+    <rect class="chip" x="598" y="126" width="50" height="24" rx="12"/><text class="text" x="610" y="142">Flask</text>
+    <rect class="chip" x="656" y="126" width="86" height="24" rx="12"/><text class="text" x="668" y="142">Spring Boot</text>
+    <rect class="chip" x="750" y="126" width="58" height="24" rx="12"/><text class="text" x="762" y="142">Docker</text>
+    <rect class="chip" x="598" y="158" width="82" height="24" rx="12"/><text class="text" x="610" y="174">PostgreSQL</text>
+    <rect class="chip" x="688" y="158" width="40" height="24" rx="12"/><text class="text" x="700" y="174">Git</text>
+    <rect class="chip" x="736" y="158" width="52" height="24" rx="12"/><text class="text" x="748" y="174">Linux</text>
+  </g>
+</g>
+
+<!-- ═══ CARD C · TERMINAL (signature) ═══ -->
+<g class="rise d3">
+  <rect class="card-bg" x="0" y="214" width="560" height="226" rx="20" filter="url(#shadow)"/>
+  <path d="M0 234 a20 20 0 0 1 20 -20 h520 a20 20 0 0 1 20 20 v14 h-560 z" fill="#161b22"/>
+  <circle fill="#ff5f56" cx="24" cy="231" r="5"/>
+  <circle fill="#ffbd2e" cx="44" cy="231" r="5"/>
+  <circle fill="#27c93f" cx="64" cy="231" r="5"/>
+  <text class="mono muted" x="280" y="235" font-size="11" text-anchor="middle">keelbismark: ~</text>
+  <g class="mono" font-size="13">
+    <text class="accent" x="28" y="292">❯</text>
+    <text class="white" x="48" y="292" clip-path="url(#tc1)">whoami</text>
+    <text class="sans white fade f1" x="48" y="318" font-size="14" font-weight="700">KeelBismarck</text>
+    <text class="accent fade f1" x="28" y="350">❯</text>
+    <text class="white" x="48" y="350" clip-path="url(#tc2)">cat status.txt</text>
+    <text class="fade f2" x="48" y="376" fill="#7ee2a8">● open for freelance · response &lt; 24h</text>
+    <g class="fade f3">
+      <text class="accent" x="28" y="408">❯</text>
+      <rect class="accent blink" x="48" y="396" width="8" height="15"/>
+    </g>
+  </g>
+</g>
+
+<!-- ═══ CARD D · CONTACT ═══ -->
+<g class="rise d4">
+  <rect class="card-bg" x="574" y="214" width="326" height="226" rx="20" filter="url(#shadow)"/>
+  <text class="mono title" x="598" y="254">CONTACT</text>
+  <g class="mono" font-size="9">
+    <circle cx="610" cy="288" r="10" fill="#ffffff" fill-opacity="0.06"/>
+    <text class="accent" x="610" y="291" text-anchor="middle">D</text>
+    <circle cx="610" cy="326" r="10" fill="#ffffff" fill-opacity="0.06"/>
+    <text class="accent" x="610" y="329" text-anchor="middle">@</text>
+    <circle cx="610" cy="364" r="10" fill="#ffffff" fill-opacity="0.06"/>
+    <text class="accent" x="610" y="367" text-anchor="middle">GH</text>
+  </g>
+  <g class="sans" font-size="12">
+    <text class="text" x="630" y="292">justkeel.6707</text>
+    <text class="muted" x="876" y="292" text-anchor="end" font-size="11">discord</text>
+    <text class="text" x="630" y="330">contact@keelbismark.space</text>
+    <text class="muted" x="876" y="330" text-anchor="end" font-size="11">email</text>
+    <text class="text" x="630" y="368">github.com/keelbismark</text>
+    <text class="muted" x="876" y="368" text-anchor="end" font-size="11">github</text>
+  </g>
+  <line x1="598" y1="392" x2="876" y2="392" stroke="#ffffff" stroke-opacity="0.06"/>
+  <text class="sans muted" x="598" y="416" font-size="11">open to: freelance · contract · remote</text>
+</g>
+</svg>
