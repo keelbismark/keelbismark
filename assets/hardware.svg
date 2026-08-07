@@ -1,10 +1,13 @@
 <svg width="900" height="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hardware">
+<title>Hardware — Intel i9-14900KF, RTX 4070 Ti SUPER, 80 GB RAM</title>
 <defs>
 <style>
   .sans { font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; }
   .label { font-family: 'JetBrains Mono', Consolas, monospace; font-size: 10px; fill: #6b5a68; letter-spacing: 2px; }
   .accent { fill: #ff2e88; }
   .text { fill: #d4c8d1; }
+  .muted { fill: #93838f; }
+  .italic { font-style: italic; }
   .card-bg { fill: url(#cardGrad); }
   .edge { fill: none; stroke: url(#edgeGrad); }
   .chip { fill: #ffffff; fill-opacity: 0.04; stroke: #ffffff; stroke-opacity: 0.10; }
@@ -14,6 +17,9 @@
   .c4 { animation-delay: .5s; } .c5 { animation-delay: .6s; } .c6 { animation-delay: .7s; }
   @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes fadeup { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) {
+    .rise, .fadeup { animation: none; opacity: 1; }
+  }
 </style>
 <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
   <stop offset="0" stop-color="#16111b"/><stop offset="1" stop-color="#0d0a11"/>
@@ -21,12 +27,20 @@
 <linearGradient id="edgeGrad" x1="0" y1="0" x2="0" y2="1">
   <stop offset="0" stop-color="#ffffff" stop-opacity="0.14"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.04"/>
 </linearGradient>
+<pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+  <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.02"/>
+</pattern>
+<radialGradient id="glowTL" cx="0.15" cy="0" r="0.8">
+  <stop offset="0" stop-color="#ff2e88" stop-opacity="0.05"/><stop offset="1" stop-color="#ff2e88" stop-opacity="0"/>
+</radialGradient>
 <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
   <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.5"/>
   <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="#000000" flood-opacity="0.35"/>
 </filter>
 </defs>
 <rect x="0" y="0" width="900" height="150" rx="24" fill="#08060b"/>
+<rect x="0" y="0" width="900" height="150" rx="24" fill="url(#grid)"/>
+<rect x="0" y="0" width="900" height="150" rx="24" fill="url(#glowTL)"/>
 <rect x="0.5" y="0.5" width="899" height="149" rx="24" fill="none" stroke="#ffffff" stroke-opacity="0.06"/>
 <g class="rise">
   <rect class="card-bg" x="20" y="20" width="860" height="110" rx="20" filter="url(#shadow)"/>
@@ -40,5 +54,6 @@
     <g class="fadeup c5"><rect class="chip" x="478" y="78" width="88" height="28" rx="14"/><text class="text" x="490" y="96">Windows 11</text></g>
     <g class="fadeup c6"><rect class="chip" x="576" y="78" width="64" height="28" rx="14"/><text class="text" x="588" y="96">macOS</text></g>
   </g>
+  <text class="sans muted italic" x="856" y="96" text-anchor="end" font-size="10"><tspan class="accent">"</tspan>Engineering logic. Building stability.<tspan class="accent">"</tspan></text>
 </g>
 </svg>
