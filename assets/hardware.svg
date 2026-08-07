@@ -1,0 +1,30 @@
+<svg width="900" height="110" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<style>
+  .mono { font-family: 'JetBrains Mono', Consolas, monospace; }
+  .sans { font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; }
+  .label { font-family: 'JetBrains Mono', Consolas, monospace; font-size: 10px; fill: #5b6470; letter-spacing: 2px; }
+  .accent { fill: #ff3e00; }
+  .text { fill: #c9d1d9; }
+  .card-bg { fill: url(#cardGrad); stroke: #ffffff; stroke-opacity: 0.08; }
+  .chip { fill: #ffffff; fill-opacity: 0.04; stroke: #ffffff; stroke-opacity: 0.10; }
+  .rise { opacity: 0; animation: rise .7s cubic-bezier(.2,.7,.3,1) forwards; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+<linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#12151c"/><stop offset="1" stop-color="#0b0e13"/>
+</linearGradient>
+</defs>
+<g class="rise">
+  <rect class="card-bg" x="0" y="0" width="900" height="110" rx="20"/>
+  <text class="label" x="32" y="42"><tspan class="accent">//</tspan> hardware</text>
+  <g class="sans" font-size="11">
+    <rect class="chip" x="32" y="58" width="112" height="28" rx="14"/><text class="text" x="44" y="76">Intel i9-14900KF</text>
+    <rect class="chip" x="154" y="58" width="126" height="28" rx="14"/><text class="text" x="166" y="76">RTX 4070 Ti SUPER</text>
+    <rect class="chip" x="290" y="58" width="74" height="28" rx="14"/><text class="text" x="302" y="76">80 GB RAM</text>
+    <rect class="chip" x="374" y="58" width="82" height="28" rx="14"/><text class="text" x="386" y="76">Arch Linux</text>
+    <rect class="chip" x="466" y="58" width="88" height="28" rx="14"/><text class="text" x="478" y="76">Windows 11</text>
+    <rect class="chip" x="564" y="58" width="64" height="28" rx="14"/><text class="text" x="576" y="76">macOS</text>
+  </g>
+</g>
+</svg>
