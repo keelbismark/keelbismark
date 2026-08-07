@@ -1,18 +1,19 @@
 <svg width="900" height="110" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <style>
-  .mono { font-family: 'JetBrains Mono', Consolas, monospace; }
   .sans { font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; }
-  .label { font-family: 'JetBrains Mono', Consolas, monospace; font-size: 10px; fill: #5b6470; letter-spacing: 2px; }
-  .accent { fill: #ff3e00; }
-  .text { fill: #c9d1d9; }
+  .label { font-family: 'JetBrains Mono', Consolas, monospace; font-size: 10px; fill: #6b5a68; letter-spacing: 2px; }
+  .accent { fill: #ff2e88; }
+  .text { fill: #d4c8d1; }
+  .muted { fill: #93838f; }
+  .italic { font-style: italic; }
   .card-bg { fill: url(#cardGrad); stroke: #ffffff; stroke-opacity: 0.08; }
   .chip { fill: #ffffff; fill-opacity: 0.04; stroke: #ffffff; stroke-opacity: 0.10; }
   .rise { opacity: 0; animation: rise .7s cubic-bezier(.2,.7,.3,1) forwards; }
   @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0" stop-color="#12151c"/><stop offset="1" stop-color="#0b0e13"/>
+  <stop offset="0" stop-color="#151019"/><stop offset="1" stop-color="#0c0910"/>
 </linearGradient>
 </defs>
 <g class="rise">
@@ -26,5 +27,6 @@
     <rect class="chip" x="466" y="58" width="88" height="28" rx="14"/><text class="text" x="478" y="76">Windows 11</text>
     <rect class="chip" x="564" y="58" width="64" height="28" rx="14"/><text class="text" x="576" y="76">macOS</text>
   </g>
+  <text class="sans muted italic" x="868" y="76" text-anchor="end" font-size="11">// yes, it's overkill — i love it</text>
 </g>
 </svg>
