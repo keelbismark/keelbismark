@@ -1,4 +1,4 @@
-<svg width="900" height="110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hardware">
+<svg width="900" height="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hardware">
 <defs>
 <style>
   .sans { font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; }
@@ -26,17 +26,19 @@
   <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="#000000" flood-opacity="0.35"/>
 </filter>
 </defs>
+<rect x="0" y="0" width="900" height="150" rx="24" fill="#08060b"/>
+<rect x="0.5" y="0.5" width="899" height="149" rx="24" fill="none" stroke="#ffffff" stroke-opacity="0.06"/>
 <g class="rise">
-  <rect class="card-bg" x="0" y="0" width="900" height="110" rx="20" filter="url(#shadow)"/>
-  <rect class="edge" x="0.5" y="0.5" width="899" height="109" rx="20"/>
-  <text class="label" x="32" y="42"><tspan class="accent">//</tspan> hardware</text>
+  <rect class="card-bg" x="20" y="20" width="860" height="110" rx="20" filter="url(#shadow)"/>
+  <rect class="edge" x="20.5" y="20.5" width="859" height="109" rx="20"/>
+  <text class="label" x="44" y="62"><tspan class="accent">//</tspan> hardware</text>
   <g class="sans" font-size="11">
-    <g class="fadeup c1"><rect class="chip" x="32" y="58" width="112" height="28" rx="14"/><text class="text" x="44" y="76">Intel i9-14900KF</text></g>
-    <g class="fadeup c2"><rect class="chip" x="154" y="58" width="126" height="28" rx="14"/><text class="text" x="166" y="76">RTX 4070 Ti SUPER</text></g>
-    <g class="fadeup c3"><rect class="chip" x="290" y="58" width="74" height="28" rx="14"/><text class="text" x="302" y="76">80 GB RAM</text></g>
-    <g class="fadeup c4"><rect class="chip" x="374" y="58" width="82" height="28" rx="14"/><text class="text" x="386" y="76">Arch Linux</text></g>
-    <g class="fadeup c5"><rect class="chip" x="466" y="58" width="88" height="28" rx="14"/><text class="text" x="478" y="76">Windows 11</text></g>
-    <g class="fadeup c6"><rect class="chip" x="564" y="58" width="64" height="28" rx="14"/><text class="text" x="576" y="76">macOS</text></g>
+    <g class="fadeup c1"><rect class="chip" x="44" y="78" width="112" height="28" rx="14"/><text class="text" x="56" y="96">Intel i9-14900KF</text></g>
+    <g class="fadeup c2"><rect class="chip" x="166" y="78" width="126" height="28" rx="14"/><text class="text" x="178" y="96">RTX 4070 Ti SUPER</text></g>
+    <g class="fadeup c3"><rect class="chip" x="302" y="78" width="74" height="28" rx="14"/><text class="text" x="314" y="96">80 GB RAM</text></g>
+    <g class="fadeup c4"><rect class="chip" x="386" y="78" width="82" height="28" rx="14"/><text class="text" x="398" y="96">Arch Linux</text></g>
+    <g class="fadeup c5"><rect class="chip" x="478" y="78" width="88" height="28" rx="14"/><text class="text" x="490" y="96">Windows 11</text></g>
+    <g class="fadeup c6"><rect class="chip" x="576" y="78" width="64" height="28" rx="14"/><text class="text" x="588" y="96">macOS</text></g>
   </g>
 </g>
 </svg>
