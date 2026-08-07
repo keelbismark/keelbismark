@@ -3,14 +3,15 @@
 update.py — self-updating GitHub profile generator.
 
 Тянет реальные данные из GitHub API и перегенерирует SVG-ассеты
-(stats / heatmap / languages) в единой дизайн-системе профиля,
-затем обновляет AUTO-секцию README.md.
+(stats / languages) в единой дизайн-системе профиля, затем обновляет
+AUTO-секцию README.md.
+
+Heatmap не генерируется намеренно: нативный граф контрибуций
+и так всегда виден на странице профиля GitHub.
 
 Usage:
-    python update.py                          # anonymous (60 req/h)
-    GITHUB_TOKEN=ghp_... python update.py     # полный календарь контрибуций
-
-Project #1 of KeelBismarck. Hand-tuned, no templates.
+    python update.py                      # anonymous (60 req/h)
+    GITHUB_TOKEN=... python update.py     # authenticated (5000 req/h)
 """
 
 from __future__ import annotations
@@ -19,10 +20,8 @@ import os
 import re
 import sys
 from collections import defaultdict
-from datetime import date, timedelta
 from pathlib import Path
 
-import requests
 from github import Auth, Github
 
 # ── config ────────────────────────────────────────────────────────────
@@ -32,7 +31,6 @@ ASSETS = Path(__file__).parent / "assets"
 README = Path(__file__).parent / "README.md"
 AUTO_START = "<!-- AUTO:START -->"
 AUTO_END = "<!-- AUTO:END -->"
-GRAPHQL_URL = "https://api.github.com/graphql"
 
 # ── design system (shared by all generated svg) ──────────────────────
 SHARED_CSS = """
@@ -103,7 +101,7 @@ def fetch_profile(gh: Github) -> dict:
             for lang, bytes_ in repo.get_languages().items():
                 languages[lang] += int(bytes_)
         except Exception:
-            continue
+            continue  # пустой репо или сбой API — пропускаем
 
     top = sorted(languages.items(), key=lambda kv: kv[1], reverse=True)[:6]
     total_bytes = sum(languages.values()) or 1
@@ -114,45 +112,11 @@ def fetch_profile(gh: Github) -> dict:
         "forks": sum(r.forks_count for r in repos),
         "followers": user.followers,
         "since": user.created_at.year,
-        "languages": [(name, round(bytes_ / total_bytes * 100, 1)) for name, bytes_ in top],
+        "languages": [(name, round(b / total_bytes * 100, 1)) for name, b in top],
     }
 
 
-def fetch_contributions(token: str | None, gh: Github) -> dict[str, int]:
-    """date iso -> contribution count. GraphQL with token, public events otherwise."""
-    if token:
-        query = """
-        query($login: String!) {
-          user(login: $login) {
-            contributionsCollection {
-              contributionCalendar {
-                weeks { contributionDays { date contributionCount } }
-              }
-            }
-          }
-        }
-        """
-        resp = requests.post(
-            GRAPHQL_URL,
-            json={"query": query, "variables": {"login": USERNAME}},
-            headers={"Authorization": f"bearer {token}"},
-            timeout=30,
-        )
-        resp.raise_for_status()
-        weeks = resp.json()["data"]["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
-        return {
-            day["date"]: day["contributionCount"]
-            for week in weeks
-            for day in week["contributionDays"]
-        }
-
-    counts: dict[str, int] = defaultdict(int)
-    for event in gh.get_user(USERNAME).get_events():  # public, ~last 90 days
-        counts[event.created_at.date().isoformat()] += 1
-    return dict(counts)
-
-
-# ── builders ─────────────────────────────────────────────────────────
+# ── builders ──────────────────────────────────────────────────────────
 def build_stats(d: dict) -> str:
     tiles = [
         ("public repos", str(d["repos"])),
@@ -186,50 +150,6 @@ def build_languages(d: dict) -> str:
     return svg_shell(900, 260, "Languages", "\n".join(parts))
 
 
-def level(count: int) -> int:
-    if count == 0: return 0
-    if count < 4: return 1
-    if count < 8: return 2
-    if count < 12: return 3
-    return 4
-
-
-OPACITY = {0: 0.05, 1: 0.25, 2: 0.45, 3: 0.7, 4: 1.0}
-MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
-
-
-def build_heatmap(days: dict[str, int]) -> str:
-    today = date.today()
-    start = today - timedelta(days=364)
-    start -= timedelta(days=(start.weekday() + 1) % 7)  # align to sunday
-
-    total = sum(days.values())
-    parts = [
-        f'  <text class="label" x="44" y="62"><tspan class="accent">//</tspan> activity — {total} contributions / year</text>',
-        '  <text class="sans muted" x="736" y="62" font-size="8">less</text>',
-    ]
-    for i in range(5):
-        parts.append(f'  <rect x="{760 + i * 15}" y="53" width="12" height="12" rx="3" fill="#{"ffffff" if i == 0 else ACCENT}" fill-opacity="{OPACITY[i]}"/>')
-    parts.append('  <text class="sans muted" x="856" y="62" font-size="8" text-anchor="end">more</text>')
-
-    prev_month = -1
-    for w in range(53):
-        week_start = start + timedelta(weeks=w)
-        if week_start.month != prev_month and week_start.day <= 7:
-            parts.append(f'  <text class="mono muted" x="{44 + w * 15}" y="196" font-size="8">{MONTHS[week_start.month - 1]}</text>')
-            prev_month = week_start.month
-        for d in range(7):
-            day = week_start + timedelta(days=d)
-            if day > today:
-                continue
-            lv = level(days.get(day.isoformat(), 0))
-            fill = "#ffffff" if lv == 0 else f"#{ACCENT}"
-            parts.append(
-                f'  <rect x="{44 + w * 15}" y="{72 + d * 15}" width="12" height="12" rx="3" fill="{fill}" fill-opacity="{OPACITY[lv]}"/>'
-            )
-    return svg_shell(900, 220, "Contribution heatmap", "\n".join(parts))
-
-
 # ── readme ────────────────────────────────────────────────────────────
 def update_readme() -> None:
     block = "\n".join(
@@ -240,20 +160,16 @@ def update_readme() -> None:
             "</div>",
             "",
             '<div align="center">',
-            '  <img src="./assets/heatmap.svg" width="900" alt="Contribution heatmap"/>',
-            "</div>",
-            "",
-            '<div align="center">',
             '  <img src="./assets/languages.svg" width="900" alt="Languages"/>',
             "</div>",
-            f"<!-- regenerated: {date.today().isoformat()} -->",
+            f"<!-- regenerated: {__import__('datetime').date.today().isoformat()} -->",
             AUTO_END,
         ]
     )
     text = README.read_text(encoding="utf-8")
     pattern = re.compile(re.escape(AUTO_START) + r".*?" + re.escape(AUTO_END), re.S)
     if pattern.search(text):
-        text = pattern.sub(block.replace("\\", "\\\\"), text, count=1)
+        text = pattern.sub(lambda m: block, text, count=1)
     else:
         text = text.rstrip() + "\n\n" + block + "\n"
     README.write_text(text, encoding="utf-8")
@@ -266,17 +182,14 @@ def main() -> int:
 
     print(f"→ fetching profile data for {USERNAME}...")
     data = fetch_profile(gh)
-    print(f"→ fetching contributions ({'graphql' if token else 'public events fallback'})...")
-    days = fetch_contributions(token, gh)
 
     ASSETS.mkdir(exist_ok=True)
     (ASSETS / "stats.svg").write_text(build_stats(data), encoding="utf-8")
     (ASSETS / "languages.svg").write_text(build_languages(data), encoding="utf-8")
-    (ASSETS / "heatmap.svg").write_text(build_heatmap(days), encoding="utf-8")
     update_readme()
 
-    print(f"✓ repos={data['repos']} stars={data['stars']} followers={data['followers']} days={len(days)}")
-    print("✓ stats.svg / heatmap.svg / languages.svg / README.md refreshed")
+    print(f"✓ repos={data['repos']} stars={data['stars']} followers={data['followers']}")
+    print("✓ stats.svg / languages.svg / README.md refreshed")
     return 0
 
 
