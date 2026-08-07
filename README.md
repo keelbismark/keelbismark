@@ -12,10 +12,6 @@
 </div>
 
 <div align="center">
-  <img src="./assets/heatmap.svg" width="900" alt="Contribution heatmap"/>
-</div>
-
-<div align="center">
   <img src="./assets/languages.svg" width="900" alt="Languages"/>
 </div>
 <!-- regenerated: 2026-08-07 -->
