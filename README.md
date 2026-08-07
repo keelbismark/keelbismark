@@ -6,4 +6,16 @@
   <img src="./assets/hardware.svg" width="900" alt="Hardware"/>
 </div>
 
-<!-- projects section: придёт вместе с update.py -->
+<!-- AUTO:START -->
+<div align="center">
+  <img src="./assets/stats.svg" width="900" alt="GitHub stats"/>
+</div>
+
+<div align="center">
+  <img src="./assets/heatmap.svg" width="900" alt="Contribution heatmap"/>
+</div>
+
+<div align="center">
+  <img src="./assets/languages.svg" width="900" alt="Languages"/>
+</div>
+<!-- AUTO:END -->
