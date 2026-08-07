@@ -99,8 +99,11 @@ def fetch_profile(gh: Github) -> dict:
 
     languages: dict[str, int] = defaultdict(int)
     for repo in repos:
-        for lang, bytes_ in repo.get_languages().items():
-            languages[lang] += bytes_
+        try:
+            for lang, bytes_ in repo.get_languages().items():
+                languages[lang] += int(bytes_)
+        except Exception:
+            continue
 
     top = sorted(languages.items(), key=lambda kv: kv[1], reverse=True)[:6]
     total_bytes = sum(languages.values()) or 1
