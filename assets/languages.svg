@@ -55,38 +55,38 @@
   <g class="fadeup" style="animation-delay:0.2s">
     <text class="sans text" x="44" y="87" font-size="11">Rust</text>
     <rect x="170" y="78" width="560" height="10" rx="5" fill="#ffffff" fill-opacity="0.05"/>
-    <rect x="170" y="78" width="211" height="10" rx="5" fill="url(#barGrad)"/>
-    <text class="mono muted" x="856" y="87" font-size="10" text-anchor="end">37.6%</text>
+    <rect x="170" y="78" width="282" height="10" rx="5" fill="url(#barGrad)"/>
+    <text class="mono muted" x="856" y="87" font-size="10" text-anchor="end">50.3%</text>
   </g>
   <g class="fadeup" style="animation-delay:0.3s">
     <text class="sans text" x="44" y="113" font-size="11">Java</text>
     <rect x="170" y="104" width="560" height="10" rx="5" fill="#ffffff" fill-opacity="0.05"/>
-    <rect x="170" y="104" width="96" height="10" rx="5" fill="url(#barGrad)"/>
-    <text class="mono muted" x="856" y="113" font-size="10" text-anchor="end">17.1%</text>
+    <rect x="170" y="104" width="128" height="10" rx="5" fill="url(#barGrad)"/>
+    <text class="mono muted" x="856" y="113" font-size="10" text-anchor="end">22.8%</text>
   </g>
   <g class="fadeup" style="animation-delay:0.4s">
     <text class="sans text" x="44" y="139" font-size="11">JavaScript</text>
     <rect x="170" y="130" width="560" height="10" rx="5" fill="#ffffff" fill-opacity="0.05"/>
-    <rect x="170" y="130" width="91" height="10" rx="5" fill="url(#barGrad)"/>
-    <text class="mono muted" x="856" y="139" font-size="10" text-anchor="end">16.2%</text>
+    <rect x="170" y="130" width="68" height="10" rx="5" fill="url(#barGrad)"/>
+    <text class="mono muted" x="856" y="139" font-size="10" text-anchor="end">12.1%</text>
   </g>
   <g class="fadeup" style="animation-delay:0.5s">
     <text class="sans text" x="44" y="165" font-size="11">HTML</text>
     <rect x="170" y="156" width="560" height="10" rx="5" fill="#ffffff" fill-opacity="0.05"/>
-    <rect x="170" y="156" width="64" height="10" rx="5" fill="url(#barGrad)"/>
-    <text class="mono muted" x="856" y="165" font-size="10" text-anchor="end">11.4%</text>
+    <rect x="170" y="156" width="31" height="10" rx="5" fill="url(#barGrad)"/>
+    <text class="mono muted" x="856" y="165" font-size="10" text-anchor="end">5.5%</text>
   </g>
   <g class="fadeup" style="animation-delay:0.6s">
-    <text class="sans text" x="44" y="191" font-size="11">Python</text>
+    <text class="sans text" x="44" y="191" font-size="11">CSS</text>
     <rect x="170" y="182" width="560" height="10" rx="5" fill="#ffffff" fill-opacity="0.05"/>
-    <rect x="170" y="182" width="56" height="10" rx="5" fill="url(#barGrad)"/>
-    <text class="mono muted" x="856" y="191" font-size="10" text-anchor="end">10.0%</text>
+    <rect x="170" y="182" width="27" height="10" rx="5" fill="url(#barGrad)"/>
+    <text class="mono muted" x="856" y="191" font-size="10" text-anchor="end">4.8%</text>
   </g>
   <g class="fadeup" style="animation-delay:0.7s">
-    <text class="sans text" x="44" y="217" font-size="11">CSS</text>
+    <text class="sans text" x="44" y="217" font-size="11">Shell</text>
     <rect x="170" y="208" width="560" height="10" rx="5" fill="#ffffff" fill-opacity="0.05"/>
-    <rect x="170" y="208" width="26" height="10" rx="5" fill="url(#barGrad)"/>
-    <text class="mono muted" x="856" y="217" font-size="10" text-anchor="end">4.7%</text>
+    <rect x="170" y="208" width="11" height="10" rx="5" fill="url(#barGrad)"/>
+    <text class="mono muted" x="856" y="217" font-size="10" text-anchor="end">2.0%</text>
   </g>
 </g>
 </svg>
