@@ -55,26 +55,26 @@
   <g class="fadeup" style="animation-delay:0.2s">
     <text class="sans text" x="44" y="87" font-size="11">Rust</text>
     <rect x="170" y="78" width="560" height="10" rx="5" fill="#ffffff" fill-opacity="0.05"/>
-    <rect x="170" y="78" width="277" height="10" rx="5" fill="url(#barGrad)"/>
-    <text class="mono muted" x="856" y="87" font-size="10" text-anchor="end">49.4%</text>
+    <rect x="170" y="78" width="280" height="10" rx="5" fill="url(#barGrad)"/>
+    <text class="mono muted" x="856" y="87" font-size="10" text-anchor="end">50.0%</text>
   </g>
   <g class="fadeup" style="animation-delay:0.3s">
     <text class="sans text" x="44" y="113" font-size="11">Java</text>
     <rect x="170" y="104" width="560" height="10" rx="5" fill="#ffffff" fill-opacity="0.05"/>
-    <rect x="170" y="104" width="116" height="10" rx="5" fill="url(#barGrad)"/>
-    <text class="mono muted" x="856" y="113" font-size="10" text-anchor="end">20.8%</text>
+    <rect x="170" y="104" width="115" height="10" rx="5" fill="url(#barGrad)"/>
+    <text class="mono muted" x="856" y="113" font-size="10" text-anchor="end">20.6%</text>
   </g>
   <g class="fadeup" style="animation-delay:0.4s">
     <text class="sans text" x="44" y="139" font-size="11">JavaScript</text>
     <rect x="170" y="130" width="560" height="10" rx="5" fill="#ffffff" fill-opacity="0.05"/>
-    <rect x="170" y="130" width="62" height="10" rx="5" fill="url(#barGrad)"/>
-    <text class="mono muted" x="856" y="139" font-size="10" text-anchor="end">11.0%</text>
+    <rect x="170" y="130" width="61" height="10" rx="5" fill="url(#barGrad)"/>
+    <text class="mono muted" x="856" y="139" font-size="10" text-anchor="end">10.9%</text>
   </g>
   <g class="fadeup" style="animation-delay:0.5s">
     <text class="sans text" x="44" y="165" font-size="11">HTML</text>
     <rect x="170" y="156" width="560" height="10" rx="5" fill="#ffffff" fill-opacity="0.05"/>
-    <rect x="170" y="156" width="29" height="10" rx="5" fill="url(#barGrad)"/>
-    <text class="mono muted" x="856" y="165" font-size="10" text-anchor="end">5.1%</text>
+    <rect x="170" y="156" width="28" height="10" rx="5" fill="url(#barGrad)"/>
+    <text class="mono muted" x="856" y="165" font-size="10" text-anchor="end">5.0%</text>
   </g>
   <g class="fadeup" style="animation-delay:0.6s">
     <text class="sans text" x="44" y="191" font-size="11">CSS</text>
