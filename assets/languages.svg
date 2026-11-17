@@ -55,14 +55,14 @@
   <g class="fadeup" style="animation-delay:0.2s">
     <text class="sans text" x="44" y="87" font-size="11">Rust</text>
     <rect x="170" y="78" width="560" height="10" rx="5" fill="#ffffff" fill-opacity="0.05"/>
-    <rect x="170" y="78" width="298" height="10" rx="5" fill="url(#barGrad)"/>
-    <text class="mono muted" x="856" y="87" font-size="10" text-anchor="end">53.3%</text>
+    <rect x="170" y="78" width="300" height="10" rx="5" fill="url(#barGrad)"/>
+    <text class="mono muted" x="856" y="87" font-size="10" text-anchor="end">53.6%</text>
   </g>
   <g class="fadeup" style="animation-delay:0.3s">
     <text class="sans text" x="44" y="113" font-size="11">Java</text>
     <rect x="170" y="104" width="560" height="10" rx="5" fill="#ffffff" fill-opacity="0.05"/>
-    <rect x="170" y="104" width="117" height="10" rx="5" fill="url(#barGrad)"/>
-    <text class="mono muted" x="856" y="113" font-size="10" text-anchor="end">20.9%</text>
+    <rect x="170" y="104" width="116" height="10" rx="5" fill="url(#barGrad)"/>
+    <text class="mono muted" x="856" y="113" font-size="10" text-anchor="end">20.7%</text>
   </g>
   <g class="fadeup" style="animation-delay:0.4s">
     <text class="sans text" x="44" y="139" font-size="11">JavaScript</text>
