@@ -1,0 +1,33 @@
+{
+  "repos": 14,
+  "stars": 11,
+  "forks": 7,
+  "followers": 3,
+  "since": 2022,
+  "languages": [
+    [
+      "Rust",
+      54.0
+    ],
+    [
+      "Java",
+      20.6
+    ],
+    [
+      "JavaScript",
+      7.3
+    ],
+    [
+      "Shell",
+      3.7
+    ],
+    [
+      "PowerShell",
+      3.6
+    ],
+    [
+      "HTML",
+      3.5
+    ]
+  ]
+}
