@@ -2,9 +2,11 @@
 """
 update.py — self-updating GitHub profile generator.
 
-Fetches live metrics from GitHub API and generates SVG telemetry assets
-(stats / languages) adhering to the unified cyber-telemetry design system,
-then updates the AUTO-section in README.md.
+Тянет реальные данные из GitHub API и перегенерирует SVG-ассеты
+(stats / languages) в единой дизайн-системе профиля, затем обновляет
+AUTO-секцию README.md. Все карточки — «окна» с одинаковой шапкой.
+
+Heatmap не генерируется: нативный граф контрибуций уже есть на профиле.
 
 Usage:
     python update.py                      # anonymous (60 req/h)
@@ -20,10 +22,6 @@ from collections import defaultdict
 from datetime import date
 from pathlib import Path
 
-# Fix Windows console UTF-8 output
-if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding="utf-8")
-
 from github import Auth, Github
 
 # ── config ────────────────────────────────────────────────────────────
@@ -36,75 +34,65 @@ AUTO_END = "<!-- AUTO:END -->"
 
 # ── design system (shared by all generated svg) ──────────────────────
 SHARED_CSS = """
-  .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', Helvetica, Arial, sans-serif; }
-  .mono { font-family: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', Consolas, monospace; }
+  .sans { font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace; }
   .accent { fill: #ff2e88; }
-  .white { fill: #f8fafc; }
-  .text { fill: #cbd5e1; }
-  .muted { fill: #64748b; }
-  .faint { fill: #475569; }
+  .white { fill: #f5f0f4; }
+  .text { fill: #d4c8d1; }
+  .muted { fill: #93838f; }
   .card-bg { fill: url(#cardGrad); }
   .edge { fill: none; stroke: url(#edgeGrad); }
-  .chip { fill: #ffffff; fill-opacity: 0.03; stroke: #ffffff; stroke-opacity: 0.08; }
-  .rise { opacity: 0; animation: rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-  .fadeup { opacity: 0; animation: fadeup 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-  .pulse { animation: pulse 2s ease-in-out infinite; }
-  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .chip { fill: #ffffff; fill-opacity: 0.04; stroke: #ffffff; stroke-opacity: 0.10; }
+  .rise { opacity: 0; animation: rise .7s cubic-bezier(.22,.9,.3,1.05) forwards; }
+  .fadeup { opacity: 0; animation: fadeup .5s cubic-bezier(.22,.9,.3,1.05) forwards; }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes fadeup { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
-  @media (prefers-reduced-motion: reduce) { .rise, .fadeup { animation: none; opacity: 1; transform: none; } .pulse { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .rise, .fadeup { animation: none; opacity: 1; } }
 """
 
 
 def svg_shell(width: int, height: int, title: str, label: str, body: str) -> str:
-    """Panel with cyber-telemetry header, responsive viewBox, and deep obsidian styling."""
+    """Panel + window-card with the unified 30px header (dots + // label)."""
     w = width - 40
-    return f"""<svg width="100%" height="auto" viewBox="0 0 {width} {height}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{title}" preserveAspectRatio="xMidYMid meet">
+    return f"""<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{title}">
 <title>{title}</title>
 <defs>
 <style>{SHARED_CSS}</style>
 <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0%" stop-color="#120e17"/>
-  <stop offset="100%" stop-color="#09070d"/>
+  <stop offset="0" stop-color="#16111b"/><stop offset="1" stop-color="#0d0a11"/>
 </linearGradient>
 <linearGradient id="edgeGrad" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14"/>
-  <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
+  <stop offset="0" stop-color="#ffffff" stop-opacity="0.14"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.04"/>
 </linearGradient>
-<linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0%" stop-color="#ff2e88" stop-opacity="0.12"/>
-  <stop offset="100%" stop-color="#ff2e88" stop-opacity="0.0"/>
+<linearGradient id="headGrad" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#1c1522"/><stop offset="1" stop-color="#141018"/>
 </linearGradient>
 <linearGradient id="barGrad" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0%" stop-color="#ff2e88"/>
-  <stop offset="100%" stop-color="#ff007f"/>
+  <stop offset="0" stop-color="#ff2e88"/><stop offset="1" stop-color="#ff7ab8"/>
 </linearGradient>
-<pattern id="dotGrid" width="30" height="30" patternUnits="userSpaceOnUse">
-  <circle cx="2" cy="2" r="0.8" fill="#ffffff" fill-opacity="0.04"/>
+<pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+  <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.02"/>
 </pattern>
-<radialGradient id="ambientGlow" cx="0.1" cy="0.1" r="0.7">
-  <stop offset="0%" stop-color="#ff2e88" stop-opacity="0.06"/>
-  <stop offset="100%" stop-color="#ff2e88" stop-opacity="0"/>
+<radialGradient id="glowTL" cx="0.15" cy="0" r="0.8">
+  <stop offset="0" stop-color="#ff2e88" stop-opacity="0.05"/><stop offset="1" stop-color="#ff2e88" stop-opacity="0"/>
 </radialGradient>
-<filter id="shadowDepth" x="-20%" y="-20%" width="140%" height="140%">
-  <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.6"/>
-  <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.4"/>
-</filter>
-<filter id="accentGlow" x="-30%" y="-30%" width="160%" height="160%">
-  <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#ff2e88" flood-opacity="0.55"/>
+<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+  <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.5"/>
+  <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="#000000" flood-opacity="0.35"/>
 </filter>
 </defs>
-<rect x="0" y="0" width="{width}" height="{height}" rx="20" fill="#07050a"/>
-<rect x="0" y="0" width="{width}" height="{height}" rx="20" fill="url(#dotGrid)"/>
-<rect x="0" y="0" width="{width}" height="{height}" rx="20" fill="url(#ambientGlow)"/>
-<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="19.5" fill="none" stroke="#ffffff" stroke-opacity="0.06"/>
+<rect x="0" y="0" width="{width}" height="{height}" rx="24" fill="#08060b"/>
+<rect x="0" y="0" width="{width}" height="{height}" rx="24" fill="url(#grid)"/>
+<rect x="0" y="0" width="{width}" height="{height}" rx="24" fill="url(#glowTL)"/>
+<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="24" fill="none" stroke="#ffffff" stroke-opacity="0.06"/>
 <g class="rise">
-  <rect class="card-bg" x="20" y="16" width="{w}" height="{height - 32}" rx="16" filter="url(#shadowDepth)"/>
-  <rect class="edge" x="20.5" y="16.5" width="{w - 1}" height="{height - 33}" rx="15.5"/>
-  <rect x="21" y="17" width="{w - 2}" height="32" rx="15" fill="url(#headerGrad)"/>
-  <text class="mono faint" x="38" y="38" font-size="10" font-weight="600" letter-spacing="1"><tspan class="accent">//</tspan> {label}</text>
-  <circle cx="{width - 38}" cy="33" r="3" fill="#10b981" class="pulse"/>
-  <text class="mono faint" x="{width - 48}" y="36" font-size="9" text-anchor="end">LIVE TELEMETRY</text>
+  <rect class="card-bg" x="20" y="20" width="{w}" height="{height - 40}" rx="20" filter="url(#shadow)"/>
+  <rect class="edge" x="20.5" y="20.5" width="{w - 1}" height="{height - 41}" rx="20"/>
+  <path d="M20 40 a20 20 0 0 1 20 -20 h{w - 40} a20 20 0 0 1 20 20 v10 h-{w} z" fill="url(#headGrad)"/>
+  <circle fill="#ff5f56" cx="40" cy="35" r="4"/>
+  <circle fill="#ffbd2e" cx="56" cy="35" r="4"/>
+  <circle fill="#27c93f" cx="72" cy="35" r="4"/>
+  <text class="mono muted" x="{width // 2}" y="39" font-size="10" text-anchor="middle"><tspan class="accent">//</tspan> {label}</text>
 {body}
 </g>
 </svg>
@@ -122,7 +110,7 @@ def fetch_profile(gh: Github) -> dict:
             for lang, bytes_ in repo.get_languages().items():
                 languages[lang] += int(bytes_)
         except Exception:
-            continue
+            continue  # пустой репо или сбой API — пропускаем
 
     top = sorted(languages.items(), key=lambda kv: kv[1], reverse=True)[:6]
     total_bytes = sum(languages.values()) or 1
@@ -140,47 +128,35 @@ def fetch_profile(gh: Github) -> dict:
 # ── builders ──────────────────────────────────────────────────────────
 def build_stats(d: dict) -> str:
     tiles = [
-        ("PUBLIC REPOS", str(d["repos"])),
-        ("STARS EARNED", str(d["stars"])),
-        ("FORKS REPLICATED", str(d["forks"])),
-        ("GITHUB FOLLOWERS", str(d["followers"])),
-        ("ACTIVE SINCE", str(d["since"])),
+        ("public repos", str(d["repos"])),
+        ("stars", str(d["stars"])),
+        ("forks", str(d["forks"])),
+        ("followers", str(d["followers"])),
+        ("on github", f"since {d['since']}"),
     ]
     parts = []
     for i, (label, value) in enumerate(tiles):
-        cx = 126 + i * 164
-        parts.append(
-            f'  <text class="sans white" x="{cx}" y="88" font-size="24" font-weight="800" text-anchor="middle">{value}</text>'
-        )
-        parts.append(
-            f'  <text class="mono faint" x="{cx}" y="108" font-size="9" font-weight="700" letter-spacing="0.5" text-anchor="middle">{label}</text>'
-        )
+        cx = 128 + i * 164
+        parts.append(f'  <text class="sans white" x="{cx}" y="92" font-size="22" font-weight="700" text-anchor="middle">{value}</text>')
+        parts.append(f'  <text class="sans muted" x="{cx}" y="112" font-size="9" text-anchor="middle">{label}</text>')
         if i:
-            parts.append(
-                f'  <line x1="{cx - 82}.5" y1="62" x2="{cx - 82}.5" y2="114" stroke="#ffffff" stroke-opacity="0.05"/>'
-            )
-    return svg_shell(900, 146, "GitHub stats", "GITHUB.STATISTICS [CORE_METRICS]", "\n".join(parts))
+            parts.append(f'  <line x1="{cx - 82}" y1="64" x2="{cx - 82}" y2="112" stroke="#ffffff" stroke-opacity="0.06"/>')
+    return svg_shell(900, 150, "GitHub stats", "stats", "\n".join(parts))
 
 
 def build_languages(d: dict) -> str:
     parts = []
     for i, (name, pct) in enumerate(d["languages"]):
-        y = 74 + i * 26
+        y = 78 + i * 26
         w = max(4, round(pct / 100 * 560))
-        delay = 0.15 + i * 0.08
-        parts.append(f'  <g class="fadeup" style="animation-delay:{delay:.2f}s">')
-        parts.append(f'    <text class="mono text" x="42" y="{y + 9}" font-size="11" font-weight="500">{name}</text>')
-        parts.append(
-            f'    <rect x="170" y="{y}" width="560" height="10" rx="5" fill="#ffffff" fill-opacity="0.04"/>'
-        )
+        delay = 0.2 + i * 0.1
+        parts.append(f'  <g class="fadeup" style="animation-delay:{delay:.1f}s">')
+        parts.append(f'    <text class="sans text" x="44" y="{y + 9}" font-size="11">{name}</text>')
+        parts.append(f'    <rect x="170" y="{y}" width="560" height="10" rx="5" fill="#ffffff" fill-opacity="0.05"/>')
         parts.append(f'    <rect x="170" y="{y}" width="{w}" height="10" rx="5" fill="url(#barGrad)"/>')
-        parts.append(
-            f'    <text class="mono faint" x="858" y="{y + 9}" font-size="10" font-weight="700" text-anchor="end">{pct}%</text>'
-        )
+        parts.append(f'    <text class="mono muted" x="856" y="{y + 9}" font-size="10" text-anchor="end">{pct}%</text>')
         parts.append("  </g>")
-    return svg_shell(
-        900, 256, "Language Metrics", "REPO.ANALYTICS [DISTRIBUTION_PERCENTILE]", "\n".join(parts)
-    )
+    return svg_shell(900, 260, "Languages", "languages — real repo data", "\n".join(parts))
 
 
 # ── readme ────────────────────────────────────────────────────────────
@@ -213,7 +189,7 @@ def main() -> int:
     token = os.environ.get("GITHUB_TOKEN", "").strip() or None
     gh = Github(auth=Auth.Token(token)) if token else Github()
 
-    print(f"-> fetching profile data for {USERNAME}...")
+    print(f"→ fetching profile data for {USERNAME}...")
     data = fetch_profile(gh)
 
     ASSETS.mkdir(exist_ok=True)
@@ -221,8 +197,8 @@ def main() -> int:
     (ASSETS / "languages.svg").write_text(build_languages(data), encoding="utf-8")
     update_readme()
 
-    print(f"[OK] repos={data['repos']} stars={data['stars']} followers={data['followers']}")
-    print("[OK] stats.svg / languages.svg / README.md refreshed successfully")
+    print(f"✓ repos={data['repos']} stars={data['stars']} followers={data['followers']}")
+    print("✓ stats.svg / languages.svg / README.md refreshed")
     return 0
 
 

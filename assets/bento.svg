@@ -1,315 +1,244 @@
-<svg width="100%" height="auto" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="KeelBismarck — Systems &amp; High-Load Engineer" preserveAspectRatio="xMidYMid meet">
-<title>KeelBismarck — Systems &amp; High-Load Engineer</title>
+<svg width="900" height="494" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="KeelBismarck — full-stack developer profile">
+<title>KeelBismarck — full-stack developer</title>
 <defs>
 <style>
-  .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', Helvetica, Arial, sans-serif; }
-  .mono { font-family: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', Consolas, monospace; }
+  .sans { font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace; }
   .accent { fill: #ff2e88; }
-  .accent-stroke { stroke: #ff2e88; }
-  .white { fill: #f8fafc; }
-  .text { fill: #cbd5e1; }
-  .muted { fill: #64748b; }
-  .faint { fill: #475569; }
+  .white { fill: #f5f0f4; }
+  .text { fill: #d4c8d1; }
+  .muted { fill: #93838f; }
+  .green { fill: #3fb950; }
   .card-bg { fill: url(#cardGrad); }
   .edge { fill: none; stroke: url(#edgeGrad); }
-  .chip { fill: #ffffff; fill-opacity: 0.03; stroke: #ffffff; stroke-opacity: 0.08; }
-  .chip-core { fill: #ff2e88; fill-opacity: 0.09; stroke: #ff2e88; stroke-opacity: 0.38; }
-  .chip-core-t { fill: #ffd2e5; font-weight: 600; }
-  .tag-label { fill: #94a3b8; font-size: 9px; font-weight: 700; letter-spacing: 1px; }
-  
-  /* Animations */
-  .rise { opacity: 0; animation: rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-  .d1 { animation-delay: 0.05s; }
-  .d2 { animation-delay: 0.15s; }
-  .d3 { animation-delay: 0.25s; }
-  .d4 { animation-delay: 0.35s; }
-  
-  .fadeup { opacity: 0; animation: fadeup 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-  .r1 { animation-delay: 0.45s; }
-  .r2 { animation-delay: 0.55s; }
-  .r3 { animation-delay: 0.65s; }
-  .r4 { animation-delay: 0.75s; }
-  
-  .radar-ring { transform-origin: 75px 95px; animation: spin 12s linear infinite; }
+  .chip { fill: #ffffff; fill-opacity: 0.04; stroke: #ffffff; stroke-opacity: 0.10; }
+  .core { fill: #ff2e88; fill-opacity: 0.08; stroke: #ff2e88; stroke-opacity: 0.35; animation: coreGlow 3s ease-in-out 1.4s infinite; }
+  .core-t { fill: #ffd7e8; }
+  .icon { fill: none; stroke: #ff9ec7; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .icon * { stroke-dasharray: 1; stroke-dashoffset: 1; animation: drawI .8s ease-out forwards; }
+  .ig1 * { animation-delay: .6s; } .ig2 * { animation-delay: .75s; }
+  .ig3 * { animation-delay: .9s; } .ig4 * { animation-delay: 1.05s; }
+  .rise { opacity: 0; animation: rise .7s cubic-bezier(.22,.9,.3,1.05) forwards; }
+  .d1 { animation-delay: .05s; } .d2 { animation-delay: .15s; } .d3 { animation-delay: .25s; } .d4 { animation-delay: .35s; }
+  .fadeup { opacity: 0; animation: fadeup .5s cubic-bezier(.22,.9,.3,1.05) forwards; }
+  .r1 { animation-delay: .5s; } .r2 { animation-delay: .62s; } .r3 { animation-delay: .74s; } .r4 { animation-delay: .86s; }
+  .fade { opacity: 0; animation: fade .4s ease-out forwards; }
+  .f1 { animation-delay: 1.7s; } .f2 { animation-delay: 3.2s; } .f3 { animation-delay: 3.5s; }
+  .t1 { width: 0; animation: t1 .7s steps(6) .9s forwards; }
+  .t2 { width: 0; animation: t2 .9s steps(14) 2.2s forwards; }
+  .cA { opacity: 0; animation: cA 2.5s linear forwards; }
+  .cB { opacity: 0; animation: cB 4s linear forwards; }
   .pulse { animation: pulse 2s ease-in-out infinite; }
-  .blink { animation: blink 1.2s step-end infinite; }
-  .glow-line { stroke-dasharray: 200; stroke-dashoffset: 200; animation: drawLine 1.8s ease-out 0.8s forwards; }
-  .telemetry-sweep { animation: sweep 3s ease-in-out infinite alternate; }
-
-  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .blink { animation: blink 1s step-end infinite; }
+  .draw1 { stroke-dasharray: 90; stroke-dashoffset: 90; animation: draw .7s ease-out 1s forwards; }
+  .draw2 { stroke-dasharray: 85; stroke-dashoffset: 85; animation: draw .7s ease-out 1.15s forwards; }
+  .ambient { animation: amb 8s ease-in-out infinite alternate; }
+  .sticker { transform-origin: 500px 44px; animation: pop .6s cubic-bezier(.3,1.4,.4,1) .7s both, floaty 5s ease-in-out 1.6s infinite alternate; }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes fadeup { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
-  @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
-  @keyframes drawLine { to { stroke-dashoffset: 0; } }
-  @keyframes sweep { from { opacity: 0.3; } to { opacity: 0.8; } }
-
+  @keyframes fade { to { opacity: 1; } }
+  @keyframes t1 { to { width: 48px; } }
+  @keyframes t2 { to { width: 104px; } }
+  @keyframes cA { 0% { opacity: 0; transform: translateX(0); } 36% { opacity: 1; transform: translateX(0); } 64% { opacity: 1; transform: translateX(48px); } 68%, 100% { opacity: 0; transform: translateX(48px); } }
+  @keyframes cB { 0% { opacity: 0; transform: translateX(0); } 55% { opacity: 1; transform: translateX(0); } 77.5% { opacity: 1; transform: translateX(104px); } 81%, 100% { opacity: 0; transform: translateX(104px); } }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+  @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes drawI { to { stroke-dashoffset: 0; } }
+  @keyframes coreGlow { 0%,100% { stroke-opacity: .35; } 50% { stroke-opacity: .65; } }
+  @keyframes amb { from { opacity: .7; } to { opacity: 1; } }
+  @keyframes pop { 0% { opacity: 0; transform: rotate(-5deg) scale(.7); } 100% { opacity: 1; transform: rotate(-5deg) scale(1); } }
+  @keyframes floaty { from { transform: rotate(-5deg) translateY(0); } to { transform: rotate(-5deg) translateY(-3px); } }
   @media (prefers-reduced-motion: reduce) {
-    .rise, .fadeup { opacity: 1; animation: none; transform: none; }
-    .radar-ring, .pulse, .blink, .glow-line, .telemetry-sweep { animation: none; opacity: 1; }
+    .rise, .fade, .fadeup { animation: none; opacity: 1; }
+    .sticker { animation: none; opacity: 1; transform: rotate(-5deg); }
+    .t1 { animation: none; width: 48px; }
+    .t2 { animation: none; width: 104px; }
+    .cA, .cB { animation: none; opacity: 0; }
+    .draw1, .draw2 { animation: none; stroke-dashoffset: 0; }
+    .icon * { animation: none; stroke-dashoffset: 0; }
+    .blink, .pulse, .core, .ambient { animation: none; }
   }
 </style>
-
-<!-- Gradients -->
 <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0%" stop-color="#120e17"/>
-  <stop offset="100%" stop-color="#09070d"/>
+  <stop offset="0" stop-color="#16111b"/><stop offset="1" stop-color="#0d0a11"/>
 </linearGradient>
-
 <linearGradient id="edgeGrad" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14"/>
-  <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
+  <stop offset="0" stop-color="#ffffff" stop-opacity="0.14"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.04"/>
 </linearGradient>
-
-<linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0%" stop-color="#ff2e88" stop-opacity="0.12"/>
-  <stop offset="100%" stop-color="#ff2e88" stop-opacity="0.0"/>
+<linearGradient id="headGrad" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#1c1522"/><stop offset="1" stop-color="#141018"/>
 </linearGradient>
-
-<linearGradient id="nameGrad" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0%" stop-color="#ffffff"/>
-  <stop offset="65%" stop-color="#f1f5f9"/>
-  <stop offset="100%" stop-color="#ff9ec7"/>
+<linearGradient id="nameGrad" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfc3d8"/>
 </linearGradient>
-
-<linearGradient id="accentGlowGrad" x1="0" y1="0" x2="1" y2="1">
-  <stop offset="0%" stop-color="#ff2e88"/>
-  <stop offset="100%" stop-color="#ff007f"/>
+<linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#ff2e88" stop-opacity="1"/><stop offset="1" stop-color="#ff2e88" stop-opacity="0.25"/>
 </linearGradient>
-
-<pattern id="dotGrid" width="30" height="30" patternUnits="userSpaceOnUse">
-  <circle cx="2" cy="2" r="0.8" fill="#ffffff" fill-opacity="0.04"/>
-</pattern>
-
-<radialGradient id="ambientGlow" cx="0.1" cy="0.1" r="0.7">
-  <stop offset="0%" stop-color="#ff2e88" stop-opacity="0.08"/>
-  <stop offset="100%" stop-color="#ff2e88" stop-opacity="0"/>
+<radialGradient id="glowTL" cx="0.15" cy="0" r="0.8">
+  <stop offset="0" stop-color="#ff2e88" stop-opacity="0.07"/><stop offset="1" stop-color="#ff2e88" stop-opacity="0"/>
 </radialGradient>
-
-<filter id="shadowDepth" x="-20%" y="-20%" width="140%" height="140%">
-  <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.6"/>
-  <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.4"/>
+<radialGradient id="glowBR" cx="0.9" cy="1" r="0.8">
+  <stop offset="0" stop-color="#ff2e88" stop-opacity="0.04"/><stop offset="1" stop-color="#ff2e88" stop-opacity="0"/>
+</radialGradient>
+<pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+  <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.02"/>
+</pattern>
+<filter id="glowP" x="-80%" y="-80%" width="260%" height="260%">
+  <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#ff2e88" flood-opacity="0.45"/>
 </filter>
-
-<filter id="accentGlow" x="-30%" y="-30%" width="160%" height="160%">
-  <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#ff2e88" flood-opacity="0.55"/>
+<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+  <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.5"/>
+  <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="#000000" flood-opacity="0.35"/>
 </filter>
+<filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+<clipPath id="tc1"><rect class="t1" x="616" y="65" width="0" height="18"/></clipPath>
+<clipPath id="tc2"><rect class="t2" x="616" y="117" width="0" height="18"/></clipPath>
 </defs>
 
-<!-- Main Canvas Background -->
-<rect x="0" y="0" width="900" height="500" rx="20" fill="#07050a"/>
-<rect x="0" y="0" width="900" height="500" rx="20" fill="url(#dotGrid)"/>
-<rect x="0" y="0" width="900" height="500" rx="20" fill="url(#ambientGlow)"/>
-<rect x="0.5" y="0.5" width="899" height="499" rx="19.5" fill="none" stroke="#ffffff" stroke-opacity="0.06"/>
+<!-- panel -->
+<rect x="0" y="0" width="900" height="494" rx="24" fill="#08060b"/>
+<rect x="0" y="0" width="900" height="494" rx="24" fill="url(#grid)"/>
+<rect class="ambient" x="0" y="0" width="900" height="494" rx="24" fill="url(#glowTL)"/>
+<rect x="0" y="0" width="900" height="494" rx="24" fill="url(#glowBR)"/>
+<rect x="0" y="0" width="900" height="494" rx="24" filter="url(#noise)" opacity="0.02"/>
+<rect x="0.5" y="0.5" width="899" height="493" rx="24" fill="none" stroke="#ffffff" stroke-opacity="0.06"/>
 
-<!-- Corner Precision Ticks -->
-<path d="M 12 4 L 4 4 L 4 12 M 888 4 L 896 4 L 896 12 M 4 488 L 4 496 L 12 496 M 896 488 L 896 496 L 888 496" fill="none" stroke="#ff2e88" stroke-width="1.2" stroke-opacity="0.4"/>
-
-<!-- ═══════════════════════════════════════════════════════════════
-     CARD 1: IDENTITY & HERO (Left Top: 550 x 224)
-     ═══════════════════════════════════════════════════════════════ -->
+<!-- ═══ IDENTITY ═══ -->
 <g class="rise d1">
-  <rect class="card-bg" x="20" y="20" width="550" height="224" rx="16" filter="url(#shadowDepth)"/>
-  <rect class="edge" x="20.5" y="20.5" width="549" height="223" rx="15.5"/>
-  <rect x="21" y="21" width="548" height="34" rx="15" fill="url(#headerGrad)"/>
-  
-  <!-- Header Bar -->
-  <text class="mono faint" x="38" y="42" font-size="10" font-weight="600" letter-spacing="1"><tspan class="accent">//</tspan> SYSTEM.IDENTITY <tspan fill="#334155">[PID: 0x4B42]</tspan></text>
-  <circle cx="548" cy="38" r="3" fill="#ff2e88" opacity="0.6"/>
-  <circle cx="536" cy="38" r="3" fill="#64748b" opacity="0.4"/>
-
-  <!-- Radar Avatar / Core Glyph -->
-  <g transform="translate(0, 0)">
-    <circle cx="75" cy="115" r="34" fill="#0d0a13" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1"/>
-    <circle cx="75" cy="115" r="28" fill="none" stroke="url(#accentGlowGrad)" stroke-width="1" stroke-dasharray="8 4" class="radar-ring" opacity="0.8"/>
-    <circle cx="75" cy="115" r="22" fill="#150f1c" stroke="#ff2e88" stroke-opacity="0.3" stroke-width="1"/>
-    <text class="mono accent" x="75" y="121" font-size="18" font-weight="700" text-anchor="middle" filter="url(#accentGlow)">❯_</text>
+  <rect class="card-bg" x="20" y="20" width="540" height="210" rx="20" filter="url(#shadow)"/>
+  <rect class="edge" x="20.5" y="20.5" width="539" height="209" rx="20"/>
+  <path d="M20 40 a20 20 0 0 1 20 -20 h500 a20 20 0 0 1 20 20 v10 h-540 z" fill="url(#headGrad)"/>
+  <circle fill="#ff5f56" cx="40" cy="35" r="4"/>
+  <circle fill="#ffbd2e" cx="56" cy="35" r="4"/>
+  <circle fill="#27c93f" cx="72" cy="35" r="4"/>
+  <text class="mono muted" x="290" y="39" font-size="10" text-anchor="middle"><tspan class="accent">//</tspan> identity</text>
+  <circle cx="76" cy="96" r="30" fill="#0d0a11" stroke="url(#ringGrad)" stroke-width="1.5"/>
+  <text class="mono accent" x="70" y="103" font-size="18" font-weight="700" text-anchor="middle">❯</text>
+  <rect class="blink" x="79" y="98" width="9" height="2.5" rx="1" fill="#ff9ec7"/>
+  <g>
+    <circle cx="76" cy="66" r="2.5" fill="#ff9ec7"/>
+    <animateTransform attributeName="transform" type="rotate" from="0 76 96" to="360 76 96" dur="10s" repeatCount="indefinite"/>
   </g>
-
-  <!-- Title & Credentials -->
-  <text class="sans" x="126" y="105" font-size="30" font-weight="800" letter-spacing="-0.5" fill="url(#nameGrad)">KeelBismarck</text>
-  <text class="sans text" x="126" y="127" font-size="12" font-weight="500">Systems &amp; High-Load Engineer · Full-Stack Architect</text>
-  
-  <!-- Status Badges -->
-  <g transform="translate(126, 142)">
-    <!-- Availability Pill -->
-    <rect x="0" y="0" width="186" height="26" rx="13" fill="#10b981" fill-opacity="0.09" stroke="#10b981" stroke-opacity="0.32"/>
-    <circle class="pulse" cx="14" cy="13" r="4" fill="#10b981"/>
-    <text class="sans" x="26" y="17" font-size="11" font-weight="600" fill="#6ee7b7">OPEN FOR FREELANCE</text>
-
-    <!-- Location Pill -->
-    <rect x="194" y="0" width="132" height="26" rx="13" class="chip"/>
-    <text class="mono muted" x="206" y="17" font-size="10">MOSCOW · UTC+3</text>
+  <text class="sans" x="128" y="88" font-size="34" font-weight="700" letter-spacing="-0.5" fill="url(#nameGrad)">KeelBismarck</text>
+  <path class="draw1" d="M128 100 q14 4 28 1 t28 0 t28 -1" fill="none" stroke="#ff2e88" stroke-width="2.5" stroke-linecap="round" filter="url(#glowP)"/>
+  <path class="draw2" d="M130 103 q14 3 26 1 t26 0 t24 -1" fill="none" stroke="#ff2e88" stroke-width="1.2" stroke-linecap="round" opacity="0.45"/>
+  <text class="sans muted" x="128" y="128" font-size="13">Full-stack Developer · Python / JavaScript / C++</text>
+  <rect x="128" y="146" width="168" height="28" rx="14" fill="#3fb950" fill-opacity="0.10" stroke="#3fb950" stroke-opacity="0.35"/>
+  <circle class="green pulse" cx="146" cy="160" r="4"/>
+  <circle cx="146" cy="160" r="4" fill="none" stroke="#3fb950" stroke-width="1">
+    <animate attributeName="r" values="4;11" dur="1.8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;0" dur="1.8s" repeatCount="indefinite"/>
+  </circle>
+  <text class="sans" x="158" y="165" font-size="12" fill="#7ee2a8">Open for freelance</text>
+  <rect x="308" y="146" width="148" height="28" rx="14" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.10"/>
+  <text class="sans muted" x="324" y="165" font-size="12">Moscow · UTC+3</text>
+  <g class="sticker">
+    <rect x="448" y="29" width="104" height="30" rx="15" fill="#ff2e88" filter="url(#shadow)"/>
+    <text class="mono" x="500" y="48" font-size="11" font-weight="700" text-anchor="middle" fill="#200510">hire me →</text>
   </g>
-
-  <!-- Motto / Principle -->
-  <line x1="38" y1="188" x2="550" y2="188" stroke="#ffffff" stroke-opacity="0.05"/>
-  <text class="mono faint" x="38" y="210" font-size="10">PHILOSOPHY : <tspan class="text">"Deterministic logic. Low latency. Zero compromise."</tspan></text>
 </g>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     CARD 2: TELEMETRY & RUNTIME (Right Top: 290 x 224)
-     ═══════════════════════════════════════════════════════════════ -->
+<!-- ═══ TERMINAL ═══ -->
 <g class="rise d2">
-  <rect class="card-bg" x="590" y="20" width="290" height="224" rx="16" filter="url(#shadowDepth)"/>
-  <rect class="edge" x="590.5" y="20.5" width="289" height="223" rx="15.5"/>
-  <rect x="591" y="21" width="288" height="34" rx="15" fill="url(#headerGrad)"/>
-  
-  <text class="mono faint" x="608" y="42" font-size="10" font-weight="600" letter-spacing="1"><tspan class="accent">//</tspan> ENGINE.TELEMETRY</text>
-  <rect class="blink" x="856" y="34" width="8" height="8" rx="2" fill="#ff2e88"/>
-
-  <!-- Telemetry Metrics -->
-  <g class="mono" font-size="10" transform="translate(608, 72)">
-    <!-- Row 1 -->
-    <text class="faint" x="0" y="10">DOMAIN</text>
-    <text class="text" x="254" y="10" text-anchor="end">Distributed / Low-Load</text>
-    <line x1="0" y1="20" x2="254" y2="20" stroke="#ffffff" stroke-opacity="0.04"/>
-
-    <!-- Row 2 -->
-    <text class="faint" x="0" y="38">PARADIGM</text>
-    <text class="white" x="254" y="38" text-anchor="end" font-weight="600">Type-Safe &amp; Async</text>
-    <line x1="0" y1="48" x2="254" y2="48" stroke="#ffffff" stroke-opacity="0.04"/>
-
-    <!-- Row 3 -->
-    <text class="faint" x="0" y="66">RESPONSE SLA</text>
-    <text class="accent" x="254" y="66" text-anchor="end" font-weight="700">&lt; 24h Guaranteed</text>
-    <line x1="0" y1="76" x2="254" y2="76" stroke="#ffffff" stroke-opacity="0.04"/>
-
-    <!-- Row 4 -->
-    <text class="faint" x="0" y="94">TESTING</text>
-    <text class="text" x="254" y="94" text-anchor="end">CI/CD Automated</text>
-    <line x1="0" y1="104" x2="254" y2="104" stroke="#ffffff" stroke-opacity="0.04"/>
-
-    <!-- Active Pulse Waveform -->
-    <g transform="translate(0, 118)">
-      <path d="M 0 16 L 40 16 L 60 4 L 75 28 L 90 8 L 105 22 L 120 16 L 254 16" fill="none" stroke="#ff2e88" stroke-width="1.5" class="glow-line" filter="url(#accentGlow)"/>
-      <text class="faint" x="0" y="34" font-size="9">SIGNAL: LOCK // SYNCHRONIZED</text>
-      <circle cx="250" cy="16" r="3" fill="#ff2e88" class="pulse"/>
+  <rect class="card-bg" x="580" y="20" width="300" height="210" rx="20" filter="url(#shadow)"/>
+  <rect class="edge" x="580.5" y="20.5" width="299" height="209" rx="20"/>
+  <path d="M580 40 a20 20 0 0 1 20 -20 h260 a20 20 0 0 1 20 20 v10 h-300 z" fill="url(#headGrad)"/>
+  <circle fill="#ff5f56" cx="600" cy="35" r="4"/>
+  <circle fill="#ffbd2e" cx="616" cy="35" r="4"/>
+  <circle fill="#27c93f" cx="632" cy="35" r="4"/>
+  <text class="mono muted" x="730" y="39" font-size="10" text-anchor="middle"><tspan class="accent">//</tspan> terminal</text>
+  <g class="mono" font-size="11">
+    <text class="accent" x="598" y="78">❯</text>
+    <text class="white" x="616" y="78" clip-path="url(#tc1)">whoami</text>
+    <rect class="cA accent" x="616" y="66" width="7" height="14"/>
+    <text class="sans white fade f1" x="616" y="102" font-size="12" font-weight="700">KeelBismarck</text>
+    <text class="accent fade f1" x="598" y="132">❯</text>
+    <text class="white" x="616" y="132" clip-path="url(#tc2)">cat status.txt</text>
+    <rect class="cB accent" x="616" y="120" width="7" height="14"/>
+    <text class="sans text fade f2" x="616" y="156" font-size="11">focused · available</text>
+    <g class="fade f3">
+      <text class="accent" x="598" y="186">❯</text>
+      <rect class="accent blink" x="616" y="175" width="7" height="14"/>
     </g>
   </g>
 </g>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     CARD 3: ARCHITECTURAL MATRIX (Left Bottom: 550 x 216)
-     ═══════════════════════════════════════════════════════════════ -->
+<!-- ═══ STACK ══ -->
 <g class="rise d3">
-  <rect class="card-bg" x="20" y="260" width="550" height="220" rx="16" filter="url(#shadowDepth)"/>
-  <rect class="edge" x="20.5" y="260.5" width="549" height="219" rx="15.5"/>
-  <rect x="21" y="261" width="548" height="34" rx="15" fill="url(#headerGrad)"/>
-  
-  <text class="mono faint" x="38" y="282" font-size="10" font-weight="600" letter-spacing="1"><tspan class="accent">//</tspan> TECHNICAL.MATRIX <tspan fill="#334155">[SPECIALIZATIONS]</tspan></text>
-
-  <!-- Matrix Grid -->
-  <!-- Layer 1: Systems & Core -->
-  <g class="sans fadeup r1" transform="translate(38, 304)">
-    <text class="mono tag-label" x="0" y="16">SYSTEMS</text>
-    <g transform="translate(74, 0)">
-      <rect class="chip-core" x="0" y="0" width="64" height="24" rx="12"/><text class="chip-core-t" x="12" y="16" font-size="11">Rust</text>
-      <rect class="chip-core" x="70" y="0" width="54" height="24" rx="12"/><text class="chip-core-t" x="12" y="16" font-size="11">C++</text>
-      <rect class="chip" x="130" y="0" width="54" height="24" rx="12"/><text class="text" x="14" y="16" font-size="11">Java</text>
-      <rect class="chip" x="190" y="0" width="54" height="24" rx="12"/><text class="text" x="12" y="16" font-size="11">Bash</text>
-      <rect class="chip" x="250" y="0" width="76" height="24" rx="12"/><text class="muted" x="12" y="16" font-size="11">Linux CLI</text>
-    </g>
+  <rect class="card-bg" x="20" y="244" width="540" height="230" rx="20" filter="url(#shadow)"/>
+  <rect class="edge" x="20.5" y="244.5" width="539" height="229" rx="20"/>
+  <path d="M20 264 a20 20 0 0 1 20 -20 h500 a20 20 0 0 1 20 20 v10 h-540 z" fill="url(#headGrad)"/>
+  <circle fill="#ff5f56" cx="40" cy="259" r="4"/>
+  <circle fill="#ffbd2e" cx="56" cy="259" r="4"/>
+  <circle fill="#27c93f" cx="72" cy="259" r="4"/>
+  <text class="mono muted" x="290" y="263" font-size="10" text-anchor="middle"><tspan class="accent">//</tspan> stack</text>
+  <g class="sans fadeup r1" font-size="11">
+    <rect class="core" x="44" y="296" width="62" height="24" rx="12"/><text class="core-t" x="56" y="312">Python</text>
+    <rect class="core" x="114" y="296" width="78" height="24" rx="12"/><text class="core-t" x="126" y="312">JavaScript</text>
+    <rect class="core" x="200" y="296" width="48" height="24" rx="12"/><text class="core-t" x="212" y="312">C++</text>
+    <rect class="chip" x="256" y="296" width="50" height="24" rx="12"/><text class="text" x="268" y="312">Java</text>
+    <rect class="chip" x="314" y="296" width="50" height="24" rx="12"/><text class="text" x="326" y="312">Bash</text>
   </g>
-
-  <!-- Layer 2: Backend & Distributed -->
-  <g class="sans fadeup r2" transform="translate(38, 336)">
-    <text class="mono tag-label" x="0" y="16">BACKEND</text>
-    <g transform="translate(74, 0)">
-      <rect class="chip-core" x="0" y="0" width="72" height="24" rx="12"/><text class="chip-core-t" x="12" y="16" font-size="11">Python</text>
-      <rect class="chip" x="78" y="0" width="68" height="24" rx="12"/><text class="text" x="12" y="16" font-size="11">FastAPI</text>
-      <rect class="chip" x="152" y="0" width="70" height="24" rx="12"/><text class="text" x="12" y="16" font-size="11">Node.js</text>
-      <rect class="chip" x="228" y="0" width="84" height="24" rx="12"/><text class="text" x="12" y="16" font-size="11">TypeScript</text>
-      <rect class="chip" x="318" y="0" width="52" height="24" rx="12"/><text class="muted" x="12" y="16" font-size="11">Flask</text>
-    </g>
+  <g class="sans fadeup r2" font-size="11">
+    <rect class="chip" x="44" y="328" width="76" height="24" rx="12"/><text class="text" x="56" y="344">TypeScript</text>
+    <rect class="chip" x="128" y="328" width="62" height="24" rx="12"/><text class="text" x="140" y="344">Node.js</text>
+    <rect class="chip" x="198" y="328" width="50" height="24" rx="12"/><text class="text" x="210" y="344">Flask</text>
+    <rect class="chip" x="256" y="328" width="86" height="24" rx="12"/><text class="text" x="268" y="344">Spring Boot</text>
+    <rect class="chip" x="350" y="328" width="58" height="24" rx="12"/><text class="text" x="362" y="344">Docker</text>
   </g>
-
-  <!-- Layer 3: Data & Storage -->
-  <g class="sans fadeup r3" transform="translate(38, 368)">
-    <text class="mono tag-label" x="0" y="16">STORAGE</text>
-    <g transform="translate(74, 0)">
-      <rect class="chip" x="0" y="0" width="88" height="24" rx="12"/><text class="text" x="12" y="16" font-size="11">PostgreSQL</text>
-      <rect class="chip" x="94" y="0" width="56" height="24" rx="12"/><text class="text" x="12" y="16" font-size="11">Redis</text>
-      <rect class="chip" x="156" y="0" width="58" height="24" rx="12"/><text class="text" x="12" y="16" font-size="11">MySQL</text>
-      <rect class="chip" x="220" y="0" width="58" height="24" rx="12"/><text class="muted" x="12" y="16" font-size="11">SQLite</text>
-    </g>
+  <g class="sans fadeup r3" font-size="11">
+    <rect class="chip" x="44" y="360" width="82" height="24" rx="12"/><text class="text" x="56" y="376">PostgreSQL</text>
+    <rect class="chip" x="134" y="360" width="58" height="24" rx="12"/><text class="text" x="146" y="376">MySQL</text>
+    <rect class="chip" x="200" y="360" width="56" height="24" rx="12"/><text class="text" x="212" y="376">SQLite</text>
+    <rect class="chip" x="264" y="360" width="40" height="24" rx="12"/><text class="text" x="276" y="376">Git</text>
+    <rect class="chip" x="312" y="360" width="54" height="24" rx="12"/><text class="text" x="324" y="376">Nginx</text>
   </g>
-
-  <!-- Layer 4: Infrastructure & Delivery -->
-  <g class="sans fadeup r4" transform="translate(38, 400)">
-    <text class="mono tag-label" x="0" y="16">INFRA</text>
-    <g transform="translate(74, 0)">
-      <rect class="chip" x="0" y="0" width="64" height="24" rx="12"/><text class="text" x="12" y="16" font-size="11">Docker</text>
-      <rect class="chip" x="70" y="0" width="58" height="24" rx="12"/><text class="text" x="12" y="16" font-size="11">Nginx</text>
-      <rect class="chip" x="134" y="0" width="46" height="24" rx="12"/><text class="text" x="12" y="16" font-size="11">Git</text>
-      <rect class="chip" x="186" y="0" width="94" height="24" rx="12"/><text class="text" x="12" y="16" font-size="11">GitHub Actions</text>
-      <rect class="chip" x="286" y="0" width="70" height="24" rx="12"/><text class="muted" x="12" y="16" font-size="11">Electron</text>
-    </g>
+  <g class="sans fadeup r4" font-size="11">
+    <rect class="chip" x="44" y="392" width="66" height="24" rx="12"/><text class="text" x="56" y="408">Electron</text>
+    <rect class="chip" x="118" y="392" width="78" height="24" rx="12"/><text class="text" x="130" y="408">Arch Linux</text>
+    <rect class="chip" x="204" y="392" width="70" height="24" rx="12"/><text class="text" x="216" y="408">Windows</text>
+    <rect class="chip" x="282" y="392" width="60" height="24" rx="12"/><text class="text" x="294" y="408">macOS</text>
   </g>
-  
-  <text class="mono faint" x="38" y="458" font-size="9">HIGH CONCURRENCY · EVENT-DRIVEN ARCHITECTURE · REVERSE ENGINEERING</text>
 </g>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     CARD 4: DIRECT TRANSCEIVER / COMMS (Right Bottom: 290 x 220)
-     ═══════════════════════════════════════════════════════════════ -->
+<!-- ═══ CONTACT ═══ -->
 <g class="rise d4">
-  <rect class="card-bg" x="590" y="260" width="290" height="220" rx="16" filter="url(#shadowDepth)"/>
-  <rect class="edge" x="590.5" y="260.5" width="289" height="219" rx="15.5"/>
-  <rect x="591" y="261" width="288" height="34" rx="15" fill="url(#headerGrad)"/>
-  
-  <text class="mono faint" x="608" y="282" font-size="10" font-weight="600" letter-spacing="1"><tspan class="accent">//</tspan> DIRECT.TRANSCEIVER</text>
-  <circle cx="858" cy="278" r="3" fill="#10b981" class="pulse"/>
-
-  <!-- Communication Channels with Precision Icons -->
-  <g class="sans" font-size="11" transform="translate(608, 304)">
-    <!-- Telegram -->
-    <g transform="translate(0, 0)">
-      <circle cx="12" cy="12" r="12" fill="#ffffff" fill-opacity="0.04"/>
-      <!-- Telegram Icon -->
-      <path d="M 7 12 L 17 8 L 15 17 L 11 14 Z M 11 14 L 14 11" fill="none" stroke="#ff2e88" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-      <text class="text" x="32" y="16" font-weight="600">@bismark_dev</text>
-      <text class="mono faint" x="254" y="16" text-anchor="end" font-size="9">TG</text>
-      <line x1="0" y1="28" x2="254" y2="28" stroke="#ffffff" stroke-opacity="0.04"/>
-    </g>
-
-    <!-- Discord -->
-    <g transform="translate(0, 36)">
-      <circle cx="12" cy="12" r="12" fill="#ffffff" fill-opacity="0.04"/>
-      <!-- Gamepad / Discord icon -->
-      <path d="M 6 10 C 8 8 16 8 18 10 C 18 14 17 17 15 17 C 14 16 13 14 11 14 C 9 14 8 16 7 17 C 5 17 4 14 6 10 Z" fill="none" stroke="#ff2e88" stroke-width="1.2" stroke-linejoin="round"/>
-      <circle cx="9.5" cy="12" r="0.8" fill="#ff2e88"/>
-      <circle cx="14.5" cy="12" r="0.8" fill="#ff2e88"/>
-      <text class="text" x="32" y="16" font-weight="600">justkeel.6707</text>
-      <text class="mono faint" x="254" y="16" text-anchor="end" font-size="9">DISCORD</text>
-      <line x1="0" y1="28" x2="254" y2="28" stroke="#ffffff" stroke-opacity="0.04"/>
-    </g>
-
-    <!-- Email -->
-    <g transform="translate(0, 72)">
-      <circle cx="12" cy="12" r="12" fill="#ffffff" fill-opacity="0.04"/>
-      <!-- Mail icon -->
-      <rect x="6.5" y="7.5" width="11" height="8" rx="1.5" fill="none" stroke="#ff2e88" stroke-width="1.2"/>
-      <path d="M 7 8.5 L 12 12 L 17 8.5" fill="none" stroke="#ff2e88" stroke-width="1.2" stroke-linejoin="round"/>
-      <text class="text" x="32" y="16" font-size="10.5">contact@keelbismark.space</text>
-      <text class="mono faint" x="254" y="16" text-anchor="end" font-size="9">MAIL</text>
-      <line x1="0" y1="28" x2="254" y2="28" stroke="#ffffff" stroke-opacity="0.04"/>
-    </g>
-
-    <!-- GitHub / Code -->
-    <g transform="translate(0, 108)">
-      <circle cx="12" cy="12" r="12" fill="#ffffff" fill-opacity="0.04"/>
-      <!-- Code brackets icon -->
-      <path d="M 9.5 9 L 6.5 12 L 9.5 15 M 14.5 9 L 17.5 12 L 14.5 15" fill="none" stroke="#ff2e88" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-      <text class="text" x="32" y="16" font-weight="600">keelbismark</text>
-      <text class="mono faint" x="254" y="16" text-anchor="end" font-size="9">GITHUB</text>
-    </g>
+  <rect class="card-bg" x="580" y="244" width="300" height="230" rx="20" filter="url(#shadow)"/>
+  <rect class="edge" x="580.5" y="244.5" width="299" height="229" rx="20"/>
+  <path d="M580 264 a20 20 0 0 1 20 -20 h260 a20 20 0 0 1 20 20 v10 h-300 z" fill="url(#headGrad)"/>
+  <circle fill="#ff5f56" cx="600" cy="259" r="4"/>
+  <circle fill="#ffbd2e" cx="616" cy="259" r="4"/>
+  <circle fill="#27c93f" cx="632" cy="259" r="4"/>
+  <text class="mono muted" x="730" y="263" font-size="10" text-anchor="middle"><tspan class="accent">//</tspan> contact</text>
+  <circle cx="614" cy="302" r="11" fill="#ffffff" fill-opacity="0.05"/>
+  <g class="icon ig1" transform="translate(608,296)">
+    <path pathLength="1" d="M11 1 L1 5.8 L4.8 7.2 L5.6 11 L7.6 8.6 L11 1 Z"/><path pathLength="1" d="M11 1 L4.8 7.2"/>
   </g>
-
-  <!-- Live Status Footer -->
-  <g transform="translate(608, 412)">
-    <circle cx="4" cy="5" r="3" fill="#10b981" class="pulse"/>
-    <text class="mono faint" x="14" y="8" font-size="9">CHANNELS MONITORED // ENCRYPTED</text>
+  <circle cx="614" cy="338" r="11" fill="#ffffff" fill-opacity="0.05"/>
+  <g class="icon ig2" transform="translate(608,332)">
+    <path pathLength="1" d="M1.5 1.5 h9 a1 1 0 0 1 1 1 v5 a1 1 0 0 1 -1 1 H6 l-2.8 2.4 V8.5 H1.5 a1 1 0 0 1 -1 -1 v-5 a1 1 0 0 1 1 -1 z"/>
   </g>
+  <circle cx="614" cy="374" r="11" fill="#ffffff" fill-opacity="0.05"/>
+  <g class="icon ig3" transform="translate(608,368)">
+    <rect pathLength="1" x="0.5" y="1.5" width="11" height="8.5" rx="1.5"/><path pathLength="1" d="M1 2.5 L6 6.5 L11 2.5"/>
+  </g>
+  <circle cx="614" cy="410" r="11" fill="#ffffff" fill-opacity="0.05"/>
+  <g class="icon ig4" transform="translate(608,404)">
+    <circle pathLength="1" cx="3" cy="2.5" r="1.7"/><circle pathLength="1" cx="3" cy="9.5" r="1.7"/><circle pathLength="1" cx="9.5" cy="4" r="1.7"/>
+    <path pathLength="1" d="M3 4.2 v3.6 M9.5 5.7 c0 2.6 -4.5 1.6 -6.5 3.2"/>
+  </g>
+  <g class="sans">
+    <text class="text" x="634" y="306" font-size="11">@bismark_dev</text><text class="muted" x="856" y="306" text-anchor="end" font-size="9">telegram</text>
+    <text class="text" x="634" y="342" font-size="11">justkeel.6707</text><text class="muted" x="856" y="342" text-anchor="end" font-size="9">discord</text>
+    <text class="text" x="634" y="378" font-size="10">contact@keelbismark.space</text><text class="muted" x="856" y="378" text-anchor="end" font-size="9">email</text>
+    <text class="text" x="634" y="414" font-size="11">github.com/keelbismark</text><text class="muted" x="856" y="414" text-anchor="end" font-size="9">github</text>
+  </g>
+  <circle class="green pulse" cx="608" cy="444" r="3"/>
+  <circle cx="608" cy="444" r="3" fill="none" stroke="#3fb950" stroke-width="1">
+    <animate attributeName="r" values="3;8" dur="1.8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;0" dur="1.8s" repeatCount="indefinite"/>
+  </circle>
+  <text class="sans muted" x="618" y="448" font-size="10">reply &lt; 24h</text>
 </g>
 </svg>
