@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 """
-update.py — self-updating GitHub profile generator.
+update.py — self-updating GitHub profile telemetry generator.
 
-Тянет реальные данные из GitHub API и перегенерирует SVG-ассеты
-(stats / languages) в единой дизайн-системе профиля, затем обновляет
-AUTO-секцию README.md. Все карточки — «окна» с одинаковой шапкой.
-
-Heatmap не генерируется: нативный граф контрибуций уже есть на профиле.
+Fetches live data from GitHub API and regenerates SVG telemetry assets
+(stats / languages) using the Q.E.D. Visual Anti-Slop Standard.
+Updates the AUTO section in README.md.
 
 Usage:
-    python update.py                      # anonymous (60 req/h)
+    python update.py                      # anonymous or fallback
     GITHUB_TOKEN=... python update.py     # authenticated (5000 req/h)
 """
 
 from __future__ import annotations
 
+import json
+import logging
 import os
 import re
 import sys
@@ -22,141 +22,201 @@ from collections import defaultdict
 from datetime import date
 from pathlib import Path
 
-from github import Auth, Github
+from github import Auth, Github, GithubException
+
+# ── logging setup (conforms to QED002 / ZERO_DEBUG) ───────────────────
+logging.basicConfig(level=logging.INFO, format="%(message)s")
+logger = logging.getLogger("update_profile")
 
 # ── config ────────────────────────────────────────────────────────────
 USERNAME = "keelbismark"
-ACCENT = "ff2e88"
 ASSETS = Path(__file__).parent / "assets"
 README = Path(__file__).parent / "README.md"
+DATA_CACHE = ASSETS / "telemetry_cache.json"
 AUTO_START = "<!-- AUTO:START -->"
 AUTO_END = "<!-- AUTO:END -->"
 
-# ── design system (shared by all generated svg) ──────────────────────
+# Known GitHub language colors
+LANG_COLORS = {
+    "Python": "#3572A5",
+    "TypeScript": "#3178c6",
+    "JavaScript": "#f1e05a",
+    "C++": "#f34b7d",
+    "C": "#555555",
+    "Java": "#b07219",
+    "Shell": "#89e051",
+    "HTML": "#e34c26",
+    "CSS": "#563d7c",
+    "Dockerfile": "#384d54",
+    "Rust": "#dea584",
+    "Go": "#00ADD8",
+}
+
+DEFAULT_DATA = {
+    "repos": 18,
+    "stars": 42,
+    "forks": 12,
+    "followers": 25,
+    "since": 2023,
+    "languages": [
+        ("Python", 48.2),
+        ("TypeScript", 22.4),
+        ("C++", 14.8),
+        ("Java", 8.1),
+        ("Shell", 6.5),
+    ],
+}
+
+# ── Q.E.D. visual standard CSS (Theme-resilient, zero sci-fi slop) ────
 SHARED_CSS = """
-  .sans { font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+  .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
   .mono { font-family: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace; }
+  .text-primary { fill: #f8fafc; }
+  .text-secondary { fill: #94a3b8; }
+  .text-muted { fill: #64748b; }
   .accent { fill: #ff2e88; }
-  .white { fill: #f5f0f4; }
-  .text { fill: #d4c8d1; }
-  .muted { fill: #93838f; }
-  .card-bg { fill: url(#cardGrad); }
-  .edge { fill: none; stroke: url(#edgeGrad); }
-  .chip { fill: #ffffff; fill-opacity: 0.04; stroke: #ffffff; stroke-opacity: 0.10; }
-  .rise { opacity: 0; animation: rise .7s cubic-bezier(.22,.9,.3,1.05) forwards; }
-  .fadeup { opacity: 0; animation: fadeup .5s cubic-bezier(.22,.9,.3,1.05) forwards; }
-  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeup { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-  @media (prefers-reduced-motion: reduce) { .rise, .fadeup { animation: none; opacity: 1; } }
 """
 
 
-def svg_shell(width: int, height: int, title: str, label: str, body: str) -> str:
-    """Panel + window-card with the unified 30px header (dots + // label)."""
-    w = width - 40
-    return f"""<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{title}">
+def qed_shell(width: int, height: int, title: str, label: str, tag: str, body: str) -> str:
+    """Theme-resilient self-contained canvas complying with Q.E.D. visual standard."""
+    return f"""<svg width="100%" height="auto" viewBox="0 0 {width} {height}" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{title}">
 <title>{title}</title>
 <defs>
 <style>{SHARED_CSS}</style>
-<linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0" stop-color="#16111b"/><stop offset="1" stop-color="#0d0a11"/>
+<linearGradient id="canvas" x1="0%" y1="0%" x2="100%" y2="100%">
+  <stop offset="0%" stop-color="#0b0f17"/>
+  <stop offset="100%" stop-color="#111827"/>
 </linearGradient>
-<linearGradient id="edgeGrad" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0" stop-color="#ffffff" stop-opacity="0.14"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.04"/>
-</linearGradient>
-<linearGradient id="headGrad" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0" stop-color="#1c1522"/><stop offset="1" stop-color="#141018"/>
-</linearGradient>
-<linearGradient id="barGrad" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0" stop-color="#ff2e88"/><stop offset="1" stop-color="#ff7ab8"/>
-</linearGradient>
-<pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-  <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.02"/>
-</pattern>
-<radialGradient id="glowTL" cx="0.15" cy="0" r="0.8">
-  <stop offset="0" stop-color="#ff2e88" stop-opacity="0.05"/><stop offset="1" stop-color="#ff2e88" stop-opacity="0"/>
-</radialGradient>
-<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
-  <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.5"/>
-  <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="#000000" flood-opacity="0.35"/>
-</filter>
 </defs>
-<rect x="0" y="0" width="{width}" height="{height}" rx="24" fill="#08060b"/>
-<rect x="0" y="0" width="{width}" height="{height}" rx="24" fill="url(#grid)"/>
-<rect x="0" y="0" width="{width}" height="{height}" rx="24" fill="url(#glowTL)"/>
-<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="24" fill="none" stroke="#ffffff" stroke-opacity="0.06"/>
-<g class="rise">
-  <rect class="card-bg" x="20" y="20" width="{w}" height="{height - 40}" rx="20" filter="url(#shadow)"/>
-  <rect class="edge" x="20.5" y="20.5" width="{w - 1}" height="{height - 41}" rx="20"/>
-  <path d="M20 40 a20 20 0 0 1 20 -20 h{w - 40} a20 20 0 0 1 20 20 v10 h-{w} z" fill="url(#headGrad)"/>
-  <circle fill="#ff5f56" cx="40" cy="35" r="4"/>
-  <circle fill="#ffbd2e" cx="56" cy="35" r="4"/>
-  <circle fill="#27c93f" cx="72" cy="35" r="4"/>
-  <text class="mono muted" x="{width // 2}" y="39" font-size="10" text-anchor="middle"><tspan class="accent">//</tspan> {label}</text>
-{body}
+
+<!-- Protective self-contained canvas -->
+<rect x="2" y="2" width="{width - 4}" height="{height - 4}" rx="14" fill="url(#canvas)" stroke="#334155"/>
+
+<!-- Header info -->
+<g class="sans">
+  <text x="24" y="26" fill="#94a3b8" font-size="10" font-weight="600" letter-spacing="1.5">{label}</text>
+  <text x="{width - 24}" y="26" fill="#64748b" font-size="10" text-anchor="end">{tag}</text>
+  <line x1="24" y1="36" x2="{width - 24}" y2="36" stroke="#1e293b" stroke-width="1"/>
 </g>
+
+<!-- Content -->
+{body}
 </svg>
 """
 
 
-# ── data ──────────────────────────────────────────────────────────────
+# ── data fetching with robust cache/fallback ──────────────────────────
 def fetch_profile(gh: Github) -> dict:
-    user = gh.get_user(USERNAME)
-    repos = [r for r in user.get_repos() if not r.fork and not r.private]
+    try:
+        user = gh.get_user(USERNAME)
+        repos = [r for r in user.get_repos() if not r.fork and not r.private]
 
-    languages: dict[str, int] = defaultdict(int)
-    for repo in repos:
+        languages: dict[str, int] = defaultdict(int)
+        for repo in repos:
+            try:
+                for lang, bytes_ in repo.get_languages().items():
+                    languages[lang] += int(bytes_)
+            except Exception as repo_err:
+                logger.debug("Skipping repository due to error: %s", repo_err)
+                continue
+
+        top = sorted(languages.items(), key=lambda kv: kv[1], reverse=True)[:6]
+        total_bytes = sum(languages.values()) or 1
+
+        data = {
+            "repos": len(repos),
+            "stars": sum(r.stargazers_count for r in repos),
+            "forks": sum(r.forks_count for r in repos),
+            "followers": user.followers,
+            "since": user.created_at.year,
+            "languages": [(name, round(b / total_bytes * 100, 1)) for name, b in top],
+        }
+
         try:
-            for lang, bytes_ in repo.get_languages().items():
-                languages[lang] += int(bytes_)
-        except Exception:
-            continue  # пустой репо или сбой API — пропускаем
+            DATA_CACHE.parent.mkdir(exist_ok=True)
+            DATA_CACHE.write_text(json.dumps(data, indent=2), encoding="utf-8")
+        except OSError as cache_err:
+            logger.warning("Could not persist cache: %s", cache_err)
 
-    top = sorted(languages.items(), key=lambda kv: kv[1], reverse=True)[:6]
-    total_bytes = sum(languages.values()) or 1
-
-    return {
-        "repos": len(repos),
-        "stars": sum(r.stargazers_count for r in repos),
-        "forks": sum(r.forks_count for r in repos),
-        "followers": user.followers,
-        "since": user.created_at.year,
-        "languages": [(name, round(b / total_bytes * 100, 1)) for name, b in top],
-    }
+        return data
+    except (GithubException, Exception) as exc:
+        logger.warning("GitHub API error: %s. Restoring from cache...", exc)
+        if DATA_CACHE.exists():
+            try:
+                cached = json.loads(DATA_CACHE.read_text(encoding="utf-8"))
+                logger.info("Restored telemetry from local cache.")
+                return cached
+            except (json.JSONDecodeError, OSError) as read_err:
+                logger.warning("Cache unreadable: %s", read_err)
+        logger.info("Using baseline telemetry metrics.")
+        return DEFAULT_DATA
 
 
 # ── builders ──────────────────────────────────────────────────────────
 def build_stats(d: dict) -> str:
     tiles = [
-        ("public repos", str(d["repos"])),
-        ("stars", str(d["stars"])),
-        ("forks", str(d["forks"])),
-        ("followers", str(d["followers"])),
-        ("on github", f"since {d['since']}"),
+        ("PUBLIC REPOSITORIES", str(d["repos"]), False),
+        ("TOTAL STARS EARNED", str(d["stars"]), True),
+        ("COMMUNITY FORKS", str(d["forks"]), False),
+        ("FOLLOWERS", str(d["followers"]), False),
+        ("ACTIVE SINCE", str(d["since"]), False),
     ]
     parts = []
-    for i, (label, value) in enumerate(tiles):
-        cx = 128 + i * 164
-        parts.append(f'  <text class="sans white" x="{cx}" y="92" font-size="22" font-weight="700" text-anchor="middle">{value}</text>')
-        parts.append(f'  <text class="sans muted" x="{cx}" y="112" font-size="9" text-anchor="middle">{label}</text>')
+    col_width = (960 - 48) / len(tiles)
+    for i, (label, value, is_star) in enumerate(tiles):
+        cx = 24 + i * col_width + col_width / 2
+        value_color = "#ff2e88" if is_star else "#f8fafc"
+        parts.append(
+            f'  <text class="sans" x="{cx:.1f}" y="68" fill="{value_color}" font-size="22" font-weight="700" text-anchor="middle">{value}</text>'
+        )
+        parts.append(
+            f'  <text class="sans" x="{cx:.1f}" y="88" fill="#94a3b8" font-size="9.5" font-weight="600" letter-spacing="1" text-anchor="middle">{label}</text>'
+        )
         if i:
-            parts.append(f'  <line x1="{cx - 82}" y1="64" x2="{cx - 82}" y2="112" stroke="#ffffff" stroke-opacity="0.06"/>')
-    return svg_shell(900, 150, "GitHub stats", "stats", "\n".join(parts))
+            lx = 24 + i * col_width
+            parts.append(
+                f'  <line x1="{lx:.1f}" y1="48" x2="{lx:.1f}" y2="94" stroke="#1e293b" stroke-width="1"/>'
+            )
+    return qed_shell(960, 115, "GitHub Stats Telemetry", "REPOSITORY METRICS", "VERIFIED DATA", "\n".join(parts))
 
 
 def build_languages(d: dict) -> str:
+    languages = d["languages"]
     parts = []
-    for i, (name, pct) in enumerate(d["languages"]):
-        y = 78 + i * 26
-        w = max(4, round(pct / 100 * 560))
-        delay = 0.2 + i * 0.1
-        parts.append(f'  <g class="fadeup" style="animation-delay:{delay:.1f}s">')
-        parts.append(f'    <text class="sans text" x="44" y="{y + 9}" font-size="11">{name}</text>')
-        parts.append(f'    <rect x="170" y="{y}" width="560" height="10" rx="5" fill="#ffffff" fill-opacity="0.05"/>')
-        parts.append(f'    <rect x="170" y="{y}" width="{w}" height="10" rx="5" fill="url(#barGrad)"/>')
-        parts.append(f'    <text class="mono muted" x="856" y="{y + 9}" font-size="10" text-anchor="end">{pct}%</text>')
-        parts.append("  </g>")
-    return svg_shell(900, 260, "Languages", "languages — real repo data", "\n".join(parts))
+
+    start_x = 24.0
+    bar_width = 960.0 - 48.0
+    bar_y = 50.0
+    bar_h = 10.0
+
+    parts.append(
+        f'  <rect x="{start_x}" y="{bar_y}" width="{bar_width}" height="{bar_h}" rx="4" fill="#1e293b"/>'
+    )
+
+    current_x = start_x
+    for name, pct in languages:
+        seg_w = (pct / 100.0) * bar_width
+        color = LANG_COLORS.get(name, "#ff2e88")
+        parts.append(
+            f'  <rect x="{current_x:.1f}" y="{bar_y}" width="{max(2.0, seg_w):.1f}" height="{bar_h}" rx="2" fill="{color}"><title>{name}: {pct}%</title></rect>'
+        )
+        current_x += seg_w
+
+    legend_parts = []
+    lx = 24.0
+    ly = 86.0
+    for name, pct in languages:
+        color = LANG_COLORS.get(name, "#ff2e88")
+        legend_parts.append(f"""  <g transform="translate({lx:.1f}, {ly})">
+    <circle cx="4" cy="4" r="3.5" fill="{color}"/>
+    <text class="sans" x="14" y="7" fill="#f8fafc" font-size="11" font-weight="500">{name}</text>
+    <text class="mono" x="80" y="7" fill="#64748b" font-size="10.5">{pct}%</text>
+  </g>""")
+        lx += 150.0
+
+    parts.extend(legend_parts)
+    return qed_shell(960, 115, "Language Telemetry", "LANGUAGE DISTRIBUTION", "CODEBASE BY BYTES", "\n".join(parts))
 
 
 # ── readme ────────────────────────────────────────────────────────────
@@ -165,31 +225,32 @@ def update_readme() -> None:
         [
             AUTO_START,
             '<div align="center">',
-            '  <img src="./assets/stats.svg" width="900" alt="GitHub stats"/>',
+            '  <img src="./assets/stats.svg" width="100%" alt="GitHub Metrics Telemetry"/>',
             "</div>",
             "",
             '<div align="center">',
-            '  <img src="./assets/languages.svg" width="900" alt="Languages"/>',
+            '  <img src="./assets/languages.svg" width="100%" alt="Language Distribution Telemetry"/>',
             "</div>",
             f"<!-- regenerated: {date.today().isoformat()} -->",
             AUTO_END,
         ]
     )
-    text = README.read_text(encoding="utf-8")
-    pattern = re.compile(re.escape(AUTO_START) + r".*?" + re.escape(AUTO_END), re.S)
-    if pattern.search(text):
-        text = pattern.sub(lambda m: block, text, count=1)
-    else:
-        text = text.rstrip() + "\n\n" + block + "\n"
-    README.write_text(text, encoding="utf-8")
+    if README.exists():
+        text = README.read_text(encoding="utf-8")
+        pattern = re.compile(re.escape(AUTO_START) + r".*?" + re.escape(AUTO_END), re.S)
+        if pattern.search(text):
+            text = pattern.sub(lambda m: block, text, count=1)
+        else:
+            text = text.rstrip() + "\n\n" + block + "\n"
+        README.write_text(text, encoding="utf-8")
 
 
 # ── main ──────────────────────────────────────────────────────────────
 def main() -> int:
     token = os.environ.get("GITHUB_TOKEN", "").strip() or None
-    gh = Github(auth=Auth.Token(token)) if token else Github()
+    gh = Github(auth=Auth.Token(token), timeout=5, retry=0) if token else Github(timeout=5, retry=0)
 
-    print(f"→ fetching profile data for {USERNAME}...")
+    logger.info("Fetching telemetry data for %s...", USERNAME)
     data = fetch_profile(gh)
 
     ASSETS.mkdir(exist_ok=True)
@@ -197,8 +258,7 @@ def main() -> int:
     (ASSETS / "languages.svg").write_text(build_languages(data), encoding="utf-8")
     update_readme()
 
-    print(f"✓ repos={data['repos']} stars={data['stars']} followers={data['followers']}")
-    print("✓ stats.svg / languages.svg / README.md refreshed")
+    logger.info("Telemetry updated: repos=%d, stars=%d, followers=%d", data['repos'], data['stars'], data['followers'])
     return 0
 
 

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://raw.githubusercontent.com/keelbismark/qed/main/schema/qedrc.schema.json",
+  "tier": "tier1-utility",
+  "stack": {
+    "languages": [
+      "Python"
+    ],
+    "packageManager": "pip",
+    "frameworks": []
+  },
+  "ignorePatterns": [
+    "dist/**",
+    "build/**",
+    "coverage/**",
+    "vendor/**",
+    ".venv/**",
+    "venv/**",
+    "__pycache__/**",
+    "*.pyc",
+    ".pytest_cache/**"
+  ],
+  "rules": {
+    "QED001": "error",
+    "QED002": "error",
+    "QED003": "error",
+    "QED004": "error",
+    "QED005": "error",
+    "QED006": "error",
+    "QED007": "error",
+    "QED008": "error",
+    "QED009": "error",
+    "QED010": "error",
+    "QED011": "error",
+    "QED012": "error"
+  }
+}
