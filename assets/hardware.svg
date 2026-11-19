@@ -1,64 +1,112 @@
-<svg width="900" height="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hardware">
-<title>Hardware — Intel i9-14900KF, RTX 4070 Ti SUPER, 80 GB RAM</title>
+<svg width="100%" height="auto" viewBox="0 0 900 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Local Workstation &amp; Engineering Rig Hardware" preserveAspectRatio="xMidYMid meet">
+<title>Hardware Rig — Intel i9-14900KF, RTX 4070 Ti SUPER, 80 GB RAM</title>
 <defs>
 <style>
-  .sans { font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; }
-  .mono { font-family: 'JetBrains Mono', Consolas, monospace; }
+  .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', Helvetica, Arial, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', Consolas, monospace; }
   .accent { fill: #ff2e88; }
-  .text { fill: #d4c8d1; }
-  .muted { fill: #93838f; }
-  .italic { font-style: italic; }
+  .white { fill: #f8fafc; }
+  .text { fill: #cbd5e1; }
+  .muted { fill: #64748b; }
+  .faint { fill: #475569; }
   .card-bg { fill: url(#cardGrad); }
   .edge { fill: none; stroke: url(#edgeGrad); }
-  .chip { fill: #ffffff; fill-opacity: 0.04; stroke: #ffffff; stroke-opacity: 0.10; }
-  .rise { opacity: 0; animation: rise .7s cubic-bezier(.22,.9,.3,1.05) forwards; }
-  .fadeup { opacity: 0; animation: fadeup .5s cubic-bezier(.22,.9,.3,1.05) forwards; }
-  .c1 { animation-delay: .2s; } .c2 { animation-delay: .3s; } .c3 { animation-delay: .4s; }
-  .c4 { animation-delay: .5s; } .c5 { animation-delay: .6s; } .c6 { animation-delay: .7s; }
-  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .chip { fill: #ffffff; fill-opacity: 0.03; stroke: #ffffff; stroke-opacity: 0.08; }
+  .chip-accent { fill: #ff2e88; fill-opacity: 0.08; stroke: #ff2e88; stroke-opacity: 0.35; }
+  .rise { opacity: 0; animation: rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .fadeup { opacity: 0; animation: fadeup 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .c1 { animation-delay: 0.15s; }
+  .c2 { animation-delay: 0.25s; }
+  .c3 { animation-delay: 0.35s; }
+  .c4 { animation-delay: 0.45s; }
+  .c5 { animation-delay: 0.55s; }
+  .pulse { animation: pulse 2s ease-in-out infinite; }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes fadeup { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-  @media (prefers-reduced-motion: reduce) { .rise, .fadeup { animation: none; opacity: 1; } }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rise, .fadeup { opacity: 1; animation: none; transform: none; }
+    .pulse { animation: none; }
+  }
 </style>
+
 <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0" stop-color="#16111b"/><stop offset="1" stop-color="#0d0a11"/>
+  <stop offset="0%" stop-color="#120e17"/>
+  <stop offset="100%" stop-color="#09070d"/>
 </linearGradient>
+
 <linearGradient id="edgeGrad" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0" stop-color="#ffffff" stop-opacity="0.14"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.04"/>
+  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14"/>
+  <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
 </linearGradient>
-<linearGradient id="headGrad" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0" stop-color="#1c1522"/><stop offset="1" stop-color="#141018"/>
+
+<linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0%" stop-color="#ff2e88" stop-opacity="0.12"/>
+  <stop offset="100%" stop-color="#ff2e88" stop-opacity="0.0"/>
 </linearGradient>
-<pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-  <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.02"/>
+
+<pattern id="dotGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+  <circle cx="2" cy="2" r="0.8" fill="#ffffff" fill-opacity="0.04"/>
 </pattern>
-<radialGradient id="glowTL" cx="0.15" cy="0" r="0.8">
-  <stop offset="0" stop-color="#ff2e88" stop-opacity="0.05"/><stop offset="1" stop-color="#ff2e88" stop-opacity="0"/>
-</radialGradient>
-<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
-  <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.5"/>
-  <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="#000000" flood-opacity="0.35"/>
+
+<filter id="shadowDepth" x="-20%" y="-20%" width="140%" height="140%">
+  <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.6"/>
+  <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.4"/>
 </filter>
 </defs>
-<rect x="0" y="0" width="900" height="150" rx="24" fill="#08060b"/>
-<rect x="0" y="0" width="900" height="150" rx="24" fill="url(#grid)"/>
-<rect x="0" y="0" width="900" height="150" rx="24" fill="url(#glowTL)"/>
-<rect x="0.5" y="0.5" width="899" height="149" rx="24" fill="none" stroke="#ffffff" stroke-opacity="0.06"/>
+
+<!-- Canvas Background -->
+<rect x="0" y="0" width="900" height="150" rx="20" fill="#07050a"/>
+<rect x="0" y="0" width="900" height="150" rx="20" fill="url(#dotGrid)"/>
+<rect x="0.5" y="0.5" width="899" height="149" rx="19.5" fill="none" stroke="#ffffff" stroke-opacity="0.06"/>
+
+<!-- Hardware Panel Card -->
 <g class="rise">
-  <rect class="card-bg" x="20" y="20" width="860" height="110" rx="20" filter="url(#shadow)"/>
-  <rect class="edge" x="20.5" y="20.5" width="859" height="109" rx="20"/>
-  <path d="M20 40 a20 20 0 0 1 20 -20 h820 a20 20 0 0 1 20 20 v10 h-860 z" fill="url(#headGrad)"/>
-  <circle fill="#ff5f56" cx="40" cy="35" r="4"/>
-  <circle fill="#ffbd2e" cx="56" cy="35" r="4"/>
-  <circle fill="#27c93f" cx="72" cy="35" r="4"/>
-  <text class="mono muted" x="450" y="39" font-size="10" text-anchor="middle"><tspan class="accent">//</tspan> hardware</text>
-  <g class="sans" font-size="11">
-    <g class="fadeup c1"><rect class="chip" x="44" y="78" width="112" height="28" rx="14"/><text class="text" x="56" y="96">Intel i9-14900KF</text></g>
-    <g class="fadeup c2"><rect class="chip" x="166" y="78" width="126" height="28" rx="14"/><text class="text" x="178" y="96">RTX 4070 Ti SUPER</text></g>
-    <g class="fadeup c3"><rect class="chip" x="302" y="78" width="74" height="28" rx="14"/><text class="text" x="314" y="96">80 GB RAM</text></g>
-    <g class="fadeup c4"><rect class="chip" x="386" y="78" width="82" height="28" rx="14"/><text class="text" x="398" y="96">Arch Linux</text></g>
-    <g class="fadeup c5"><rect class="chip" x="478" y="78" width="88" height="28" rx="14"/><text class="text" x="490" y="96">Windows 11</text></g>
-    <g class="fadeup c6"><rect class="chip" x="576" y="78" width="64" height="28" rx="14"/><text class="text" x="588" y="96">macOS</text></g>
+  <rect class="card-bg" x="20" y="16" width="860" height="118" rx="16" filter="url(#shadowDepth)"/>
+  <rect class="edge" x="20.5" y="16.5" width="859" height="117" rx="15.5"/>
+  <rect x="21" y="17" width="858" height="32" rx="15" fill="url(#headerGrad)"/>
+  
+  <!-- Header Bar -->
+  <text class="mono faint" x="38" y="38" font-size="10" font-weight="600" letter-spacing="1"><tspan class="accent">//</tspan> HARDWARE.RIG <tspan fill="#334155">[PRIMARY_STATION_TELEMETRY]</tspan></text>
+  <circle cx="858" cy="33" r="3" fill="#10b981" class="pulse"/>
+  <text class="mono faint" x="848" y="36" font-size="9" text-anchor="end">READY // 100% OPERATIONAL</text>
+
+  <!-- Hardware Spec Badges -->
+  <g class="sans" font-size="11" transform="translate(38, 62)">
+    <!-- CPU -->
+    <g class="fadeup c1" transform="translate(0, 0)">
+      <rect class="chip-accent" x="0" y="0" width="138" height="28" rx="14"/>
+      <text class="mono accent" x="12" y="18" font-size="10" font-weight="700">CPU</text>
+      <text class="text" x="42" y="18" font-weight="600">i9-14900KF</text>
+    </g>
+
+    <!-- GPU -->
+    <g class="fadeup c2" transform="translate(148, 0)">
+      <rect class="chip-accent" x="0" y="0" width="170" height="28" rx="14"/>
+      <text class="mono accent" x="12" y="18" font-size="10" font-weight="700">GPU</text>
+      <text class="text" x="42" y="18" font-weight="600">RTX 4070 Ti SUPER</text>
+    </g>
+
+    <!-- RAM -->
+    <g class="fadeup c3" transform="translate(328, 0)">
+      <rect class="chip" x="0" y="0" width="108" height="28" rx="14"/>
+      <text class="mono faint" x="12" y="18" font-size="10">RAM</text>
+      <text class="white" x="44" y="18" font-weight="600">80 GB DDR5</text>
+    </g>
+
+    <!-- OS Platforms -->
+    <g class="fadeup c4" transform="translate(446, 0)">
+      <rect class="chip" x="0" y="0" width="168" height="28" rx="14"/>
+      <text class="mono faint" x="12" y="18" font-size="10">OS</text>
+      <text class="text" x="38" y="18">Arch · Win 11 · macOS</text>
+    </g>
   </g>
-  <text class="sans muted italic" x="856" y="96" text-anchor="end" font-size="10"><tspan class="accent">"</tspan>Engineering logic. Building stability.<tspan class="accent">"</tspan></text>
+
+  <!-- Bottom Terminal Tagline -->
+  <line x1="38" y1="104" x2="862" y2="104" stroke="#ffffff" stroke-opacity="0.04"/>
+  <text class="mono faint" x="38" y="120" font-size="9">CAPABILITY: <tspan class="text">Local LLM inference, kernel-level virtualization, high-throughput build systems.</tspan></text>
+  <text class="sans muted" x="862" y="120" text-anchor="end" font-size="10" font-style="italic"><tspan class="accent">"</tspan>Engineering logic. Building stability.<tspan class="accent">"</tspan></text>
 </g>
 </svg>
