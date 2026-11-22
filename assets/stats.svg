@@ -26,9 +26,9 @@
 </g>
 
 <!-- Content -->
-  <text class="sans" x="115.2" y="68" fill="#f8fafc" font-size="22" font-weight="700" text-anchor="middle">14</text>
+  <text class="sans" x="115.2" y="68" fill="#f8fafc" font-size="22" font-weight="700" text-anchor="middle">15</text>
   <text class="sans" x="115.2" y="88" fill="#94a3b8" font-size="9.5" font-weight="600" letter-spacing="1" text-anchor="middle">PUBLIC REPOSITORIES</text>
-  <text class="sans" x="297.6" y="68" fill="#ff2e88" font-size="22" font-weight="700" text-anchor="middle">12</text>
+  <text class="sans" x="297.6" y="68" fill="#ff2e88" font-size="22" font-weight="700" text-anchor="middle">13</text>
   <text class="sans" x="297.6" y="88" fill="#94a3b8" font-size="9.5" font-weight="600" letter-spacing="1" text-anchor="middle">TOTAL STARS EARNED</text>
   <line x1="206.4" y1="48" x2="206.4" y2="94" stroke="#1e293b" stroke-width="1"/>
   <text class="sans" x="480.0" y="68" fill="#f8fafc" font-size="22" font-weight="700" text-anchor="middle">7</text>
