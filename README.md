@@ -64,7 +64,7 @@
 <div align="center">
   <img src="./assets/languages.svg" width="100%" alt="Language Distribution Telemetry"/>
 </div>
-<!-- regenerated: 2026-11-25 -->
+<!-- regenerated: 2026-11-26 -->
 <!-- AUTO:END -->
 
 ---
