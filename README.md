@@ -48,9 +48,9 @@
 | :--- | :--- |
 | **CPU** | Intel Core i9-14900KF (24 Cores / 32 Threads @ up to 6.0 GHz) |
 | **GPU** | NVIDIA GeForce RTX 4070 Ti SUPER (16 GB GDDR6X) |
-| **Memory** | 80 GB DDR5 High-Speed Dual-Channel |
+| **Memory** | 80 GB DDR5 |
 | **Primary OS** | Arch Linux x86_64 / Windows 11 Pro (Dual Boot) |
-| **Tooling** | Neovim, VS Code, Cursor, zsh |
+| **Tooling** | Neovim, VS Code, zsh |
 
 ---
 
