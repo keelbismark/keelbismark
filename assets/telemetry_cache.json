@@ -1,5 +1,5 @@
 {
-  "repos": 15,
+  "repos": 16,
   "stars": 13,
   "forks": 7,
   "followers": 3,
@@ -7,11 +7,11 @@
   "languages": [
     [
       "JavaScript",
-      82.9
+      82.8
     ],
     [
       "Rust",
-      9.4
+      9.3
     ],
     [
       "Java",
@@ -19,7 +19,7 @@
     ],
     [
       "TypeScript",
-      0.9
+      1.0
     ],
     [
       "HTML",

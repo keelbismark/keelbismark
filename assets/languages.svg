@@ -27,21 +27,21 @@
 
 <!-- Content -->
   <rect x="24.0" y="50.0" width="912.0" height="10.0" rx="4" fill="#1e293b"/>
-  <rect x="24.0" y="50.0" width="756.0" height="10.0" rx="2" fill="#f1e05a"><title>JavaScript: 82.9%</title></rect>
-  <rect x="780.0" y="50.0" width="85.7" height="10.0" rx="2" fill="#dea584"><title>Rust: 9.4%</title></rect>
-  <rect x="865.8" y="50.0" width="32.8" height="10.0" rx="2" fill="#b07219"><title>Java: 3.6%</title></rect>
-  <rect x="898.6" y="50.0" width="8.2" height="10.0" rx="2" fill="#3178c6"><title>TypeScript: 0.9%</title></rect>
-  <rect x="906.8" y="50.0" width="6.4" height="10.0" rx="2" fill="#e34c26"><title>HTML: 0.7%</title></rect>
-  <rect x="913.2" y="50.0" width="5.5" height="10.0" rx="2" fill="#89e051"><title>Shell: 0.6%</title></rect>
+  <rect x="24.0" y="50.0" width="755.1" height="10.0" rx="2" fill="#f1e05a"><title>JavaScript: 82.8%</title></rect>
+  <rect x="779.1" y="50.0" width="84.8" height="10.0" rx="2" fill="#dea584"><title>Rust: 9.3%</title></rect>
+  <rect x="864.0" y="50.0" width="32.8" height="10.0" rx="2" fill="#b07219"><title>Java: 3.6%</title></rect>
+  <rect x="896.8" y="50.0" width="9.1" height="10.0" rx="2" fill="#3178c6"><title>TypeScript: 1.0%</title></rect>
+  <rect x="905.9" y="50.0" width="6.4" height="10.0" rx="2" fill="#e34c26"><title>HTML: 0.7%</title></rect>
+  <rect x="912.3" y="50.0" width="5.5" height="10.0" rx="2" fill="#89e051"><title>Shell: 0.6%</title></rect>
   <g transform="translate(24.0, 86.0)">
     <circle cx="4" cy="4" r="3.5" fill="#f1e05a"/>
     <text class="sans" x="14" y="7" fill="#f8fafc" font-size="11" font-weight="500">JavaScript</text>
-    <text class="mono" x="80" y="7" fill="#64748b" font-size="10.5">82.9%</text>
+    <text class="mono" x="80" y="7" fill="#64748b" font-size="10.5">82.8%</text>
   </g>
   <g transform="translate(174.0, 86.0)">
     <circle cx="4" cy="4" r="3.5" fill="#dea584"/>
     <text class="sans" x="14" y="7" fill="#f8fafc" font-size="11" font-weight="500">Rust</text>
-    <text class="mono" x="80" y="7" fill="#64748b" font-size="10.5">9.4%</text>
+    <text class="mono" x="80" y="7" fill="#64748b" font-size="10.5">9.3%</text>
   </g>
   <g transform="translate(324.0, 86.0)">
     <circle cx="4" cy="4" r="3.5" fill="#b07219"/>
@@ -51,7 +51,7 @@
   <g transform="translate(474.0, 86.0)">
     <circle cx="4" cy="4" r="3.5" fill="#3178c6"/>
     <text class="sans" x="14" y="7" fill="#f8fafc" font-size="11" font-weight="500">TypeScript</text>
-    <text class="mono" x="80" y="7" fill="#64748b" font-size="10.5">0.9%</text>
+    <text class="mono" x="80" y="7" fill="#64748b" font-size="10.5">1.0%</text>
   </g>
   <g transform="translate(624.0, 86.0)">
     <circle cx="4" cy="4" r="3.5" fill="#e34c26"/>
